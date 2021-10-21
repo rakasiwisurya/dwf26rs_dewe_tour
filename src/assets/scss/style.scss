@@ -1,0 +1,166 @@
+/*!
+ * Bootstrap v5.0.2 (https://getbootstrap.com/)
+ * Copyright 2011-2021 The Bootstrap Authors
+ * Copyright 2011-2021 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+ */
+
+// Font Montserrat (alternative of Product Sans Font and Avenir Font)
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+// scss-docs-start import-stack
+// Configuration
+@import "functions";
+@import "variables";
+@import "mixins";
+@import "utilities";
+
+// Layout & components
+@import "root";
+@import "reboot";
+@import "type";
+@import "images";
+@import "containers";
+@import "grid";
+@import "tables";
+@import "forms";
+@import "buttons";
+@import "transitions";
+@import "dropdown";
+@import "button-group";
+@import "nav";
+@import "navbar";
+@import "card";
+@import "accordion";
+@import "breadcrumb";
+@import "pagination";
+@import "badge";
+@import "alert";
+@import "progress";
+@import "list-group";
+@import "close";
+@import "toasts";
+@import "modal";
+@import "tooltip";
+@import "popover";
+@import "carousel";
+@import "spinners";
+@import "offcanvas";
+
+// Helpers
+@import "helpers";
+
+// Utilities
+@import "utilities/api";
+// scss-docs-end import-stack
+
+body {
+  background-color: #F1F1F1;
+}
+
+.btn-outline-light {
+
+  &:hover,
+  &:active {
+    color: $primary;
+  }
+}
+
+.header {
+  position: relative;
+  z-index: 10;
+
+  .navbar {
+    position: absolute;
+    width: 100%;
+  }
+
+  .btn {
+    width: 100px;
+    height: 30px;
+    font-size: 14px;
+    line-height: 17px;
+    font-weight: 700;
+  }
+}
+
+.hero {
+  height: 532px;
+  object-fit: cover;
+  background: linear-gradient(rgba(0, 0, 0, 0.25), rgba(129, 86, 86, 0.25)), url(../images/hero.jpg);
+  background-size: 1488px 547px;
+  background-position: center bottom;
+  background-repeat: no-repeat;
+
+  .content {
+    padding-top: 143px;
+
+    .title {
+      display: block;
+      font-weight: 700;
+
+      .subtitle {
+        display: block;
+        font-weight: 300;
+      }
+    }
+
+    .search-group {
+      margin-top: 64px;
+
+      .label {
+        font-size: 18px;
+      }
+
+      .form-control {
+        border-radius: .25rem 0 0 .25rem;
+      }
+
+      .btn {
+        position: relative;
+        left: -5px;
+        width: 136px;
+        height: 50px;
+        font-weight: 700;
+        font-size: 18px;
+        border-radius: 0 .25rem .25rem 0;
+      }
+    }
+  }
+}
+
+.categories {
+  .card {
+    position: relative;
+    top: -44px;
+    width: 250px;
+    height: 350px;
+    padding-top: 53px;
+    margin-bottom: 40px;
+  }
+}
+
+.group-tour {
+  .title {
+    margin-bottom: 88px;
+  }
+
+  .card {
+    position: relative;
+    width: 350px;
+    height: 350px;
+
+    .capacity {
+      position: absolute;
+      top: 40px;
+      right: 0;
+      width: 62px;
+      height: 34px;
+      z-index: 10;
+    }
+  }
+}
+
+footer {
+  line-height: 4;
+}

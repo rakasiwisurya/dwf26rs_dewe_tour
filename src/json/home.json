@@ -1,0 +1,50 @@
+[
+  {
+    "id": "1",
+    "name": "6D/4N Fun Tassie Vacation",
+    "capacity": "12",
+    "price": "12398000",
+    "country": "Australia",
+    "imageUrl": "/images/6d-4n-fun-tassie-vacation.jpg"
+  },
+  {
+    "id": "2",
+    "name": "6D/4N Exciting Summer",
+    "capacity": "14",
+    "price": "10288000",
+    "country": "South Korea",
+    "imageUrl": "/images/6d-4n-exciting-summer.jpg"
+  },
+  {
+    "id": "3",
+    "name": "8D/6N Wonderful Autumn",
+    "capacity": "10",
+    "price": "28999000",
+    "country": "Japan",
+    "imageUrl": "/images/8d-6n-wonderful-autumn.jpg"
+  },
+  {
+    "id": "4",
+    "name": "4D/3N Overland Jakarta",
+    "capacity": "10",
+    "price": "3188000",
+    "country": "Indonesia",
+    "imageUrl": "/images/4d-3n-overland-jakarta.jpg"
+  },
+  {
+    "id": "5",
+    "name": "4D/3N Labuan Bajo Delight",
+    "capacity": "14",
+    "price": "10488000",
+    "country": "Indonesia",
+    "imageUrl": "/images/4d-3n-labuan-bajo-delight.jpg"
+  },
+  {
+    "id": "6",
+    "name": "5D/4N Magic Tokyo Fun",
+    "capacity": "10",
+    "price": "11188000",
+    "country": "Japan",
+    "imageUrl": "/images/5d-4n-magic-tokyo-fun.jpg"
+  }
+]
