@@ -58,6 +58,10 @@ body {
   background-color: #F1F1F1;
 }
 
+.modal-dialog {
+  max-width: 416px;
+}
+
 .btn-outline-light {
 
   &:hover,
@@ -81,6 +85,40 @@ body {
     font-size: 14px;
     line-height: 17px;
     font-weight: 700;
+  }
+
+  .dropdown img {
+    cursor: pointer;
+  }
+
+  .dropdown-toggle::after {
+    display: none !important;
+  }
+
+  .dropdown-menu {
+    border: none;
+    box-shadow: 0 0 5px rgba(151, 151, 151, 0.4);
+    inset: 30px 0px auto auto !important;
+  }
+
+  .dropdown-menu::after {
+    background-color: #fff;
+    content: "\00a0";
+    position: absolute;
+    display: block;
+    z-index: -1;
+    top: -10px;
+    right: 16px;
+    width: 22px;
+    height: 22px;
+    box-shadow: -1px 1px 2px 0 rgba(178, 178, 178, 0.4);
+    transform: rotate(135deg);
+    -moz-transform: rotate(135deg);
+    -ms-transform: rotate(135deg);
+    -o-transform: rotate(135deg);
+    -webkit-transform: rotate(135deg);
+    /* -webkit-filter: drop-shadow(1px -1px 1px rgba(0,0,0,.5));
+    filter: drop-shadow(1px -1px 1px rgba(0,0,0,.5)); */
   }
 }
 
