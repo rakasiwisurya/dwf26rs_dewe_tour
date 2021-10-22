@@ -1,0 +1,20 @@
+[
+  {
+    "id": "1",
+    "fullname": "Rakasiwi",
+    "email": "rakasiwi@gmail.com",
+    "password": "12345",
+    "phone": "085717573808",
+    "address": "Jl. Kenangan No. 1",
+    "level": "0"
+  },
+  {
+    "id": "2",
+    "fullname": "Surya",
+    "email": "surya@gmail.com",
+    "password": "12345",
+    "phone": "085717573809",
+    "address": "Jl. Kenangan No. 2",
+    "level": "1"
+  }
+]
