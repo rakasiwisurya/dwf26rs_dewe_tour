@@ -6,54 +6,53 @@ import Agent from "assets/icons/best-travel-agent.svg";
 import Support from "assets/icons/our-dedicated-support.svg";
 
 export default function Categories() {
+  const data = [
+    {
+      id: 1,
+      title: "Best Price Guarantee",
+      content: "A small river named Duren flows by their place and supplies",
+      icon: Guarantee,
+    },
+    {
+      id: 2,
+      title: "Travellers Love Us",
+      content: "A small river named Duren flows by their place and supplies",
+      icon: Love,
+    },
+    {
+      id: 3,
+      title: "Best Travel Agent",
+      content: "A small river named Duren flows by their place and supplies",
+      icon: Agent,
+    },
+    {
+      id: 4,
+      title: "Our Dedicated Support",
+      content: "A small river named Duren flows by their place and supplies",
+      icon: Support,
+    },
+  ];
+
   return (
-    <section className="categories">
+    <section className="categories mb-4">
       <div className="container">
         <div className="row">
-          <div className="col d-flex justify-content-center">
-            <div className="card shadow-sm text-center px-4">
-              <div className="content">
-                <img src={Guarantee} alt="Guarantee" className="mb-4" />
-                <h3 className="fs-5 fw-bold mb-3">Best Price Guarantee</h3>
-                <p className="fs-sm text-muted">
-                  A small river named Duren flows by their place and supplies
-                </p>
+          {data.map((item, index) => (
+            <div
+              Love
+              Us
+              className="col d-flex justify-content-center"
+              key={`categories-${index}`}
+            >
+              <div className="card shadow-sm text-center px-4">
+                <div className="content">
+                  <img src={item.icon} alt={item.id} />
+                  <h3 className="fs-5 fw-bold my-4">{item.title}</h3>
+                  <p className="text-muted">{item.content}</p>
+                </div>
               </div>
             </div>
-          </div>
-          <div className="col d-flex justify-content-center">
-            <div className="card shadow-sm text-center px-4">
-              <div className="content">
-                <img src={Love} alt="Love" className="mb-4" />
-                <h3 className="fs-5 fw-bold mb-3">Travellers Love Us</h3>
-                <p className="text-muted">
-                  A small river named Duren flows by their place and supplies
-                </p>
-              </div>
-            </div>
-          </div>
-          <div className="col d-flex justify-content-center">
-            <div className="card shadow-sm text-center px-4">
-              <div className="content">
-                <img src={Agent} alt="Agent" className="mb-4" />
-                <h3 className="fs-5 fw-bold mb-3">Best Travel Agent</h3>
-                <p className="text-muted">
-                  A small river named Duren flows by their place and supplies
-                </p>
-              </div>
-            </div>
-          </div>
-          <div className="col d-flex justify-content-center">
-            <div className="card shadow-sm text-center px-4">
-              <div className="content">
-                <img src={Support} alt="Support" className="mb-4" />
-                <h3 className="fs-5 fw-bold mb-3">Our Dedicated Support</h3>
-                <p className="text-muted">
-                  A small river named Duren flows by their place and supplies
-                </p>
-              </div>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
     </section>

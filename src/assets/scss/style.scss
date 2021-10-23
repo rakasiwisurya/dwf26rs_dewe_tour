@@ -58,6 +58,10 @@ body {
   background-color: #F1F1F1;
 }
 
+main {
+  padding-top: 150px;
+}
+
 .modal-dialog {
   max-width: 416px;
 }
@@ -71,12 +75,12 @@ body {
 }
 
 .header {
-  position: relative;
   z-index: 10;
 
   .navbar {
-    position: absolute;
-    width: 100%;
+    object-fit: cover;
+    background: linear-gradient(rgba(0, 0, 0, 0.25), rgba(129, 86, 86, 0.25)), url(../images/hero.jpg) no-repeat center top;
+    background-size: 1488px 547px;
   }
 
   .btn {
@@ -125,10 +129,8 @@ body {
 .hero {
   height: 532px;
   object-fit: cover;
-  background: linear-gradient(rgba(0, 0, 0, 0.25), rgba(129, 86, 86, 0.25)), url(../images/hero.jpg);
+  background: linear-gradient(rgba(0, 0, 0, 0.25), rgba(129, 86, 86, 0.25)), url(../images/hero.jpg) no-repeat center top;
   background-size: 1488px 547px;
-  background-position: center bottom;
-  background-repeat: no-repeat;
 
   .content {
     padding-top: 143px;
@@ -183,22 +185,30 @@ body {
     margin-bottom: 88px;
   }
 
-  .card {
-    position: relative;
-    width: 350px;
-    height: 350px;
+  a {
+    &:hover {
+      color: $primary;
+    }
 
-    .capacity {
-      position: absolute;
-      top: 40px;
-      right: 0;
-      width: 62px;
-      height: 34px;
-      z-index: 10;
+    .card {
+      position: relative;
+      width: 350px;
+      height: 350px;
+
+      .capacity {
+        position: absolute;
+        top: 40px;
+        right: 0;
+        width: 62px;
+        height: 34px;
+        z-index: 10;
+      }
     }
   }
 }
 
-footer {
-  line-height: 4;
+.detail-info-trip {
+  .subtitle {
+    font-size: 14px;
+  }
 }

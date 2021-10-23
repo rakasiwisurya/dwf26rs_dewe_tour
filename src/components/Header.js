@@ -99,8 +99,8 @@ export default function Header() {
   };
 
   return (
-    <header className="header">
-      <nav className="navbar navbar-expand-lg navbar-light bg-transparent">
+    <header className="header position-relative">
+      <nav className="navbar navbar-expand-lg navbar-light position-absolute w-100">
         <div className="container">
           <a href="/" className="navbar-brand">
             <img src={BrandIcon} alt="Brand Icon" width="190" height="68" />
