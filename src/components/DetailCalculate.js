@@ -68,7 +68,7 @@ export default function DetailCalculate({ data }) {
         <hr />
         <div className="d-flex justify-content-end">
           <Link
-            to={`/payment/${params.id}`}
+            to="/payment"
             onClick={handleSubmit}
             type="button"
             className="btn btn-primary mt-2 fw-bold text-white d-flex align-items-center justify-content-center"

@@ -1,10 +1,15 @@
 import { useState, useEffect, useContext } from "react";
-import { Modal } from "react-bootstrap";
+import { Link } from "react-router-dom";
+
+import { Modal, Dropdown } from "react-bootstrap";
 
 import { AuthContext } from "contexts/AuthContext";
 
 import BrandIcon from "assets/images/dewe-tour-icon.png";
 import Avatar from "assets/images/user.png";
+import Profile from "assets/icons/profile.svg";
+import Pay from "assets/icons/pay.svg";
+import Logout from "assets/icons/logout.svg";
 
 export default function Header() {
   const users = JSON.parse(localStorage.getItem("deweTourUsers"));
@@ -112,13 +117,34 @@ export default function Header() {
           <div className="auth">
             {stateAuth.isLogin ? (
               <>
-                <img
+                {/* <img
                   src={Avatar}
                   alt="user"
                   width="50"
                   height="50"
                   onClick={handleLogout}
-                />
+                /> */}
+                <Dropdown>
+                  <Dropdown.Toggle as="a" id="dropdown-basic">
+                    <img src={Avatar} alt="user" width="50" height="50" />
+                  </Dropdown.Toggle>
+
+                  <Dropdown.Menu>
+                    <Dropdown.Item href="/profile">
+                      <img src={Profile} alt="user" width="20" height="20" />
+                      <span className="fw-bold ms-2">Profile</span>
+                    </Dropdown.Item>
+                    <Dropdown.Item href="/payment">
+                      <img src={Pay} alt="pay" width="20" height="20" />
+                      <span className="fw-bold ms-2">Pay</span>
+                    </Dropdown.Item>
+                    <Dropdown.Divider />
+                    <Dropdown.Item onClick={handleLogout}>
+                      <img src={Logout} alt="logout" width="20" height="20" />
+                      <span className="fw-bold ms-2">Logout</span>
+                    </Dropdown.Item>
+                  </Dropdown.Menu>
+                </Dropdown>
               </>
             ) : (
               <ul className="navbar-nav row g-2">

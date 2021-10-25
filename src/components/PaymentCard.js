@@ -1,4 +1,6 @@
 import { useContext, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { Modal } from "react-bootstrap";
 
 import { AuthContext } from "contexts/AuthContext";
 
@@ -11,7 +13,11 @@ export default function PaymentCard({ data }) {
 
   const { stateAuth } = useContext(AuthContext);
 
-  const [order, setOrder] = useState(null);
+  const userOrder = JSON.parse(localStorage.getItem("userOrder"));
+
+  const [order, setOrder] = useState(userOrder);
+
+  const [show, setShow] = useState(false);
 
   useEffect(() => {
     const userOrder = JSON.parse(localStorage.getItem("userOrder"));
@@ -21,9 +27,12 @@ export default function PaymentCard({ data }) {
   const handlePay = () => {
     setOrder((prevState) => ({ ...prevState, isPay: true }));
     localStorage.setItem("userOrder", JSON.stringify(order));
+    setShow(true);
   };
 
-  console.log(order);
+  const handleClose = () => {
+    setShow(false);
+  };
 
   return (
     <section className="payment-card">
@@ -174,6 +183,19 @@ export default function PaymentCard({ data }) {
           </button>
         </div>
       </div>
+
+      <Modal show={show} onHide={handleClose} centered>
+        <Modal.Body className="p-4 text-center">
+          <div>Your payment will be confirmed within 1 x 24 hours</div>
+          <div>
+            To see orders{" "}
+            <Link to="" className="fw-bold">
+              click here
+            </Link>{" "}
+            thank you
+          </div>
+        </Modal.Body>
+      </Modal>
     </section>
   );
 }

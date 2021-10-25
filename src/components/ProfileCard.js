@@ -17,7 +17,7 @@ export default function ProfileCard() {
                   <img src={IconName} alt="Icon User" className="mx-1" />
                   <div>
                     <div className="fw-bold" style={{ fontSize: 13 }}>
-                      Radif Ganteng
+                      Rakasiwi Surya
                     </div>
                     <div className="text-muted" style={{ fontSize: 11 }}>
                       Full name
@@ -28,7 +28,7 @@ export default function ProfileCard() {
                   <img src={IconMail} alt="Icon Mail" className="mx-1" />
                   <div>
                     <div className="fw-bold" style={{ fontSize: 13 }}>
-                      radifgans@gmail.com
+                      rakasiwi@gmail.com
                     </div>
                     <div className="text-muted" style={{ fontSize: 11 }}>
                       Email
