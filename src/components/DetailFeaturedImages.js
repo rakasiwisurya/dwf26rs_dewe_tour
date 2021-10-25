@@ -1,5 +1,3 @@
-import React from "react";
-
 export default function DetailFeaturedImages({ data }) {
   return (
     <section className="detail-featured-images mb-5">

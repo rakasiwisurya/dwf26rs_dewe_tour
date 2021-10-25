@@ -60,10 +60,19 @@ body {
 
 main {
   padding-top: 150px;
+  padding-bottom: 85px;
 }
 
 .modal-dialog {
   max-width: 416px;
+
+  .tag-line {
+    font-size: 14px;
+
+    .link {
+      cursor: pointer;
+    }
+  }
 }
 
 .btn-outline-light {
@@ -73,6 +82,28 @@ main {
     color: $primary;
   }
 }
+
+.notif {
+  font-size: 9px;
+  width: 112px;
+  height: 24px;
+
+  &.notif-danger {
+    background-color: rgba($color: #EC7A7A, $alpha: 0.1);
+    color: #EC7A7A;
+  }
+
+  &.notif-warning {
+    background-color: rgba($color: #FF9900, $alpha: 0.1);
+    color: #FF9900;
+  }
+
+  &.notif-success {
+    background-color: rgba($color: #3CF71E, $alpha: 0.1);
+    color: #3CF71E;
+  }
+}
+
 
 .header {
   z-index: 10;
@@ -121,8 +152,6 @@ main {
     -ms-transform: rotate(135deg);
     -o-transform: rotate(135deg);
     -webkit-transform: rotate(135deg);
-    /* -webkit-filter: drop-shadow(1px -1px 1px rgba(0,0,0,.5));
-    filter: drop-shadow(1px -1px 1px rgba(0,0,0,.5)); */
   }
 }
 

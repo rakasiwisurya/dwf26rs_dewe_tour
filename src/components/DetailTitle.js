@@ -1,5 +1,3 @@
-import React from "react";
-
 export default function DetailTitle({ data }) {
   return (
     <section className="detail-title mb-3">

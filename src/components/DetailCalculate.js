@@ -1,28 +1,54 @@
-import React, { useState } from "react";
+import { useReducer, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
 export default function DetailCalculate({ data }) {
   const params = useParams();
 
-  const [state, setState] = useState({
-    unit: 1,
-    total: data.price,
-  });
+  // const initialState = { qty: 1 };
 
-  let totalPrice = state.total * state.unit;
+  // const reducer = (state, action) => {
+  //   switch (action.type) {
+  //     case "INCREMENT":
+  //       return { qty: state.qty + 1 };
+  //     case "DECREMENT":
+  //       if (state.qty > 1) {
+  //         return { qty: state.qty - 1 };
+  //       }
+  //       return { qty: state.qty };
+  //     default:
+  //       throw new Error();
+  //   }
+  // };
+
+  // const [state, dispatch] = useReducer(reducer, initialState);
+
+  // let totalPrice = state.qty * data.price;
+
+  const [qty, setQty] = useState(1);
+
+  let totalPrice = qty * data.price;
 
   const handleAdd = () => {
-    let add = state.unit + 1;
-
-    setState((prevState) => ({ ...prevState, unit: add }));
+    // dispatch({ type: "INCREMENT" })
+    setQty(qty + 1);
   };
 
   const handleSubtract = () => {
-    let subtract = state.unit - 1;
-
-    if (state.unit > 1) {
-      setState((prevState) => ({ ...prevState, unit: subtract }));
+    // dispatch({ type: "DECREMENT" })
+    if (qty > 1) {
+      setQty(qty - 1);
     }
+  };
+
+  const handleSubmit = () => {
+    const userOrder = {
+      id: Date.now(),
+      qty: qty,
+      total: totalPrice,
+      isPay: false,
+    };
+
+    localStorage.setItem("userOrder", JSON.stringify(userOrder));
   };
 
   return (
@@ -36,7 +62,7 @@ export default function DetailCalculate({ data }) {
             </span>
             / Person
           </div>
-          <div className="unit">
+          <div className="quantity">
             <button
               className="btn btn-primary text-white rounded-circle fw-bold"
               onClick={handleSubtract}
@@ -44,7 +70,8 @@ export default function DetailCalculate({ data }) {
               -
             </button>
             <div className="d-inline-block text-center" style={{ width: 75 }}>
-              {state.unit}
+              {/* {state.qty} */}
+              {qty}
             </div>
             <button
               className="btn btn-primary text-white rounded-circle fw-bold"
@@ -58,6 +85,7 @@ export default function DetailCalculate({ data }) {
         <div className="d-flex justify-content-between fw-bold">
           <div className="fs-5">Total :</div>
           <div className="text-primary fs-5">
+            {/* IDR. {Intl.NumberFormat().format(totalPrice)} */}
             IDR. {Intl.NumberFormat().format(totalPrice)}
           </div>
         </div>
@@ -65,8 +93,10 @@ export default function DetailCalculate({ data }) {
         <div className="d-flex justify-content-end">
           <Link
             to={`/payment/${params.id}`}
+            onClick={handleSubmit}
             type="button"
-            className="btn btn-primary px-5 mt-2 fw-bold text-white "
+            className="btn btn-primary mt-2 fw-bold text-white d-flex align-items-center justify-content-center"
+            style={{ width: 213, height: 50 }}
           >
             BOOK NOW
           </Link>

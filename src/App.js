@@ -1,16 +1,23 @@
-import "assets/scss/style.scss";
 import Home from "pages/Home";
-import Detail from "pages/Detail";
+import DetailTour from "pages/DetailTour";
+import Payment from "pages/Payment";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+
+import AuthContextProvider from "contexts/AuthContext";
+
+import "assets/scss/style.scss";
 
 function App() {
   return (
     <div className="App">
       <Router>
-        <Switch>
-          <Route exact path="/" component={Home} />
-          <Route exact path="/detail/:id" component={Detail} />
-        </Switch>
+        <AuthContextProvider>
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route exact path="/detail/:id" component={DetailTour} />
+            <Route exact path="/payment/:id" component={Payment} />
+          </Switch>
+        </AuthContextProvider>
       </Router>
     </div>
   );

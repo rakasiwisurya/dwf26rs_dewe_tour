@@ -39,8 +39,6 @@ export default function Categories() {
         <div className="row">
           {data.map((item, index) => (
             <div
-              Love
-              Us
               className="col d-flex justify-content-center"
               key={`categories-${index}`}
             >

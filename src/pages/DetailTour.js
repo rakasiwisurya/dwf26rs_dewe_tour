@@ -1,4 +1,3 @@
-import React from "react";
 import { useParams } from "react-router";
 
 import Header from "components/Header";
@@ -8,9 +7,10 @@ import DetailInfoTrip from "components/DetailInfoTrip";
 import DetailDescription from "components/DetailDescription";
 import DetailCalculate from "components/DetailCalculate";
 import Footer from "components/Footer";
-import detail from "json/detail.json";
 
-export default function Detail() {
+import detailTour from "json/detailTour.json";
+
+export default function DetailTour() {
   const params = useParams();
   const index = params.id - 1;
 
@@ -18,11 +18,11 @@ export default function Detail() {
     <>
       <Header />
       <main>
-        <DetailTitle data={detail[index]} />
-        <DetailFeaturedImages data={detail[index]} />
-        <DetailInfoTrip data={detail[index].infoTrip} />
-        <DetailDescription data={detail[index]} />
-        <DetailCalculate data={detail[index]} />
+        <DetailTitle data={detailTour[index]} />
+        <DetailFeaturedImages data={detailTour[index]} />
+        <DetailInfoTrip data={detailTour[index].infoTrip} />
+        <DetailDescription data={detailTour[index]} />
+        <DetailCalculate data={detailTour[index]} />
       </main>
       <Footer />
     </>

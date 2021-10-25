@@ -25,8 +25,11 @@
       "accomodation": "Hotel 4 Nights",
       "transportation": "Qatar Airways",
       "eat": "Included as ltinerary",
-      "duration": "6 Days 4 Nights",
-      "dateTrip": "26 Agustus 2020"
+      "duration": {
+        "day": "6",
+        "night": "4"
+      },
+      "dateTrip": "2020-08-26"
     },
     "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.  It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
     "price": "12398000"
@@ -57,8 +60,11 @@
       "accomodation": "Apartment 4 Nights",
       "transportation": "Korea Airways",
       "eat": "Samyang Super Hot",
-      "duration": "6 Days 4 Nights",
-      "dateTrip": "26 September 2020"
+      "duration": {
+        "day": "6",
+        "night": "4"
+      },
+      "dateTrip": "2020-08-26"
     },
     "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.  It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
     "price": "10288000"
@@ -89,8 +95,11 @@
       "accomodation": "Hotel 4 Nights",
       "transportation": "Japan Airways",
       "eat": "Included as ltinerary",
-      "duration": "6 Days 4 Nights",
-      "dateTrip": "26 Agustus 2020"
+      "duration": {
+        "day": "6",
+        "night": "4"
+      },
+      "dateTrip": "2020-08-26"
     },
     "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.  It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
     "price": "28999000"
@@ -121,8 +130,11 @@
       "accomodation": "Hotel 4 Nights",
       "transportation": "Garuda Airways",
       "eat": "Included as ltinerary",
-      "duration": "6 Days 4 Nights",
-      "dateTrip": "26 Agustus 2020"
+      "duration": {
+        "day": "6",
+        "night": "4"
+      },
+      "dateTrip": "2020-08-26"
     },
     "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.  It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
     "price": "3188000"
@@ -153,8 +165,11 @@
       "accomodation": "Hotel 4 Nights",
       "transportation": "Airasia Airways",
       "eat": "Included as ltinerary",
-      "duration": "6 Days 4 Nights",
-      "dateTrip": "26 Agustus 2020"
+      "duration": {
+        "day": "6",
+        "night": "4"
+      },
+      "dateTrip": "2020-08-26"
     },
     "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.  It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
     "price": "10488000"
@@ -185,8 +200,11 @@
       "accomodation": "Hotel 4 Nights",
       "transportation": "Japan Airways",
       "eat": "Included as ltinerary",
-      "duration": "6 Days 4 Nights",
-      "dateTrip": "26 Agustus 2020"
+      "duration": {
+        "day": "6",
+        "night": "4"
+      },
+      "dateTrip": "2020-08-26"
     },
     "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.  It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
     "price": "11188000"

@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import { useState, useEffect, useContext } from "react";
+import { Modal } from "react-bootstrap";
 
-import { Modal, Image } from "react-bootstrap";
+import { AuthContext } from "contexts/AuthContext";
 
 import BrandIcon from "assets/images/dewe-tour-icon.png";
 import Avatar from "assets/images/user.png";
@@ -8,69 +9,85 @@ import Avatar from "assets/images/user.png";
 export default function Header() {
   const users = JSON.parse(localStorage.getItem("deweTourUsers"));
 
-  const [state, setState] = useState({
-    fullname: "",
-    email: "",
-    password: "",
-    phone: "",
-    address: "",
-    showRegister: false,
-    showLogin: false,
-    isLogin: false,
+  const { stateAuth, dispatch } = useContext(AuthContext);
+
+  // Create DidMount with useEffect inside it can print "App Component Did Mount" & state value here
+  useEffect(() => {
+    dispatch({ type: "AUTH" });
+  }, []);
+
+  const [show, setShow] = useState({
+    login: false,
+    register: false,
   });
 
   const handleClose = () => {
-    setState((prevState) => ({
+    setShow((prevState) => ({
       ...prevState,
-      showLogin: false,
-      showRegister: false,
+      login: false,
+      register: false,
     }));
   };
 
   const handleShowLogin = () => {
-    setState((prevState) => ({ ...prevState, showLogin: true }));
+    setShow((prevState) => ({ ...prevState, login: true }));
   };
 
   const handleShowRegister = () => {
-    setState((prevState) => ({ ...prevState, showRegister: true }));
+    setShow((prevState) => ({ ...prevState, register: true }));
   };
 
-  const handleOnChange = (e) => {
-    setState((prevState) => ({
-      ...prevState,
-      [e.target.id]: e.target.value,
-    }));
+  const handleSwitch = () => {
+    if (show.login) {
+      setShow((prevState) => ({
+        ...prevState,
+        login: false,
+        register: true,
+      }));
+    } else {
+      setShow((prevState) => ({
+        ...prevState,
+        login: true,
+        register: false,
+      }));
+    }
   };
 
-  const handleRegister = (e) => {
-    e.preventDefault();
+  const handleRegister = () => {
+    const inputFullname = document.querySelector("#fullname").value;
+    const inputEmail = document.querySelector("#email").value;
+    const inputPassword = document.querySelector("#password").value;
+    const inputPhone = document.querySelector("#phone").value;
+    const inputAddress = document.querySelector("#address").value;
 
     users.push({
       id: Date.now(),
-      fullname: state.fullname,
-      email: state.email,
-      password: state.password,
-      phone: state.phone,
-      address: state.address,
+      fullname: inputFullname,
+      email: inputEmail,
+      password: inputPassword,
+      phone: inputPhone,
+      address: inputAddress,
+      role: "client",
     });
 
     localStorage.setItem("deweTourUsers", JSON.stringify(users));
 
     alert("Register Successful");
-
-    handleSwitch();
   };
 
-  const handleLogin = (e) => {
-    e.preventDefault();
+  const handleLogin = () => {
+    const inputEmail = document.querySelector("#emailLogin").value;
+    const inputPassword = document.querySelector("#passwordLogin").value;
 
     for (let user of users) {
-      if (state.email === user.email && state.password === user.password) {
-        setState((prevState) => ({
-          ...prevState,
-          showLogin: false,
-          isLogin: true,
-        }));
+      if (inputEmail === user.email && inputPassword === user.password) {
+        dispatch({
+          type: "LOGIN",
+          payload: {
+            ...user,
+          },
+        });
+
         return alert("Login Successful");
       }
     }
@@ -79,23 +96,9 @@ export default function Header() {
   };
 
   const handleLogout = () => {
-    setState((prevState) => ({ ...prevState, isLogin: false }));
-  };
-
-  const handleSwitch = () => {
-    if (state.showLogin) {
-      setState((prevState) => ({
-        ...prevState,
-        showLogin: false,
-        showRegister: true,
-      }));
-    } else {
-      setState((prevState) => ({
-        ...prevState,
-        showLogin: true,
-        showRegister: false,
-      }));
-    }
+    dispatch({
+      type: "LOGOUT",
+    });
   };
 
   return (
@@ -107,9 +110,9 @@ export default function Header() {
           </a>
 
           <div className="auth">
-            {state.isLogin ? (
+            {stateAuth.isLogin ? (
               <>
-                <Image
+                <img
                   src={Avatar}
                   alt="user"
                   width="50"
@@ -140,29 +143,25 @@ export default function Header() {
               </ul>
             )}
 
-            <Modal show={state.showLogin} onHide={handleClose} centered>
+            <Modal show={show.login} onHide={handleClose} centered>
               <Modal.Body className="p-4">
                 <h4 className="text-center mt-2 mb-4 fw-bold fs-3">Login</h4>
                 <form onSubmit={handleLogin}>
-                  <label htmlFor="email" className="fw-bold mb-2">
+                  <label htmlFor="emailLogin" className="fw-bold mb-2">
                     Email
                   </label>
                   <input
-                    id="email"
+                    id="emailLogin"
                     type="email"
                     className="mb-4 form-control"
-                    value={state.email}
-                    onChange={handleOnChange}
                   />
-                  <label htmlFor="password" className="fw-bold mb-2">
+                  <label htmlFor="passwordLogin" className="fw-bold mb-2">
                     Password
                   </label>
                   <input
-                    id="password"
+                    id="passwordLogin"
                     type="password"
                     className="mb-4 form-control"
-                    value={state.password}
-                    onChange={handleOnChange}
                   />
                   <button
                     type="submit"
@@ -170,20 +169,20 @@ export default function Header() {
                   >
                     Login
                   </button>
-                  <div
-                    className="text-muted text-center"
-                    style={{ fontSize: 14 }}
-                  >
+                  <div className="tag-line text-muted text-center">
                     Don't have an account?{" "}
-                    <a href="#" onClick={handleSwitch}>
+                    <span
+                      className="link text-primary text-decoration-underline"
+                      onClick={handleSwitch}
+                    >
                       Click here
-                    </a>
+                    </span>
                   </div>
                 </form>
               </Modal.Body>
             </Modal>
 
-            <Modal show={state.showRegister} onHide={handleClose} centered>
+            <Modal show={show.register} onHide={handleClose} centered>
               <Modal.Body className="p-4">
                 <h4 className="text-center mt-2 mb-4 fw-bold fs-3">Register</h4>
                 <form onSubmit={handleRegister}>
@@ -194,8 +193,6 @@ export default function Header() {
                     id="fullname"
                     type="text"
                     className="mb-4 form-control"
-                    value={state.fullname}
-                    onChange={handleOnChange}
                   />
                   <label htmlFor="email" className="fw-bold mb-2">
                     Email
@@ -204,8 +201,6 @@ export default function Header() {
                     id="email"
                     type="email"
                     className="mb-4 form-control"
-                    value={state.email}
-                    onChange={handleOnChange}
                   />
                   <label htmlFor="password" className="fw-bold mb-2">
                     Password
@@ -214,8 +209,6 @@ export default function Header() {
                     id="password"
                     type="password"
                     className="mb-4 form-control"
-                    value={state.password}
-                    onChange={handleOnChange}
                   />
                   <label htmlFor="phone" className="fw-bold mb-2">
                     Phone
@@ -224,8 +217,6 @@ export default function Header() {
                     id="phone"
                     type="number"
                     className="mb-4 form-control"
-                    value={state.phone}
-                    onChange={handleOnChange}
                   />
                   <label htmlFor="address" className="fw-bold mb-2">
                     Address
@@ -234,8 +225,6 @@ export default function Header() {
                     id="address"
                     type="number"
                     className="mb-4 form-control"
-                    value={state.address}
-                    onChange={handleOnChange}
                   />
                   <button
                     type="submit"
@@ -243,14 +232,14 @@ export default function Header() {
                   >
                     Register
                   </button>
-                  <div
-                    className="text-muted text-center"
-                    style={{ fontSize: 14 }}
-                  >
+                  <div className="tag-line text-muted text-center">
                     Have an account?{" "}
-                    <a href="#" onClick={handleSwitch}>
+                    <span
+                      className="link text-primary text-decoration-underline"
+                      onClick={handleSwitch}
+                    >
                       Click here
-                    </a>
+                    </span>
                   </div>
                 </form>
               </Modal.Body>
