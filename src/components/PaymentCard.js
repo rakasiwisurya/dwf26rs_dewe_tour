@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 import { AuthContext } from "contexts/AuthContext";
 
@@ -11,19 +11,22 @@ export default function PaymentCard({ data }) {
 
   const { stateAuth } = useContext(AuthContext);
 
-  const userOrder = JSON.parse(localStorage.getItem("userOrder"));
+  const [order, setOrder] = useState(null);
 
-  const [order, setOrder] = useState(userOrder);
+  useEffect(() => {
+    const userOrder = JSON.parse(localStorage.getItem("userOrder"));
+    setOrder(userOrder);
+  }, []);
 
   const handlePay = () => {
     setOrder((prevState) => ({ ...prevState, isPay: true }));
     localStorage.setItem("userOrder", JSON.stringify(order));
   };
 
-  console.log(order.isPay);
+  console.log(order);
 
   return (
-    <section className="payment ">
+    <section className="payment-card">
       <div className="container">
         <div className="card border border-secondary w-100 mb-3">
           <div className="card-body">
@@ -53,10 +56,10 @@ export default function PaymentCard({ data }) {
                 <div className="text-muted mb-4">{data.country}</div>
                 <div
                   className={`notif p-1 d-flex justify-content-center align-items-center ${
-                    order.isPay ? "notif-warning" : "notif-danger"
+                    order?.isPay ? "notif-warning" : "notif-danger"
                   }`}
                 >
-                  {order.isPay ? "Waiting Approve" : "Waiting Payment"}
+                  {order?.isPay ? "Waiting Approve" : "Waiting Payment"}
                 </div>
               </div>
               <div className="col-2">
@@ -141,7 +144,7 @@ export default function PaymentCard({ data }) {
                     <td>{stateAuth.user.phone}</td>
                     <td className="fw-bold">Qty</td>
                     <td className="fw-bold">:</td>
-                    <td className="fw-bold">{userOrder.qty}</td>
+                    <td className="fw-bold">{order?.qty}</td>
                   </tr>
                   <tr className="fw-bold border-white">
                     <td></td>
@@ -151,7 +154,7 @@ export default function PaymentCard({ data }) {
                     <td>Total</td>
                     <td>:</td>
                     <td className="text-danger">
-                      IDR. {Intl.NumberFormat().format(userOrder.total)}
+                      IDR. {Intl.NumberFormat().format(order?.total)}
                     </td>
                   </tr>
                 </tbody>
@@ -162,7 +165,7 @@ export default function PaymentCard({ data }) {
         <div className="d-flex justify-content-end">
           <button
             className={`btn btn-primary mt-2 fw-bold text-white ${
-              order.isPay ? "d-none" : ""
+              order?.isPay ? "d-none" : ""
             }`}
             style={{ width: 213, height: 50 }}
             onClick={handlePay}

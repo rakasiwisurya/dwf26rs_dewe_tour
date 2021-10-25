@@ -1,40 +1,18 @@
-import { useReducer, useState } from "react";
+import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
 export default function DetailCalculate({ data }) {
   const params = useParams();
-
-  // const initialState = { qty: 1 };
-
-  // const reducer = (state, action) => {
-  //   switch (action.type) {
-  //     case "INCREMENT":
-  //       return { qty: state.qty + 1 };
-  //     case "DECREMENT":
-  //       if (state.qty > 1) {
-  //         return { qty: state.qty - 1 };
-  //       }
-  //       return { qty: state.qty };
-  //     default:
-  //       throw new Error();
-  //   }
-  // };
-
-  // const [state, dispatch] = useReducer(reducer, initialState);
-
-  // let totalPrice = state.qty * data.price;
 
   const [qty, setQty] = useState(1);
 
   let totalPrice = qty * data.price;
 
   const handleAdd = () => {
-    // dispatch({ type: "INCREMENT" })
     setQty(qty + 1);
   };
 
   const handleSubtract = () => {
-    // dispatch({ type: "DECREMENT" })
     if (qty > 1) {
       setQty(qty - 1);
     }
@@ -70,7 +48,6 @@ export default function DetailCalculate({ data }) {
               -
             </button>
             <div className="d-inline-block text-center" style={{ width: 75 }}>
-              {/* {state.qty} */}
               {qty}
             </div>
             <button
@@ -85,7 +62,6 @@ export default function DetailCalculate({ data }) {
         <div className="d-flex justify-content-between fw-bold">
           <div className="fs-5">Total :</div>
           <div className="text-primary fs-5">
-            {/* IDR. {Intl.NumberFormat().format(totalPrice)} */}
             IDR. {Intl.NumberFormat().format(totalPrice)}
           </div>
         </div>
