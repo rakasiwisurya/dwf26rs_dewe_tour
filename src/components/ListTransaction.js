@@ -1,6 +1,6 @@
 import Magnify from "assets/icons/magnify.svg";
 
-export default function ListTransaction() {
+export default function ListTransaction({ data }) {
   return (
     <section className="list-transaction">
       <div className="container">
@@ -17,17 +17,27 @@ export default function ListTransaction() {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>1</td>
-              <td>Radif Ganteng</td>
-              <td>6D/4N Fun Tassie Vaca ...</td>
-              <td>bca.jpg</td>
-              <td className="text-primary fw-bold">Pending</td>
-              <td>
-                <img src={Magnify} alt="Magnify" width="25" height="25" />
-              </td>
-            </tr>
-            <tr>
+            {data.map((item, index) => (
+              <tr key={`list-transaction-${index}`}>
+                <td>{item.id}</td>
+                <td>{item.user}</td>
+                <td>{item.trip}</td>
+                <td>{item.proofPayment}</td>
+                <td
+                  className={`fw-bold ${
+                    item.status === "Pending" && "text-primary"
+                  } ${item.status === "Approve" && "text-success"} ${
+                    item.status === "Cancel" && "text-danger"
+                  }`}
+                >
+                  {item.status}
+                </td>
+                <td>
+                  <img src={Magnify} alt="Magnify" width="25" height="25" />
+                </td>
+              </tr>
+            ))}
+            {/* <tr>
               <td>2</td>
               <td>Haris Rahman</td>
               <td>6D/4N Exciting Summer...</td>
@@ -46,7 +56,7 @@ export default function ListTransaction() {
               <td>
                 <img src={Magnify} alt="Magnify" width="25" height="25" />
               </td>
-            </tr>
+            </tr> */}
           </tbody>
         </table>
       </div>

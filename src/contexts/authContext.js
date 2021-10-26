@@ -1,5 +1,4 @@
 import { createContext, useReducer } from "react";
-import { Redirect } from "react-router";
 
 // this is initial value for global auth state (context)
 const initialValue = {
