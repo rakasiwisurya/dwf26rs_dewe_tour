@@ -1,6 +1,4 @@
 import { useState, useEffect, useContext } from "react";
-import { Link } from "react-router-dom";
-
 import { Modal, Dropdown } from "react-bootstrap";
 
 import { AuthContext } from "contexts/AuthContext";
@@ -9,6 +7,7 @@ import BrandIcon from "assets/images/dewe-tour-icon.png";
 import Avatar from "assets/images/user.png";
 import Profile from "assets/icons/profile.svg";
 import Pay from "assets/icons/pay.svg";
+import Journey from "assets/icons/journey.svg";
 import Logout from "assets/icons/logout.svg";
 
 export default function Header() {
@@ -130,14 +129,35 @@ export default function Header() {
                   </Dropdown.Toggle>
 
                   <Dropdown.Menu>
-                    <Dropdown.Item href="/profile">
-                      <img src={Profile} alt="user" width="20" height="20" />
-                      <span className="fw-bold ms-2">Profile</span>
-                    </Dropdown.Item>
-                    <Dropdown.Item href="/payment">
-                      <img src={Pay} alt="pay" width="20" height="20" />
-                      <span className="fw-bold ms-2">Pay</span>
-                    </Dropdown.Item>
+                    {stateAuth.user.role === "admin" ? (
+                      <>
+                        <Dropdown.Item href="/list-transaction">
+                          <img
+                            src={Journey}
+                            alt="user"
+                            width="20"
+                            height="20"
+                          />
+                          <span className="fw-bold ms-2">Trip</span>
+                        </Dropdown.Item>
+                      </>
+                    ) : (
+                      <>
+                        <Dropdown.Item href="/profile">
+                          <img
+                            src={Profile}
+                            alt="user"
+                            width="20"
+                            height="20"
+                          />
+                          <span className="fw-bold ms-2">Profile</span>
+                        </Dropdown.Item>
+                        <Dropdown.Item href="/payment">
+                          <img src={Pay} alt="pay" width="20" height="20" />
+                          <span className="fw-bold ms-2">Pay</span>
+                        </Dropdown.Item>
+                      </>
+                    )}
                     <Dropdown.Divider />
                     <Dropdown.Item onClick={handleLogout}>
                       <img src={Logout} alt="logout" width="20" height="20" />
