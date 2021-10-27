@@ -34,7 +34,21 @@ function reducer(state, action) {
         user: payload,
       };
     case "LOGOUT":
-      localStorage.removeItem("userLogin");
+      localStorage.setItem(
+        "userLogin",
+        JSON.stringify({
+          isLogin: false,
+          user: {
+            id: "",
+            fullname: "",
+            email: "",
+            password: "",
+            phone: "",
+            address: "",
+            role: "",
+          },
+        })
+      );
       return {
         isLogin: false,
         user: {

@@ -1,7 +1,9 @@
 import Header from "components/Header";
 import ProfileCard from "components/ProfileCard";
 import Footer from "components/Footer";
-import OrderCard from "components/OrderCard";
+import PaymentCard from "components/PaymentCard";
+
+import payment from "json/payment.json";
 
 export default function Profile() {
   return (
@@ -9,7 +11,7 @@ export default function Profile() {
       <Header />
       <main>
         <ProfileCard />
-        <OrderCard />
+        <PaymentCard data={payment} />
       </main>
       <Footer />
     </>

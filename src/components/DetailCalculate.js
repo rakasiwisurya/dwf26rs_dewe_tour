@@ -1,9 +1,7 @@
 import { useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function DetailCalculate({ data }) {
-  const params = useParams();
-
   const [qty, setQty] = useState(1);
 
   let totalPrice = qty * data.price;

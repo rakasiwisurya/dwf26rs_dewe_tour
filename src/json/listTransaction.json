@@ -1,44 +1,202 @@
 [
   {
     "id": "1",
-    "user": "Rakasiwi",
-    "trip": "6D/4N Fun Tassie Vaca ...",
+    "status": "Pending",
+    "qty": "1",
+    "total": "12398000",
     "proofPayment": "bni.jpg",
-    "status": "Approve"
+    "bookDate": "2020-12-10",
+    "user": {
+      "id": "1",
+      "fullname": "Rakasiwi",
+      "email": "rakasiwi@gmail.com",
+      "password": "12345",
+      "phone": "085717573808",
+      "address": "Jl. Kenangan No. 1",
+      "role": "client"
+    },
+    "trip": {
+      "id": "1",
+      "name": "6D/4N Fun Tassie Vacation",
+      "country": "Australia",
+      "imgUrls": [
+        {
+          "id": "1",
+          "url": "/images/detail-1.jpg"
+        },
+        {
+          "id": "2",
+          "url": "/images/detail-2.jpg"
+        },
+        {
+          "id": "3",
+          "url": "/images/detail-3.jpg"
+        },
+        {
+          "id": "4",
+          "url": "/images/detail-4.jpg"
+        }
+      ],
+      "accomodation": "Hotel 4 Nights",
+      "transportation": "Qatar Airways",
+      "eat": "Included as ltinerary",
+      "duration": {
+        "day": "6",
+        "night": "4"
+      },
+      "dateTrip": "2020-08-26",
+      "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.  It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+      "price": "12398000"
+    }
   },
   {
     "id": "2",
-    "user": "Rakasiwi",
-    "trip": "6D/4N Fun Tassie Vaca ...",
+    "status": "Cancel",
+    "qty": "1",
+    "total": "12398000",
     "proofPayment": "bni.jpg",
-    "status": "Pending"
+    "bookDate": "2020-12-10",
+    "user": {
+      "id": "1",
+      "fullname": "Rakasiwi",
+      "email": "rakasiwi@gmail.com",
+      "password": "12345",
+      "phone": "085717573808",
+      "address": "Jl. Kenangan No. 1",
+      "role": "client"
+    },
+    "trip": {
+      "id": "1",
+      "name": "6D/4N Fun Tassie Vacation",
+      "country": "Australia",
+      "imgUrls": [
+        {
+          "id": "1",
+          "url": "/images/detail-1.jpg"
+        },
+        {
+          "id": "2",
+          "url": "/images/detail-2.jpg"
+        },
+        {
+          "id": "3",
+          "url": "/images/detail-3.jpg"
+        },
+        {
+          "id": "4",
+          "url": "/images/detail-4.jpg"
+        }
+      ],
+      "accomodation": "Hotel 4 Nights",
+      "transportation": "Qatar Airways",
+      "eat": "Included as ltinerary",
+      "duration": {
+        "day": "6",
+        "night": "4"
+      },
+      "dateTrip": "2020-08-26",
+      "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.  It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+      "price": "12398000"
+    }
   },
   {
     "id": "3",
-    "user": "Rakasiwi",
-    "trip": "6D/4N Fun Tassie Vaca ...",
+    "status": "Approve",
+    "qty": "1",
+    "total": "12398000",
     "proofPayment": "bni.jpg",
-    "status": "Pending"
+    "bookDate": "2020-12-10",
+    "user": {
+      "id": "1",
+      "fullname": "Rakasiwi",
+      "email": "rakasiwi@gmail.com",
+      "password": "12345",
+      "phone": "085717573808",
+      "address": "Jl. Kenangan No. 1",
+      "role": "client"
+    },
+    "trip": {
+      "id": "1",
+      "name": "6D/4N Fun Tassie Vacation",
+      "country": "Australia",
+      "imgUrls": [
+        {
+          "id": "1",
+          "url": "/images/detail-1.jpg"
+        },
+        {
+          "id": "2",
+          "url": "/images/detail-2.jpg"
+        },
+        {
+          "id": "3",
+          "url": "/images/detail-3.jpg"
+        },
+        {
+          "id": "4",
+          "url": "/images/detail-4.jpg"
+        }
+      ],
+      "accomodation": "Hotel 4 Nights",
+      "transportation": "Qatar Airways",
+      "eat": "Included as ltinerary",
+      "duration": {
+        "day": "6",
+        "night": "4"
+      },
+      "dateTrip": "2020-08-26",
+      "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.  It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+      "price": "12398000"
+    }
   },
   {
     "id": "4",
-    "user": "Rakasiwi",
-    "trip": "6D/4N Fun Tassie Vaca ...",
+    "status": "Pending",
+    "qty": "1",
+    "total": "12398000",
     "proofPayment": "bni.jpg",
-    "status": "Cancel"
-  },
-  {
-    "id": "5",
-    "user": "Rakasiwi",
-    "trip": "6D/4N Fun Tassie Vaca ...",
-    "proofPayment": "bni.jpg",
-    "status": "Pending"
-  },
-  {
-    "id": "6",
-    "user": "Rakasiwi",
-    "trip": "6D/4N Fun Tassie Vaca ...",
-    "proofPayment": "bni.jpg",
-    "status": "Approve"
+    "bookDate": "2020-12-10",
+    "user": {
+      "id": "1",
+      "fullname": "Rakasiwi",
+      "email": "rakasiwi@gmail.com",
+      "password": "12345",
+      "phone": "085717573808",
+      "address": "Jl. Kenangan No. 1",
+      "role": "client"
+    },
+    "trip": {
+      "id": "1",
+      "name": "6D/4N Fun Tassie Vacation",
+      "country": "Australia",
+      "imgUrls": [
+        {
+          "id": "1",
+          "url": "/images/detail-1.jpg"
+        },
+        {
+          "id": "2",
+          "url": "/images/detail-2.jpg"
+        },
+        {
+          "id": "3",
+          "url": "/images/detail-3.jpg"
+        },
+        {
+          "id": "4",
+          "url": "/images/detail-4.jpg"
+        }
+      ],
+      "accomodation": "Hotel 4 Nights",
+      "transportation": "Qatar Airways",
+      "eat": "Included as ltinerary",
+      "duration": {
+        "day": "6",
+        "night": "4"
+      },
+      "dateTrip": "2020-08-26",
+      "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.  It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+      "price": "12398000"
+    }
   }
 ]

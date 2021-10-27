@@ -1,5 +1,20 @@
-[
-  {
+{
+  "id": "1",
+  "status": "Pending",
+  "qty": "1",
+  "total": "12398000",
+  "proofPayment": "FileData()",
+  "bookDate": "new Date()",
+  "user": {
+    "id": "1",
+    "fullname": "Rakasiwi",
+    "email": "rakasiwi@gmail.com",
+    "password": "12345",
+    "phone": "085717573808",
+    "address": "Jl. Kenangan No. 1",
+    "role": "client"
+  },
+  "trip": {
     "id": "1",
     "name": "6D/4N Fun Tassie Vacation",
     "country": "Australia",
@@ -21,192 +36,15 @@
         "url": "/images/detail-4.jpg"
       }
     ],
-    "infoTrip": {
-      "accomodation": "Hotel 4 Nights",
-      "transportation": "Qatar Airways",
-      "eat": "Included as ltinerary",
-      "duration": {
-        "day": "6",
-        "night": "4"
-      },
-      "dateTrip": "2020-08-26"
+    "accomodation": "Hotel 4 Nights",
+    "transportation": "Qatar Airways",
+    "eat": "Included as ltinerary",
+    "duration": {
+      "day": "6",
+      "night": "4"
     },
+    "dateTrip": "2020-08-26",
     "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.  It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
     "price": "12398000"
-  },
-  {
-    "id": "2",
-    "name": "6D/4N Exciting Summer",
-    "country": "South Korea",
-    "imgUrls": [
-      {
-        "id": "1",
-        "url": "/images/detail-1.jpg"
-      },
-      {
-        "id": "2",
-        "url": "/images/detail-2.jpg"
-      },
-      {
-        "id": "3",
-        "url": "/images/detail-3.jpg"
-      },
-      {
-        "id": "4",
-        "url": "/images/detail-4.jpg"
-      }
-    ],
-    "infoTrip": {
-      "accomodation": "Apartment 4 Nights",
-      "transportation": "Korea Airways",
-      "eat": "Samyang Super Hot",
-      "duration": {
-        "day": "6",
-        "night": "4"
-      },
-      "dateTrip": "26 September 2020"
-    },
-    "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.  It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-    "price": "10288000"
-  },
-  {
-    "id": "3",
-    "name": "8D/6N Wonderful Autumn",
-    "country": "Japan",
-    "imgUrls": [
-      {
-        "id": "1",
-        "url": "/images/detail-1.jpg"
-      },
-      {
-        "id": "2",
-        "url": "/images/detail-2.jpg"
-      },
-      {
-        "id": "3",
-        "url": "/images/detail-3.jpg"
-      },
-      {
-        "id": "4",
-        "url": "/images/detail-4.jpg"
-      }
-    ],
-    "infoTrip": {
-      "accomodation": "Hotel 4 Nights",
-      "transportation": "Japan Airways",
-      "eat": "Included as ltinerary",
-      "duration": {
-        "day": "6",
-        "night": "4"
-      },
-      "dateTrip": "26 Agustus 2020"
-    },
-    "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.  It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-    "price": "28999000"
-  },
-  {
-    "id": "4",
-    "name": "4D/3N Overland Jakarta",
-    "country": "Indonesia",
-    "imgUrls": [
-      {
-        "id": "1",
-        "url": "/images/detail-1.jpg"
-      },
-      {
-        "id": "2",
-        "url": "/images/detail-2.jpg"
-      },
-      {
-        "id": "3",
-        "url": "/images/detail-3.jpg"
-      },
-      {
-        "id": "4",
-        "url": "/images/detail-4.jpg"
-      }
-    ],
-    "infoTrip": {
-      "accomodation": "Hotel 4 Nights",
-      "transportation": "Garuda Airways",
-      "eat": "Included as ltinerary",
-      "duration": {
-        "day": "6",
-        "night": "4"
-      },
-      "dateTrip": "26 Agustus 2020"
-    },
-    "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.  It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-    "price": "3188000"
-  },
-  {
-    "id": "5",
-    "name": "4D/3N Labuan Bajo Delight",
-    "country": "Indonesia",
-    "imgUrls": [
-      {
-        "id": "1",
-        "url": "/images/detail-1.jpg"
-      },
-      {
-        "id": "2",
-        "url": "/images/detail-2.jpg"
-      },
-      {
-        "id": "3",
-        "url": "/images/detail-3.jpg"
-      },
-      {
-        "id": "4",
-        "url": "/images/detail-4.jpg"
-      }
-    ],
-    "infoTrip": {
-      "accomodation": "Hotel 4 Nights",
-      "transportation": "Airasia Airways",
-      "eat": "Included as ltinerary",
-      "duration": {
-        "day": "6",
-        "night": "4"
-      },
-      "dateTrip": "26 Agustus 2020"
-    },
-    "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.  It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-    "price": "10488000"
-  },
-  {
-    "id": "6",
-    "name": "5D/4N Magic Tokyo Fun",
-    "country": "Japan",
-    "imgUrls": [
-      {
-        "id": "1",
-        "url": "/images/detail-1.jpg"
-      },
-      {
-        "id": "2",
-        "url": "/images/detail-2.jpg"
-      },
-      {
-        "id": "3",
-        "url": "/images/detail-3.jpg"
-      },
-      {
-        "id": "4",
-        "url": "/images/detail-4.jpg"
-      }
-    ],
-    "infoTrip": {
-      "accomodation": "Hotel 4 Nights",
-      "transportation": "Japan Airways",
-      "eat": "Included as ltinerary",
-      "duration": {
-        "day": "6",
-        "night": "4"
-      },
-      "dateTrip": "26 Agustus 2020"
-    },
-    "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.  It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-    "price": "11188000"
   }
-]
+}

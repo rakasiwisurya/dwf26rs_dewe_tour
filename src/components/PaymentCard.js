@@ -1,38 +1,11 @@
-import { useContext, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { Modal } from "react-bootstrap";
-
-import { AuthContext } from "contexts/AuthContext";
-
 import Logo from "assets/images/dewe-tour-black.png";
 import PaymentProof from "assets/images/payment-proof.jpg";
 
-export default function PaymentCard({ data }) {
+export default function PaymentCard({ data, isPay }) {
   const today = new Date();
-  const dateTrip = new Date(data.infoTrip.dateTrip);
+  const dateTrip = new Date(data.trip.dateTrip);
 
-  const { stateAuth } = useContext(AuthContext);
-
-  const userOrder = JSON.parse(localStorage.getItem("userOrder"));
-
-  const [order, setOrder] = useState(userOrder);
-
-  const [show, setShow] = useState(false);
-
-  useEffect(() => {
-    const userOrder = JSON.parse(localStorage.getItem("userOrder"));
-    setOrder(userOrder);
-  }, []);
-
-  const handlePay = () => {
-    setOrder((prevState) => ({ ...prevState, isPay: true }));
-    localStorage.setItem("userOrder", JSON.stringify(order));
-    setShow(true);
-  };
-
-  const handleClose = () => {
-    setShow(false);
-  };
+  // const userOrder = JSON.parse(localStorage.getItem("userOrder"));
 
   return (
     <section className="payment-card">
@@ -61,14 +34,14 @@ export default function PaymentCard({ data }) {
 
             <div className="row mb-3">
               <div className="col-4">
-                <div className="fw-bold fs-5">{data.name}</div>
-                <div className="text-muted mb-4">{data.country}</div>
+                <div className="fw-bold fs-5">{data.trip.name}</div>
+                <div className="text-muted mb-4">{data.trip.country}</div>
                 <div
                   className={`notif p-1 d-flex justify-content-center align-items-center ${
-                    order?.isPay ? "notif-warning" : "notif-danger"
+                    isPay ? "notif-warning" : "notif-danger"
                   }`}
                 >
-                  {order?.isPay ? "Waiting Approve" : "Waiting Payment"}
+                  {isPay ? "Waiting Approve" : "Waiting Payment"}
                 </div>
               </div>
               <div className="col-2">
@@ -84,8 +57,8 @@ export default function PaymentCard({ data }) {
                   <div className="col">
                     <div className="fs-6 fw-bold mb-1">Duration</div>
                     <div className="text-muted" style={{ fontSize: 12 }}>
-                      {data.infoTrip.duration.day} Day{" "}
-                      {data.infoTrip.duration.night} Night
+                      {data.trip.duration.day} Day {data.trip.duration.night}{" "}
+                      Night
                     </div>
                   </div>
                 </div>
@@ -95,13 +68,13 @@ export default function PaymentCard({ data }) {
                   <div className="col-auto mb-4">
                     <div className="fs-6 fw-bold mb-1">Accomodation</div>
                     <div className="text-muted" style={{ fontSize: 12 }}>
-                      {data.infoTrip.accomodation}
+                      {data.trip.accomodation}
                     </div>
                   </div>
                   <div className="col">
                     <div className="fs-6 fw-bold mb-1">Transportation</div>
                     <div className="text-muted" style={{ fontSize: 12 }}>
-                      {data.infoTrip.transportation}
+                      {data.trip.transportation}
                     </div>
                   </div>
                 </div>
@@ -148,22 +121,19 @@ export default function PaymentCard({ data }) {
                 <tbody className="text-muted">
                   <tr>
                     <td>1</td>
-                    <td>{stateAuth.user.fullname}</td>
-                    <td>{stateAuth.user.email}</td>
-                    <td>{stateAuth.user.phone}</td>
+                    <td>{data.user.fullname}</td>
+                    <td>{data.user.email}</td>
+                    <td>{data.user.phone}</td>
                     <td className="fw-bold">Qty</td>
                     <td className="fw-bold">:</td>
-                    <td className="fw-bold">{order?.qty}</td>
+                    <td className="fw-bold">{data.qty}</td>
                   </tr>
                   <tr className="fw-bold border-white">
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td colSpan="4"></td>
                     <td>Total</td>
                     <td>:</td>
                     <td className="text-danger">
-                      IDR. {Intl.NumberFormat().format(order?.total)}
+                      IDR. {Intl.NumberFormat().format(data.total)}
                     </td>
                   </tr>
                 </tbody>
@@ -171,31 +141,7 @@ export default function PaymentCard({ data }) {
             </div>
           </div>
         </div>
-        <div className="d-flex justify-content-end">
-          <button
-            className={`btn btn-primary mt-2 fw-bold text-white ${
-              order?.isPay ? "d-none" : ""
-            }`}
-            style={{ width: 213, height: 50 }}
-            onClick={handlePay}
-          >
-            PAY
-          </button>
-        </div>
       </div>
-
-      <Modal show={show} onHide={handleClose} centered>
-        <Modal.Body className="p-4 text-center">
-          <div>Your payment will be confirmed within 1 x 24 hours</div>
-          <div>
-            To see orders{" "}
-            <Link to="" className="fw-bold">
-              click here
-            </Link>{" "}
-            thank you
-          </div>
-        </Modal.Body>
-      </Modal>
     </section>
   );
 }

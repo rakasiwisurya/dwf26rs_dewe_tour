@@ -1,11 +1,31 @@
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
-export default function GroupTour({ data }) {
+export default function GroupTour({ data, isAdmin }) {
+  const history = useHistory();
+
   return (
     <section className="group-tour mb-5">
       <div className="container">
         <div className="title text-center">
-          <h2 className="fs-1 fw-bold">Group Tour</h2>
+          {isAdmin ? (
+            <div
+              className="d-flex justify-content-between"
+              style={{ paddingTop: 150 }}
+            >
+              <h2 className="fs-1 fw-bold">Income Trip</h2>
+              <button
+                className="btn btn-primary text-white fw-bold"
+                style={{ width: 150, height: 40 }}
+                onClick={() => {
+                  history.push("/add-trip");
+                }}
+              >
+                Add Trip
+              </button>
+            </div>
+          ) : (
+            <h2 className="fs-1 fw-bold">Group Tour</h2>
+          )}
         </div>
         <div className="row gy-5 pb-5">
           {data.map((item, index) => {

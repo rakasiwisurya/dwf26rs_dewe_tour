@@ -1,3 +1,7 @@
+import { useContext } from "react";
+
+import { AuthContext } from "contexts/AuthContext";
+
 import IconName from "assets/icons/profile-name.svg";
 import IconMail from "assets/icons/profile-mail.svg";
 import IconPhone from "assets/icons/profile-phone.svg";
@@ -5,8 +9,10 @@ import IconPlace from "assets/icons/profile-place.svg";
 import User from "assets/images/profile-user.png";
 
 export default function ProfileCard() {
+  const { stateAuth } = useContext(AuthContext);
+
   return (
-    <section className="profile-card">
+    <section className="profile-card mb-5">
       <div className="container">
         <div className="card p-3 mx-auto" style={{ width: 785 }}>
           <div className="card-body">
@@ -17,7 +23,7 @@ export default function ProfileCard() {
                   <img src={IconName} alt="Icon User" className="mx-1" />
                   <div>
                     <div className="fw-bold" style={{ fontSize: 13 }}>
-                      Rakasiwi Surya
+                      {stateAuth.user.fullname}
                     </div>
                     <div className="text-muted" style={{ fontSize: 11 }}>
                       Full name
@@ -28,7 +34,7 @@ export default function ProfileCard() {
                   <img src={IconMail} alt="Icon Mail" className="mx-1" />
                   <div>
                     <div className="fw-bold" style={{ fontSize: 13 }}>
-                      rakasiwi@gmail.com
+                      {stateAuth.user.email}
                     </div>
                     <div className="text-muted" style={{ fontSize: 11 }}>
                       Email
@@ -39,7 +45,7 @@ export default function ProfileCard() {
                   <img src={IconPhone} alt="Icon Phone" className="mx-1" />
                   <div>
                     <div className="fw-bold" style={{ fontSize: 13 }}>
-                      0812-8623-8911
+                      {stateAuth.user.phone}
                     </div>
                     <div className="text-muted" style={{ fontSize: 11 }}>
                       Mobile phone
@@ -50,7 +56,7 @@ export default function ProfileCard() {
                   <img src={IconPlace} alt="Icon Place" className="mx-1" />
                   <div>
                     <div className="fw-bold" style={{ fontSize: 13 }}>
-                      Perumahan Permata Bintaro Residence C-3
+                      {stateAuth.user.address}
                     </div>
                     <div className="text-muted" style={{ fontSize: 11 }}>
                       Address

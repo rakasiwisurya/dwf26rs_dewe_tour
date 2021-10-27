@@ -37,26 +37,6 @@ export default function ListTransaction({ data }) {
                 </td>
               </tr>
             ))}
-            {/* <tr>
-              <td>2</td>
-              <td>Haris Rahman</td>
-              <td>6D/4N Exciting Summer...</td>
-              <td>bni.jpg</td>
-              <td className="text-success fw-bold">Success</td>
-              <td>
-                <img src={Magnify} alt="Magnify" width="25" height="25" />
-              </td>
-            </tr>
-            <tr>
-              <td>3</td>
-              <td>Amin Subagiyo</td>
-              <td>6D/4N Wonderful Autum ...</td>
-              <td>permata.jpg</td>
-              <td className="text-danger fw-bold">Cancel</td>
-              <td>
-                <img src={Magnify} alt="Magnify" width="25" height="25" />
-              </td>
-            </tr> */}
           </tbody>
         </table>
       </div>

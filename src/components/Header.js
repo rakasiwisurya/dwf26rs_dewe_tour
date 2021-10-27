@@ -1,5 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import { Modal, Dropdown } from "react-bootstrap";
+import { useHistory } from "react-router";
 
 import { AuthContext } from "contexts/AuthContext";
 
@@ -11,6 +12,8 @@ import Journey from "assets/icons/journey.svg";
 import Logout from "assets/icons/logout.svg";
 
 export default function Header() {
+  const history = useHistory();
+
   const users = JSON.parse(localStorage.getItem("deweTourUsers"));
 
   const { stateAuth, dispatch } = useContext(AuthContext);
@@ -19,6 +22,8 @@ export default function Header() {
   useEffect(() => {
     dispatch({ type: "AUTH" });
   }, []);
+
+  // console.log(stateAuth);
 
   const [show, setShow] = useState({
     login: false,
@@ -57,7 +62,9 @@ export default function Header() {
     }
   };
 
-  const handleRegister = () => {
+  const handleRegister = (e) => {
+    e.preventDefault();
+
     const inputFullname = document.querySelector("#fullname").value;
     const inputEmail = document.querySelector("#email").value;
     const inputPassword = document.querySelector("#password").value;
@@ -76,10 +83,14 @@ export default function Header() {
 
     localStorage.setItem("deweTourUsers", JSON.stringify(users));
 
+    handleClose();
+
     alert("Register Successful");
   };
 
-  const handleLogin = () => {
+  const handleLogin = (e) => {
+    e.preventDefault();
+
     const inputEmail = document.querySelector("#emailLogin").value;
     const inputPassword = document.querySelector("#passwordLogin").value;
 
@@ -92,6 +103,8 @@ export default function Header() {
           },
         });
 
+        handleClose();
+
         return alert("Login Successful");
       }
     }
@@ -103,26 +116,27 @@ export default function Header() {
     dispatch({
       type: "LOGOUT",
     });
+
+    history.push("/");
   };
 
   return (
     <header className="header position-relative">
       <nav className="navbar navbar-expand-lg navbar-light position-absolute w-100">
         <div className="container">
-          <a href="/" className="navbar-brand">
+          <div
+            className="navbar-brand"
+            onClick={() => {
+              history.push("/");
+            }}
+            style={{ cursor: "pointer" }}
+          >
             <img src={BrandIcon} alt="Brand Icon" width="190" height="68" />
-          </a>
+          </div>
 
           <div className="auth">
             {stateAuth.isLogin ? (
               <>
-                {/* <img
-                  src={Avatar}
-                  alt="user"
-                  width="50"
-                  height="50"
-                  onClick={handleLogout}
-                /> */}
                 <Dropdown>
                   <Dropdown.Toggle as="a" id="dropdown-basic">
                     <img src={Avatar} alt="user" width="50" height="50" />
@@ -131,7 +145,11 @@ export default function Header() {
                   <Dropdown.Menu>
                     {stateAuth.user.role === "admin" ? (
                       <>
-                        <Dropdown.Item href="/list-transaction">
+                        <Dropdown.Item
+                          onClick={() => {
+                            history.push("/list-transaction");
+                          }}
+                        >
                           <img
                             src={Journey}
                             alt="user"
@@ -143,7 +161,11 @@ export default function Header() {
                       </>
                     ) : (
                       <>
-                        <Dropdown.Item href="/profile">
+                        <Dropdown.Item
+                          onClick={() => {
+                            history.push("/profile");
+                          }}
+                        >
                           <img
                             src={Profile}
                             alt="user"
@@ -152,7 +174,11 @@ export default function Header() {
                           />
                           <span className="fw-bold ms-2">Profile</span>
                         </Dropdown.Item>
-                        <Dropdown.Item href="/payment">
+                        <Dropdown.Item
+                          onClick={() => {
+                            history.push("/payment");
+                          }}
+                        >
                           <img src={Pay} alt="pay" width="20" height="20" />
                           <span className="fw-bold ms-2">Pay</span>
                         </Dropdown.Item>
