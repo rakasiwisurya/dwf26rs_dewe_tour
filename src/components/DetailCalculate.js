@@ -1,7 +1,9 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 export default function DetailCalculate({ data }) {
+  const history = useHistory();
+
   const [qty, setQty] = useState(1);
 
   let totalPrice = qty * data.price;
@@ -25,6 +27,8 @@ export default function DetailCalculate({ data }) {
     };
 
     localStorage.setItem("userOrder", JSON.stringify(userOrder));
+
+    history.push("/payment");
   };
 
   return (
@@ -65,15 +69,14 @@ export default function DetailCalculate({ data }) {
         </div>
         <hr />
         <div className="d-flex justify-content-end">
-          <Link
-            to="/payment"
+          <button
             onClick={handleSubmit}
             type="button"
             className="btn btn-primary mt-2 fw-bold text-white d-flex align-items-center justify-content-center"
             style={{ width: 213, height: 50 }}
           >
             BOOK NOW
-          </Link>
+          </button>
         </div>
       </div>
     </section>

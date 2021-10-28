@@ -64,13 +64,21 @@ main {
 }
 
 .modal-dialog {
-  max-width: 416px;
+  max-width: 1085px;
 
-  .tag-line {
-    font-size: 14px;
+  &.modal-dialog-centered {
+    justify-content: center;
 
-    .link {
-      cursor: pointer;
+    .modal-content {
+      width: inherit;
+
+      .tag-line {
+        font-size: 14px;
+
+        .link {
+          cursor: pointer;
+        }
+      }
     }
   }
 }
@@ -131,9 +139,9 @@ main {
   }
 
   .dropdown-menu {
+    top: 30px !important;
     border: none;
     box-shadow: 0 0 5px rgba(151, 151, 151, 0.4);
-    inset: 30px 0px auto auto !important;
   }
 
   .dropdown-menu::after {

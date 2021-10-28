@@ -32,11 +32,10 @@ export default function Payment() {
           <div className="d-flex justify-content-end">
             <button
               className={`btn btn-primary mt-2 fw-bold text-white ${
-                isPay ? "d-none" : ""
+                isPay && "d-none"
               }`}
               style={{ width: 213, height: 50 }}
               onClick={handlePay}
-              colSpan="4"
             >
               PAY
             </button>

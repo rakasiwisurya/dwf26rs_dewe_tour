@@ -31,11 +31,7 @@ export default function Header() {
   });
 
   const handleClose = () => {
-    setShow((prevState) => ({
-      ...prevState,
-      login: false,
-      register: false,
-    }));
+    setShow({ login: false, register: false });
   };
 
   const handleShowLogin = () => {
@@ -48,17 +44,9 @@ export default function Header() {
 
   const handleSwitch = () => {
     if (show.login) {
-      setShow((prevState) => ({
-        ...prevState,
-        login: false,
-        register: true,
-      }));
+      setShow({ login: false, register: true });
     } else {
-      setShow((prevState) => ({
-        ...prevState,
-        login: true,
-        register: false,
-      }));
+      setShow({ login: true, register: false });
     }
   };
 
@@ -216,7 +204,7 @@ export default function Header() {
             )}
 
             <Modal show={show.login} onHide={handleClose} centered>
-              <Modal.Body className="p-4">
+              <Modal.Body className="p-4" style={{ width: 416 }}>
                 <h4 className="text-center mt-2 mb-4 fw-bold fs-3">Login</h4>
                 <form onSubmit={handleLogin}>
                   <label htmlFor="emailLogin" className="fw-bold mb-2">
@@ -255,7 +243,7 @@ export default function Header() {
             </Modal>
 
             <Modal show={show.register} onHide={handleClose} centered>
-              <Modal.Body className="p-4">
+              <Modal.Body className="p-4" style={{ width: 416 }}>
                 <h4 className="text-center mt-2 mb-4 fw-bold fs-3">Register</h4>
                 <form onSubmit={handleRegister}>
                   <label htmlFor="fullname" className="fw-bold mb-2">
