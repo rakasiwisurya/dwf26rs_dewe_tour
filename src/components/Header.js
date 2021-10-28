@@ -30,6 +30,19 @@ export default function Header() {
     register: false,
   });
 
+  const [inputLogin, setInputLogin] = useState({
+    email: "",
+    password: "",
+  });
+
+  const [inputRegister, setInputRegister] = useState({
+    fullname: "",
+    email: "",
+    password: "",
+    phone: "",
+    address: "",
+  });
+
   const handleClose = () => {
     setShow({ login: false, register: false });
   };
@@ -50,22 +63,30 @@ export default function Header() {
     }
   };
 
+  const handleLoginChange = (e) => {
+    setInputLogin((prevState) => ({
+      ...prevState,
+      [e.target.id]: e.target.value,
+    }));
+  };
+
+  const handleRegisterChange = (e) => {
+    setInputRegister((prevState) => ({
+      ...prevState,
+      [e.target.id]: e.target.value,
+    }));
+  };
+
   const handleRegister = (e) => {
     e.preventDefault();
 
-    const inputFullname = document.querySelector("#fullname").value;
-    const inputEmail = document.querySelector("#email").value;
-    const inputPassword = document.querySelector("#password").value;
-    const inputPhone = document.querySelector("#phone").value;
-    const inputAddress = document.querySelector("#address").value;
-
     users.push({
       id: Date.now(),
-      fullname: inputFullname,
-      email: inputEmail,
-      password: inputPassword,
-      phone: inputPhone,
-      address: inputAddress,
+      fullname: inputRegister.fullname,
+      email: inputRegister.email,
+      password: inputRegister.password,
+      phone: inputRegister.phone,
+      address: inputRegister.address,
       role: "client",
     });
 
@@ -79,11 +100,11 @@ export default function Header() {
   const handleLogin = (e) => {
     e.preventDefault();
 
-    const inputEmail = document.querySelector("#emailLogin").value;
-    const inputPassword = document.querySelector("#passwordLogin").value;
-
     for (let user of users) {
-      if (inputEmail === user.email && inputPassword === user.password) {
+      if (
+        inputLogin.email === user.email &&
+        inputLogin.password === user.password
+      ) {
         dispatch({
           type: "LOGIN",
           payload: {
@@ -211,17 +232,21 @@ export default function Header() {
                     Email
                   </label>
                   <input
-                    id="emailLogin"
+                    id="email"
                     type="email"
                     className="mb-4 form-control"
+                    onChange={handleLoginChange}
+                    value={inputLogin.email}
                   />
-                  <label htmlFor="passwordLogin" className="fw-bold mb-2">
+                  <label htmlFor="password" className="fw-bold mb-2">
                     Password
                   </label>
                   <input
-                    id="passwordLogin"
+                    id="password"
                     type="password"
                     className="mb-4 form-control"
+                    onChange={handleLoginChange}
+                    value={inputLogin.password}
                   />
                   <button
                     type="submit"
@@ -253,6 +278,8 @@ export default function Header() {
                     id="fullname"
                     type="text"
                     className="mb-4 form-control"
+                    onChange={handleRegisterChange}
+                    value={inputRegister.fullname}
                   />
                   <label htmlFor="email" className="fw-bold mb-2">
                     Email
@@ -261,6 +288,8 @@ export default function Header() {
                     id="email"
                     type="email"
                     className="mb-4 form-control"
+                    onChange={handleRegisterChange}
+                    value={inputRegister.email}
                   />
                   <label htmlFor="password" className="fw-bold mb-2">
                     Password
@@ -269,6 +298,8 @@ export default function Header() {
                     id="password"
                     type="password"
                     className="mb-4 form-control"
+                    onChange={handleRegisterChange}
+                    value={inputRegister.password}
                   />
                   <label htmlFor="phone" className="fw-bold mb-2">
                     Phone
@@ -277,6 +308,8 @@ export default function Header() {
                     id="phone"
                     type="number"
                     className="mb-4 form-control"
+                    onChange={handleRegisterChange}
+                    value={inputRegister.phone}
                   />
                   <label htmlFor="address" className="fw-bold mb-2">
                     Address
@@ -285,6 +318,8 @@ export default function Header() {
                     id="address"
                     type="number"
                     className="mb-4 form-control"
+                    onChange={handleRegisterChange}
+                    value={inputRegister.address}
                   />
                   <button
                     type="submit"
