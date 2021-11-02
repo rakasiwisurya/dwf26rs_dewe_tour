@@ -5,6 +5,10 @@ import Magnify from "assets/icons/magnify.svg";
 import Logo from "assets/images/dewe-tour-black.png";
 import PaymentProof from "assets/images/payment-proof.jpg";
 
+import formatNumber from "utils/formatNumber";
+import formatDate from "utils/formatDate";
+import formatWeekDay from "utils/formatWeekDay";
+
 export default function ListTransaction({ data }) {
   const [isShow, setIsShow] = useState(false);
   const [isConfirm, setIsConfirm] = useState(false);
@@ -31,12 +35,6 @@ export default function ListTransaction({ data }) {
       transportation: "",
     },
   });
-  const dateTrip = new Date(dataItem.trip.dateTrip);
-  const bookDate = new Date(dataItem.bookDate);
-
-  console.log(dataItem);
-  // console.log(dateTrip);
-  // console.log(bookDate);
 
   return (
     <section className="list-transaction">
@@ -132,14 +130,9 @@ export default function ListTransaction({ data }) {
                     <h1 className="h4 fw-bold text-end">Booking</h1>
                     <p className="text-end">
                       <span className="fw-bold">
-                        {Intl.DateTimeFormat("id-ID", {
-                          weekday: "long",
-                        }).format(bookDate)}
+                        {formatWeekDay(dataItem.bookDate)}
                       </span>
-                      ,{" "}
-                      {Intl.DateTimeFormat("id-ID", {
-                        dateStyle: "long",
-                      }).format(bookDate)}
+                      , {formatDate(dataItem.bookDate)}
                     </p>
                   </div>
                 </div>
@@ -170,9 +163,7 @@ export default function ListTransaction({ data }) {
                     <div className="col-auto mb-4">
                       <div className="fs-6 fw-bold mb-1">Date Trip</div>
                       <div className="text-muted" style={{ fontSize: 12 }}>
-                        {Intl.DateTimeFormat("id-ID", {
-                          dateStyle: "long",
-                        }).format(dateTrip)}
+                        {formatDate(dataItem.trip.dateTrip)}
                       </div>
                     </div>
                     <div className="col">
@@ -254,7 +245,7 @@ export default function ListTransaction({ data }) {
                       <td>Total</td>
                       <td>:</td>
                       <td className="text-danger">
-                        IDR. {Intl.NumberFormat().format(dataItem.total)}
+                        IDR. {formatNumber(dataItem.total)}
                       </td>
                     </tr>
                   </tbody>

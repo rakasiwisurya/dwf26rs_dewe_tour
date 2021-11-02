@@ -10,10 +10,20 @@ export default function DetailFeaturedImages({ data }) {
                 className={`${index > 0 ? "col-4" : "col-12"}`}
               >
                 <div className="card w-100">
-                  <img src={item.url} alt={item.id} className="card-img" />
+                  <img
+                    height={`${index > 0 ? "214" : "459"}`}
+                    src={item.url}
+                    alt={item.id}
+                    className="card-img rounded"
+                  />
 
                   {index === 3 ? (
-                    <div className="card-img-overlay d-flex justify-content-center align-items-center">
+                    <div
+                      className="card-img-overlay d-flex justify-content-center align-items-center"
+                      style={{
+                        backgroundColor: `rgba(${0}, ${0}, ${0}, ${0.2})`,
+                      }}
+                    >
                       <div className="card-text fw-bold fs-4 text-white">
                         +5
                       </div>

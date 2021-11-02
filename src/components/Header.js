@@ -23,8 +23,6 @@ export default function Header() {
     dispatch({ type: "AUTH" });
   }, []);
 
-  // console.log(stateAuth);
-
   const [show, setShow] = useState({
     login: false,
     register: false,
@@ -75,6 +73,7 @@ export default function Header() {
       ...prevState,
       [e.target.id]: e.target.value,
     }));
+    console.log(inputRegister);
   };
 
   const handleRegister = (e) => {

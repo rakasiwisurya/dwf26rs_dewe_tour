@@ -1,12 +1,11 @@
 import Logo from "assets/images/dewe-tour-black.png";
 import PaymentProof from "assets/images/payment-proof.jpg";
 
+import formatDate from "utils/formatDate";
+import formatNumber from "utils/formatNumber";
+import formatWeekDay from "utils/formatWeekDay";
+
 export default function PaymentCard({ data, isPay }) {
-  const today = new Date();
-  const dateTrip = new Date(data.trip.dateTrip);
-
-  // const userOrder = JSON.parse(localStorage.getItem("userOrder"));
-
   return (
     <section className="payment-card">
       <div className="container">
@@ -18,15 +17,8 @@ export default function PaymentCard({ data, isPay }) {
                 <div>
                   <h1 className="h4 fw-bold text-end">Booking</h1>
                   <p className="text-end">
-                    <span className="fw-bold">
-                      {Intl.DateTimeFormat("id-ID", {
-                        weekday: "long",
-                      }).format(today)}
-                    </span>
-                    ,{" "}
-                    {Intl.DateTimeFormat("id-ID", {
-                      dateStyle: "long",
-                    }).format(today)}
+                    <span className="fw-bold">{formatWeekDay()}</span>,{" "}
+                    {formatDate()}
                   </p>
                 </div>
               </div>
@@ -49,9 +41,7 @@ export default function PaymentCard({ data, isPay }) {
                   <div className="col-auto mb-4">
                     <div className="fs-6 fw-bold mb-1">Date Trip</div>
                     <div className="text-muted" style={{ fontSize: 12 }}>
-                      {Intl.DateTimeFormat("id-ID", {
-                        dateStyle: "long",
-                      }).format(dateTrip)}
+                      {formatDate(data.trip.dateTrip)}
                     </div>
                   </div>
                   <div className="col">
@@ -133,7 +123,7 @@ export default function PaymentCard({ data, isPay }) {
                     <td>Total</td>
                     <td>:</td>
                     <td className="text-danger">
-                      IDR. {Intl.NumberFormat().format(data.total)}
+                      IDR. {formatNumber(data.total)}
                     </td>
                   </tr>
                 </tbody>

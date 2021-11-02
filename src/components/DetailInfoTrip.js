@@ -6,9 +6,9 @@ import MealIcon from "assets/icons/meal.svg";
 import TimeIcon from "assets/icons/time.svg";
 import CalendarIcon from "assets/icons/calendar.svg";
 
-export default function DetailInfoTrip({ data }) {
-  const dateTrip = new Date(data.dateTrip);
+import formatDate from "utils/formatDate";
 
+export default function DetailInfoTrip({ data }) {
   return (
     <section className="detail-info-trip mb-5">
       <div className="container">
@@ -43,11 +43,7 @@ export default function DetailInfoTrip({ data }) {
           <div className="col">
             <h5 className="text-muted subtitle">Date Trip</h5>
             <img src={CalendarIcon} alt="Calendar" width="24" height="24" />
-            <span className="fw-bold ms-2">
-              {Intl.DateTimeFormat("id-ID", {
-                dateStyle: "long",
-              }).format(dateTrip)}
-            </span>
+            <span className="fw-bold ms-2">{formatDate(data.dateTrip)}</span>
           </div>
         </div>
       </div>

@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
 
+import formatNumber from "utils/formatNumber";
+
 export default function DetailCalculate({ data }) {
   const history = useHistory();
 
@@ -38,7 +40,7 @@ export default function DetailCalculate({ data }) {
           <div className="price d-flex align-items-center">
             IDR.
             <span className="mx-2 text-primary">
-              {Intl.NumberFormat().format(data.price)}
+              {formatNumber(data.price)}
             </span>
             / Person
           </div>
@@ -64,7 +66,7 @@ export default function DetailCalculate({ data }) {
         <div className="d-flex justify-content-between fw-bold">
           <div className="fs-5">Total :</div>
           <div className="text-primary fs-5">
-            IDR. {Intl.NumberFormat().format(totalPrice)}
+            IDR. {formatNumber(totalPrice)}
           </div>
         </div>
         <hr />

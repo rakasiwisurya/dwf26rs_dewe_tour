@@ -1,4 +1,5 @@
 import { Link, useHistory } from "react-router-dom";
+import formatNumber from "utils/formatNumber";
 
 export default function GroupTour({ data, isAdmin }) {
   const history = useHistory();
@@ -50,12 +51,12 @@ export default function GroupTour({ data, isAdmin }) {
                       {item.capacity}/15
                     </div>
                     <div className="card-body">
-                      <h5 className="card-title mb-3 text-dark fw-bold">
+                      <h5 className="card-title mb-3 text-dark fw-bold text-truncate">
                         {item.name}
                       </h5>
                       <div className="card-text d-flex justify-content-between">
                         <span className="text-primary fw-bold">
-                          IDR. {Intl.NumberFormat().format(item.price)}
+                          IDR. {formatNumber(item.price)}
                         </span>
                         <span className="text-muted">{item.country}</span>
                       </div>
