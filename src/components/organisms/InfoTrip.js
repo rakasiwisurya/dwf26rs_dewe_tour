@@ -1,5 +1,3 @@
-import React from "react";
-
 import HotelIcon from "assets/icons/hotel.svg";
 import PlaneIcon from "assets/icons/plane.svg";
 import MealIcon from "assets/icons/meal.svg";
@@ -8,7 +6,7 @@ import CalendarIcon from "assets/icons/calendar.svg";
 
 import formatDate from "utils/formatDate";
 
-export default function DetailInfoTrip({ data }) {
+export default function InfoTrip({ data }) {
   return (
     <section className="detail-info-trip mb-5">
       <div className="container">

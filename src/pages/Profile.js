@@ -1,7 +1,7 @@
-import Header from "components/Header";
-import ProfileCard from "components/ProfileCard";
-import Footer from "components/Footer";
-import PaymentCard from "components/PaymentCard";
+import Header from "components/organisms/Header";
+import ProfileCard from "components/organisms/ProfileCard";
+import Footer from "components/organisms/Footer";
+import PaymentCard from "components/organisms/PaymentCard";
 
 import payment from "json/payment.json";
 

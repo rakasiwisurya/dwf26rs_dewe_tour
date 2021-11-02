@@ -1,6 +1,6 @@
-import Footer from "components/Footer";
-import FormAddTrip from "components/FormAddTrip";
-import Header from "components/Header";
+import Footer from "components/organisms/Footer";
+import FormAddTrip from "components/organisms/FormAddTrip";
+import Header from "components/organisms/Header";
 
 export default function AddTrip() {
   return (

@@ -37,10 +37,10 @@ export default function Categories() {
     <section className="categories mb-4">
       <div className="container">
         <div className="row">
-          {data.map((item, index) => (
+          {data.map((item) => (
             <div
               className="col d-flex justify-content-center"
-              key={`categories-${index}`}
+              key={`categories-${item.id}`}
             >
               <div className="card shadow-sm text-center px-4">
                 <div className="content">

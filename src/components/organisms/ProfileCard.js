@@ -6,7 +6,7 @@ import IconName from "assets/icons/profile-name.svg";
 import IconMail from "assets/icons/profile-mail.svg";
 import IconPhone from "assets/icons/profile-phone.svg";
 import IconPlace from "assets/icons/profile-place.svg";
-import User from "assets/images/profile-user.png";
+import { InputFileAvatar } from "components/atoms/InputFiles";
 
 export default function ProfileCard() {
   const { stateAuth } = useContext(AuthContext);
@@ -65,7 +65,7 @@ export default function ProfileCard() {
                 </div>
               </div>
               <div className="col-4 d-flex justify-content-end">
-                <div>
+                {/* <div>
                   <img src={User} alt="User" />
                   <button
                     className="btn btn-primary d-block mt-3 text-white fw-bold"
@@ -73,7 +73,8 @@ export default function ProfileCard() {
                   >
                     Change Photo Profile
                   </button>
-                </div>
+                </div> */}
+                <InputFileAvatar />
               </div>
             </div>
           </div>

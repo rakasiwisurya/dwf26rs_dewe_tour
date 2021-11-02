@@ -1,12 +1,12 @@
 import { useParams } from "react-router";
 
-import Header from "components/Header";
-import DetailTitle from "components/DetailTitle";
-import DetailFeaturedImages from "components/DetailFeaturedImages";
-import DetailInfoTrip from "components/DetailInfoTrip";
-import DetailDescription from "components/DetailDescription";
-import DetailCalculate from "components/DetailCalculate";
-import Footer from "components/Footer";
+import Header from "components/organisms/Header";
+import TourTitle from "components/organisms/TourTitle";
+import FeaturedImages from "components/organisms/FeaturedImages";
+import InfoTrip from "components/organisms/InfoTrip";
+import Description from "components/organisms/Description";
+import CalculatePrice from "components/organisms/CalculatePrice";
+import Footer from "components/organisms/Footer";
 
 import detailTour from "json/detailTour.json";
 
@@ -18,11 +18,11 @@ export default function DetailTour() {
     <>
       <Header />
       <main>
-        <DetailTitle data={detailTour[index]} />
-        <DetailFeaturedImages data={detailTour[index]} />
-        <DetailInfoTrip data={detailTour[index].infoTrip} />
-        <DetailDescription data={detailTour[index]} />
-        <DetailCalculate data={detailTour[index]} />
+        <TourTitle data={detailTour[index]} />
+        <FeaturedImages data={detailTour[index]} />
+        <InfoTrip data={detailTour[index].infoTrip} />
+        <Description data={detailTour[index]} />
+        <CalculatePrice data={detailTour[index]} />
       </main>
       <Footer />
     </>

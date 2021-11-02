@@ -1,4 +1,4 @@
-export default function DetailTitle({ data }) {
+export default function TourTitle({ data }) {
   return (
     <section className="detail-title mb-3">
       <div className="container">

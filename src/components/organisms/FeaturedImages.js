@@ -1,4 +1,4 @@
-export default function DetailFeaturedImages({ data }) {
+export default function FeaturedImages({ data }) {
   return (
     <section className="detail-featured-images mb-5">
       <div className="container">

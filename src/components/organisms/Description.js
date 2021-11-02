@@ -1,4 +1,4 @@
-export default function DetailDescription({ data }) {
+export default function Description({ data }) {
   return (
     <section className="detail-description mb-5">
       <div className="container">

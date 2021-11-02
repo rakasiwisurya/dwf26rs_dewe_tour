@@ -2,9 +2,9 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Modal } from "react-bootstrap";
 
-import Header from "components/Header";
-import PaymentCard from "components/PaymentCard";
-import Footer from "components/Footer";
+import Header from "components/organisms/Header";
+import PaymentCard from "components/organisms/PaymentCard";
+import Footer from "components/organisms/Footer";
 
 import payment from "json/payment.json";
 

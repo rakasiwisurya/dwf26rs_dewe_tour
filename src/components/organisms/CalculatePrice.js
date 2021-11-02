@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 
 import formatNumber from "utils/formatNumber";
 
-export default function DetailCalculate({ data }) {
+export default function CalculatePrice({ data }) {
   const history = useHistory();
 
   const [qty, setQty] = useState(1);
