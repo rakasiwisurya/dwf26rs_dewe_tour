@@ -2,11 +2,12 @@ import { useContext } from "react";
 
 import { AuthContext } from "contexts/AuthContext";
 
+import { InputFileAvatar } from "components/atoms";
+
 import IconName from "assets/icons/profile-name.svg";
 import IconMail from "assets/icons/profile-mail.svg";
 import IconPhone from "assets/icons/profile-phone.svg";
 import IconPlace from "assets/icons/profile-place.svg";
-import { InputFileAvatar } from "components/atoms/InputFiles";
 
 export default function ProfileCard() {
   const { stateAuth } = useContext(AuthContext);
@@ -65,15 +66,6 @@ export default function ProfileCard() {
                 </div>
               </div>
               <div className="col-4 d-flex justify-content-end">
-                {/* <div>
-                  <img src={User} alt="User" />
-                  <button
-                    className="btn btn-primary d-block mt-3 text-white fw-bold"
-                    style={{ width: 280 }}
-                  >
-                    Change Photo Profile
-                  </button>
-                </div> */}
                 <InputFileAvatar />
               </div>
             </div>

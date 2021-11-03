@@ -1,12 +1,11 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
-import { Modal } from "react-bootstrap";
 
-import Header from "components/organisms/Header";
-import PaymentCard from "components/organisms/PaymentCard";
-import Footer from "components/organisms/Footer";
+import Header from "components/molecules/Header";
+import PaymentCard from "components/molecules/PaymentCard";
+import Footer from "components/molecules/Footer";
 
 import payment from "json/payment.json";
+import { ModalPopUp } from "components/atoms";
 
 export default function Payment() {
   const [isPay, setIsPay] = useState(false);
@@ -41,19 +40,7 @@ export default function Payment() {
             </button>
           </div>
         </div>
-
-        <Modal show={isShow} onHide={handleClose} centered>
-          <Modal.Body className="p-4 text-center">
-            <div>Your payment will be confirmed within 1 x 24 hours</div>
-            <div>
-              To see orders{" "}
-              <Link to="/" className="fw-bold text-dark">
-                click here
-              </Link>{" "}
-              thank you
-            </div>
-          </Modal.Body>
-        </Modal>
+        <ModalPopUp isShow={isShow} handleClose={handleClose} />
       </main>
       <Footer />
     </>

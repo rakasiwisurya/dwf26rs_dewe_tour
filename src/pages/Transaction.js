@@ -1,6 +1,6 @@
-import Footer from "components/organisms/Footer";
-import Header from "components/organisms/Header";
-import ListTransaction from "components/organisms/ListTransaction";
+import Footer from "components/molecules/Footer";
+import Header from "components/molecules/Header";
+import ListTransaction from "components/molecules/ListTransaction";
 
 import listTransaction from "json/listTransaction.json";
 

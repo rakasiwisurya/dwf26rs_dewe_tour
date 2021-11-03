@@ -2,11 +2,11 @@ import { useContext } from "react";
 
 import { AuthContext } from "contexts/AuthContext";
 
-import Header from "components/organisms/Header";
-import Hero from "components/organisms/Hero";
-import Categories from "components/organisms/Categories";
-import GroupTour from "components/organisms/GroupTour";
-import Footer from "components/organisms/Footer";
+import Header from "components/molecules/Header";
+import Hero from "components/molecules/Hero";
+import Categories from "components/molecules/Categories";
+import GroupTour from "components/molecules/GroupTour";
+import Footer from "components/molecules/Footer";
 
 import home from "json/home.json";
 

@@ -1,7 +1,5 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
-import PrivateRoute from "components/PrivateRoute";
-
 import Home from "pages/Home";
 import DetailTour from "pages/DetailTour";
 import Payment from "pages/Payment";
@@ -9,6 +7,8 @@ import Profile from "pages/Profile";
 import Transaction from "pages/Transaction";
 import AddTrip from "pages/AddTrip";
 import NotFound from "pages/NotFound";
+
+import PrivateRoute from "components/PrivateRoute";
 
 import "assets/scss/style.scss";
 

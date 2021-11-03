@@ -249,3 +249,11 @@ main {
     font-size: 14px;
   }
 }
+
+.add-trip {
+  .input-trip {
+    width: 200px;
+    background-color: rgba($color: #c4c4c4, $alpha: 0.5) !important;
+    border: 2px solid #b1b1b1 !important;
+  }
+}

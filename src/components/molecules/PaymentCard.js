@@ -1,5 +1,5 @@
 import Logo from "assets/images/dewe-tour-black.png";
-import PaymentProof from "assets/images/payment-proof.jpg";
+import { InputFileProofPayment } from "components/atoms";
 
 import formatDate from "utils/formatDate";
 import formatNumber from "utils/formatNumber";
@@ -69,31 +69,8 @@ export default function PaymentCard({ data, isPay }) {
                   </div>
                 </div>
               </div>
-              <div className="col text-end">
-                <div className="file-input-group">
-                  <div id="preview-thumbnail">
-                    <img
-                      src={PaymentProof}
-                      alt="Payment Proof"
-                      style={{ width: 140, height: 140 }}
-                    />
-                  </div>
-                  <input
-                    type="file"
-                    hidden
-                    id="file"
-                    aria-label="file upload"
-                    name="image"
-                    // onchange="handleChange()"
-                  />
-                  <label
-                    htmlFor="file"
-                    className="text-muted"
-                    style={{ fontSize: 12 }}
-                  >
-                    upload payment proof
-                  </label>
-                </div>
+              <div className="col">
+                <InputFileProofPayment />
               </div>
             </div>
 
