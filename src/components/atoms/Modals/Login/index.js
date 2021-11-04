@@ -1,6 +1,8 @@
 import { useState, useContext } from "react";
 import { Modal } from "react-bootstrap";
 
+import { API } from "config/api";
+
 import { AuthContext } from "contexts/AuthContext";
 
 export default function Login({ show, handleClose, handleSwitch }) {
@@ -20,28 +22,51 @@ export default function Login({ show, handleClose, handleSwitch }) {
     }));
   };
 
-  const handleLogin = (e) => {
-    e.preventDefault();
+  const handleLogin = async (e) => {
+    try {
+      e.preventDefault();
 
-    for (let user of users) {
-      if (
-        inputLogin.email === user.email &&
-        inputLogin.password === user.password
-      ) {
-        dispatch({
-          type: "LOGIN",
-          payload: {
-            ...user,
-          },
-        });
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
 
+      // Convert form data to string here ...
+      const body = JSON.stringify(inputLogin);
+
+      // Insert data user to database here ...
+      const response = await API.post("/login", body, config);
+
+      if (response.data.status === "success") {
+        alert("Login Successful");
         handleClose();
-
-        return alert("Login Successful");
+      } else {
+        alert(response.data.status);
       }
+    } catch (error) {
+      if (error) throw error;
     }
 
-    alert("Sorry, your email or your password is invalid");
+    // for (let user of users) {
+    //   if (
+    //     inputLogin.email === user.email &&
+    //     inputLogin.password === user.password
+    //   ) {
+    //     dispatch({
+    //       type: "LOGIN",
+    //       payload: {
+    //         ...user,
+    //       },
+    //     });
+
+    //     handleClose();
+
+    //     return alert("Login Successful");
+    //   }
+    // }
+
+    // alert("Sorry, your email or your password is invalid");
   };
 
   return (

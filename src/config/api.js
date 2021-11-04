@@ -2,7 +2,7 @@ import axios from "axios";
 
 // Create base URL API
 export const API = axios.create({
-  baseURL: "http://localhost:4000/api/v1",
+  baseURL: "http://localhost:4000/api/v1/",
 });
 
 // Set Authorization Token Header
