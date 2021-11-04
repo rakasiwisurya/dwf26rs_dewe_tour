@@ -4,10 +4,9 @@ import { createContext, useReducer } from "react";
 const initialValue = {
   isLogin: false,
   user: {
-    id: "",
     fullname: "",
     email: "",
-    password: "",
+    gender: "",
     phone: "",
     address: "",
     role: "",
@@ -21,49 +20,52 @@ export const AuthContext = createContext();
 function reducer(state, action) {
   const { type, payload } = action;
   switch (type) {
-    case "LOGIN":
-      localStorage.setItem(
-        "userLogin",
-        JSON.stringify({
-          isLogin: true,
-          user: payload,
-        })
-      );
+    // case "AUTH_SUCCESS":
+    case "LOGIN_SUCCESS":
+      // localStorage.setItem("token", payload.token);
+      localStorage.setItem("user", JSON.stringify(payload));
       return {
         isLogin: true,
         user: payload,
       };
+    // case "AUTH_ERROR":
     case "LOGOUT":
-      localStorage.removeItem("userLogin");
+      localStorage.removeItem("user");
       return {
         isLogin: false,
         user: {
-          id: "",
           fullname: "",
           email: "",
-          password: "",
+          gender: "",
           phone: "",
           address: "",
           role: "",
         },
       };
     case "AUTH":
-      const loginState = JSON.parse(localStorage.getItem("userLogin"));
+      let loginState = JSON.parse(localStorage.getItem("user"));
+      let data = {
+        isLogin: true,
+        user: loginState,
+      };
 
-      return loginState
-        ? loginState
-        : {
-            isLogin: false,
-            user: {
-              id: "",
-              fullname: "",
-              email: "",
-              password: "",
-              phone: "",
-              address: "",
-              role: "",
-            },
-          };
+      if (!loginState) {
+        data = {
+          isLogin: false,
+          user: {
+            fullname: "",
+            email: "",
+            gender: "",
+            phone: "",
+            address: "",
+            role: "",
+          },
+        };
+      }
+
+      // console.log(data);
+
+      return data;
     default:
       throw new Error("type doesn't match cases");
   }

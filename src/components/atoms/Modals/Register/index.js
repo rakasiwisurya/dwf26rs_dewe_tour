@@ -38,11 +38,19 @@ export default function Register({ show, handleClose, handleSwitch }) {
       const response = await API.post("/register", body, config);
 
       if (response.data.status === "success") {
+        setInputRegister({
+          fullname: "",
+          email: "",
+          password: "",
+          gender: "male",
+          phone: "",
+          address: "",
+        });
         handleClose();
         return alert(response.data.message);
       }
 
-      // if (response.data.status === "failed") {
+      // if (response?.status === 400) {
       //   return alert(response.data.message);
       // }
     } catch (error) {

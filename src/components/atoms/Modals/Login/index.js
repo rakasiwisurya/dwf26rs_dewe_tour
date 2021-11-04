@@ -6,7 +6,7 @@ import { API } from "config/api";
 import { AuthContext } from "contexts/AuthContext";
 
 export default function Login({ show, handleClose, handleSwitch }) {
-  const users = JSON.parse(localStorage.getItem("deweTourUsers"));
+  // const users = JSON.parse(localStorage.getItem("deweTourUsers"));
 
   const { dispatch } = useContext(AuthContext);
 
@@ -38,11 +38,15 @@ export default function Login({ show, handleClose, handleSwitch }) {
       // Insert data user to database here ...
       const response = await API.post("/login", body, config);
 
-      if (response.data.status === "success") {
-        alert("Login Successful");
+      // console.log(response?.data.data);
+
+      if (response?.status === 200) {
+        dispatch({
+          type: "LOGIN_SUCCESS",
+          payload: response.data.data,
+        });
+        alert(response.data.message);
         handleClose();
-      } else {
-        alert(response.data.status);
       }
     } catch (error) {
       if (error) throw error;
