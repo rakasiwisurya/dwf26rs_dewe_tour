@@ -1,13 +1,11 @@
 import { useState, useContext } from "react";
 import { Modal } from "react-bootstrap";
 
-import { API } from "config/api";
+import { API, setAuthToken } from "config/api";
 
 import { AuthContext } from "contexts/AuthContext";
 
 export default function Login({ show, handleClose, handleSwitch }) {
-  // const users = JSON.parse(localStorage.getItem("deweTourUsers"));
-
   const { dispatch } = useContext(AuthContext);
 
   const [inputLogin, setInputLogin] = useState({
@@ -32,13 +30,13 @@ export default function Login({ show, handleClose, handleSwitch }) {
         },
       };
 
-      // Convert form data to string here ...
+      // Convert form data login to string here ...
       const body = JSON.stringify(inputLogin);
 
-      // Insert data user to database here ...
+      // validate data user from database here ...
       const response = await API.post("/login", body, config);
-
-      // console.log(response?.data.data);
+      setAuthToken(response.data.data.token);
+      console.log(response.data.data.token);
 
       if (response?.status === 200) {
         dispatch({
@@ -51,26 +49,6 @@ export default function Login({ show, handleClose, handleSwitch }) {
     } catch (error) {
       if (error) throw error;
     }
-
-    // for (let user of users) {
-    //   if (
-    //     inputLogin.email === user.email &&
-    //     inputLogin.password === user.password
-    //   ) {
-    //     dispatch({
-    //       type: "LOGIN",
-    //       payload: {
-    //         ...user,
-    //       },
-    //     });
-
-    //     handleClose();
-
-    //     return alert("Login Successful");
-    //   }
-    // }
-
-    // alert("Sorry, your email or your password is invalid");
   };
 
   return (

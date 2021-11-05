@@ -20,17 +20,16 @@ export const AuthContext = createContext();
 function reducer(state, action) {
   const { type, payload } = action;
   switch (type) {
-    // case "AUTH_SUCCESS":
+    case "AUTH_SUCCESS":
     case "LOGIN_SUCCESS":
-      // localStorage.setItem("token", payload.token);
-      localStorage.setItem("user", JSON.stringify(payload));
+      localStorage.setItem("token", payload.token);
       return {
         isLogin: true,
         user: payload,
       };
-    // case "AUTH_ERROR":
+    case "AUTH_ERROR":
     case "LOGOUT":
-      localStorage.removeItem("user");
+      localStorage.removeItem("token");
       return {
         isLogin: false,
         user: {
@@ -42,30 +41,30 @@ function reducer(state, action) {
           role: "",
         },
       };
-    case "AUTH":
-      let loginState = JSON.parse(localStorage.getItem("user"));
-      let data = {
-        isLogin: true,
-        user: loginState,
-      };
+    // case "AUTH":
+    //   let loginState = JSON.parse(localStorage.getItem("user"));
+    //   let data = {
+    //     isLogin: true,
+    //     user: loginState,
+    //   };
 
-      if (!loginState) {
-        data = {
-          isLogin: false,
-          user: {
-            fullname: "",
-            email: "",
-            gender: "",
-            phone: "",
-            address: "",
-            role: "",
-          },
-        };
-      }
+    //   if (!loginState) {
+    //     data = {
+    //       isLogin: false,
+    //       user: {
+    //         fullname: "",
+    //         email: "",
+    //         gender: "",
+    //         phone: "",
+    //         address: "",
+    //         role: "",
+    //       },
+    //     };
+    //   }
 
-      // console.log(data);
+    //   // console.log(data);
 
-      return data;
+    //   return data;
     default:
       throw new Error("type doesn't match cases");
   }

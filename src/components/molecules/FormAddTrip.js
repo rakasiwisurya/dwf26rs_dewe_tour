@@ -1,17 +1,18 @@
 import { useState } from "react";
-import moment from "moment";
-import "moment/locale/id";
+import { useHistory } from "react-router";
 
 import Attach from "assets/icons/attach.svg";
 
+import { API } from "config/api";
 import countries from "json/countries.json";
 
 export default function FormAddTrip() {
-  moment.locale("id");
+  const history = useHistory();
 
+  const [preview, setPreview] = useState([]);
   const [inputTrip, setInputTrip] = useState({
-    titleTrip: "",
-    country: "",
+    title: "",
+    countryId: 0,
     accomodation: "",
     transportation: "",
     eat: "",
@@ -27,28 +28,63 @@ export default function FormAddTrip() {
   const handleOnChange = (e) => {
     setInputTrip((prevState) => ({
       ...prevState,
-      [e.target.id]: e.target.value,
+      [e.target.id]: e.target.type === "file" ? e.target.files : e.target.value,
     }));
-  };
 
-  const handleImageChange = (e) => {
-    setInputTrip((prevState) => {
+    // console.log(Array.from(e.target.files))
+
+    if (e.target.type === "file") {
       const fileList = e.target.files;
 
-      const arrayImages = [];
-      for (const file of fileList) {
-        arrayImages.push(file.name);
+      const arrayUrlImages = [];
+      if (fileList) {
+        setPreview([]);
       }
+      setPreview(arrayUrlImages);
 
-      return {
-        ...prevState,
-        [e.target.id]: arrayImages,
-      };
-    });
+      for (const file of fileList) {
+        arrayUrlImages.push(URL.createObjectURL(file));
+      }
+    }
   };
 
-  const handleOnSubmit = (e) => {
-    e.preventDefault();
+  const handleOnSubmit = async (e) => {
+    try {
+      e.preventDefault();
+
+      const config = {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      };
+
+      // create data with form data as object here ...
+      const formData = new FormData();
+      formData.append("image", inputTrip.images);
+      formData.set("title", inputTrip.title);
+      formData.set("countryId", inputTrip.countryId);
+      formData.set("accomodation", inputTrip.accomodation);
+      formData.set("transportation", inputTrip.transportation);
+      formData.set("eat", inputTrip.eat);
+      formData.set("day", inputTrip.day);
+      formData.set("night", inputTrip.night);
+      formData.set("dateTrip", inputTrip.dateTrip);
+      formData.set("price", inputTrip.price);
+      formData.set("quota", inputTrip.quota);
+      formData.set("description", inputTrip.description);
+
+      // Insert data trip to database here ...
+      const response = await API.post("/trips", formData, config);
+
+      // console.log(response?.data.data);
+
+      if (response?.status === 200) {
+        alert(response.data.message);
+        history.push("/");
+      }
+    } catch (error) {
+      if (error) throw error;
+    }
   };
 
   return (
@@ -58,15 +94,15 @@ export default function FormAddTrip() {
         <div className="px-5">
           <form action="" onSubmit={handleOnSubmit}>
             <div className="mb-3">
-              <label htmlFor="titleTrip" className="mb-2 fw-bold">
+              <label htmlFor="title" className="mb-2 fw-bold">
                 Title Trip
               </label>
               <input
                 type="text"
-                id="titleTrip"
+                id="title"
                 className="w-100 form-control"
                 onChange={handleOnChange}
-                value={inputTrip.titleTrip}
+                value={inputTrip.title}
               />
             </div>
 
@@ -74,7 +110,15 @@ export default function FormAddTrip() {
               <label htmlFor="country" className="mb-2 fw-bold">
                 Country
               </label>
-              <select id="country" className="form-select">
+              <select
+                id="countryId"
+                className="form-select"
+                onChange={handleOnChange}
+                value={inputTrip.countryId}
+              >
+                <option value="0" disabled>
+                  -Select Country-
+                </option>
                 {countries.map((item, index) => (
                   <option key={`countries-${index}`} value={item.id}>
                     {item.name}
@@ -113,7 +157,13 @@ export default function FormAddTrip() {
               <label htmlFor="eat" className="mb-2 fw-bold">
                 Eat
               </label>
-              <input type="text" id="eat" className="w-100 form-control" />
+              <input
+                type="text"
+                id="eat"
+                className="w-100 form-control"
+                onChange={handleOnChange}
+                value={inputTrip.eat}
+              />
             </div>
 
             <div className="mb-3">
@@ -199,8 +249,7 @@ export default function FormAddTrip() {
                   hidden
                   id="images"
                   aria-label="file upload"
-                  name="images"
-                  onChange={handleImageChange}
+                  onChange={handleOnChange}
                   multiple
                 />
                 <label
@@ -214,11 +263,11 @@ export default function FormAddTrip() {
 
               <div className="preview-images my-4">
                 <div className="row gx-2">
-                  {inputTrip.images.map((item, index) => (
+                  {preview.map((item, index) => (
                     <div className="col-auto" key={`imagesTrip-${index}`}>
                       <img
-                        src={`/images/${item}`}
-                        alt={item}
+                        src={item}
+                        alt="preview"
                         width="190"
                         height="140"
                         className="img-thumbnail shadow"
