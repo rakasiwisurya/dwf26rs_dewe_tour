@@ -1,14 +1,15 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 
 import Attach from "assets/icons/attach.svg";
 
 import { API } from "config/api";
-import countries from "json/countries.json";
+// import countries from "json/countries.json";
 
 export default function FormAddTrip() {
   const history = useHistory();
 
+  const [countries, setCountries] = useState([]);
   const [preview, setPreview] = useState([]);
   const [inputTrip, setInputTrip] = useState({
     title: "",
@@ -24,6 +25,19 @@ export default function FormAddTrip() {
     description: "",
     images: [],
   });
+
+  const getCountries = async () => {
+    try {
+      const response = await API.get("/countries");
+      setCountries(response.data.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getCountries();
+  }, []);
 
   const handleOnChange = (e) => {
     setInputTrip((prevState) => ({
