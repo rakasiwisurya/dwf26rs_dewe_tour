@@ -41,24 +41,26 @@ export default function GroupTour({ data, isAdmin }) {
                 >
                   <div className="card shadow-sm p-2">
                     <img
-                      src={item.imageUrl}
-                      alt={item.name}
+                      src={item.image[0].url}
+                      alt={item.title}
                       className="card-img-top rounded mb-1"
                       width="328"
                       height="241"
                     />
                     <div className="capacity rounded-start bg-white text-dark d-flex justify-content-center align-items-center fw-bold">
-                      {item.capacity}/15
+                      {item.quota}/15
                     </div>
                     <div className="card-body">
                       <h5 className="card-title mb-3 text-dark fw-bold text-truncate">
-                        {item.name}
+                        {item.title}
                       </h5>
                       <div className="card-text d-flex justify-content-between">
                         <span className="text-primary fw-bold">
                           IDR. {formatNumber(item.price)}
                         </span>
-                        <span className="text-muted">{item.country}</span>
+                        <span className="text-muted">
+                          {item.countries.name}
+                        </span>
                       </div>
                     </div>
                   </div>

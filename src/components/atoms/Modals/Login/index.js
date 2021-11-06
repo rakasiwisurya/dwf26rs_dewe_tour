@@ -36,7 +36,6 @@ export default function Login({ show, handleClose, handleSwitch }) {
       // validate data user from database here ...
       const response = await API.post("/login", body, config);
       setAuthToken(response.data.data.token);
-      console.log(response.data.data.token);
 
       if (response?.status === 200) {
         dispatch({

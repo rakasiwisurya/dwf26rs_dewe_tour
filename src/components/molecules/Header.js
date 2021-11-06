@@ -12,11 +12,6 @@ export default function Header() {
 
   const { stateAuth, dispatch } = useContext(AuthContext);
 
-  // Create DidMount with useEffect inside it can print "App Component Did Mount" & state value here
-  // useEffect(() => {
-  //   dispatch({ type: "AUTH" });
-  // }, []);
-
   const [show, setShow] = useState({
     login: false,
     register: false,

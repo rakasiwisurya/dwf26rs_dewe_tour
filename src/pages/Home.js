@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 
 import { AuthContext } from "contexts/AuthContext";
 
@@ -8,21 +8,37 @@ import Categories from "components/molecules/Categories";
 import GroupTour from "components/molecules/GroupTour";
 import Footer from "components/molecules/Footer";
 
-import home from "json/home.json";
+import { API } from "config/api";
+
+// import home from "json/home.json";
 
 export default function Home() {
   const { stateAuth } = useContext(AuthContext);
+  const [trips, setTrips] = useState([]);
+
+  const getTrips = async () => {
+    try {
+      const response = await API.get("/trips");
+      setTrips(response.data.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getTrips();
+  }, []);
 
   return (
     <>
       <Header />
       {stateAuth.user.role === "admin" ? (
-        <GroupTour data={home} isAdmin={stateAuth} />
+        <GroupTour data={trips} isAdmin={stateAuth} />
       ) : (
         <>
           <Hero />
           <Categories />
-          <GroupTour data={home} />
+          <GroupTour data={trips} />
         </>
       )}
       <Footer />

@@ -4,7 +4,6 @@ import { useHistory } from "react-router";
 import Attach from "assets/icons/attach.svg";
 
 import { API } from "config/api";
-// import countries from "json/countries.json";
 
 export default function FormAddTrip() {
   const history = useHistory();
@@ -189,6 +188,8 @@ export default function FormAddTrip() {
                 className="w-25 d-inline-block form-control me-2"
                 onChange={handleOnChange}
                 value={inputTrip.day}
+                max="7"
+                min="0"
               />
               <span className="fw-bold me-2">Day</span>
               <input
@@ -197,6 +198,8 @@ export default function FormAddTrip() {
                 className="w-25 d-inline-block form-control me-2"
                 onChange={handleOnChange}
                 value={inputTrip.night}
+                max="7"
+                min="0"
               />
               <span className="fw-bold">Night</span>
             </div>
@@ -224,6 +227,7 @@ export default function FormAddTrip() {
                 className="w-100 form-control"
                 onChange={handleOnChange}
                 value={inputTrip.price}
+                min="0"
               />
             </div>
 
@@ -237,6 +241,8 @@ export default function FormAddTrip() {
                 className="w-100 form-control"
                 onChange={handleOnChange}
                 value={inputTrip.quota}
+                max="15"
+                min="0"
               />
             </div>
 
