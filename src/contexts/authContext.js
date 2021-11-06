@@ -41,30 +41,6 @@ function reducer(state, action) {
           role: "",
         },
       };
-    // case "AUTH":
-    //   let loginState = JSON.parse(localStorage.getItem("user"));
-    //   let data = {
-    //     isLogin: true,
-    //     user: loginState,
-    //   };
-
-    //   if (!loginState) {
-    //     data = {
-    //       isLogin: false,
-    //       user: {
-    //         fullname: "",
-    //         email: "",
-    //         gender: "",
-    //         phone: "",
-    //         address: "",
-    //         role: "",
-    //       },
-    //     };
-    //   }
-
-    //   // console.log(data);
-
-    //   return data;
     default:
       throw new Error("type doesn't match cases");
   }

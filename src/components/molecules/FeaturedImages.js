@@ -3,7 +3,7 @@ export default function FeaturedImages({ data }) {
     <section className="detail-featured-images mb-5">
       <div className="container">
         <div className="row g-3">
-          {data.imgUrls.map((item, index) => {
+          {data.image.map((item, index) => {
             return (
               <div
                 key={`featuredImage-${index}`}

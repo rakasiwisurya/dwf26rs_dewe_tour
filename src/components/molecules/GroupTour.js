@@ -58,9 +58,7 @@ export default function GroupTour({ data, isAdmin }) {
                         <span className="text-primary fw-bold">
                           IDR. {formatNumber(item.price)}
                         </span>
-                        <span className="text-muted">
-                          {item.countries.name}
-                        </span>
+                        <span className="text-muted">{item.country.name}</span>
                       </div>
                     </div>
                   </div>

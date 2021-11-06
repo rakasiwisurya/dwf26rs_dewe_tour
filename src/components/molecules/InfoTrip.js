@@ -35,7 +35,7 @@ export default function InfoTrip({ data }) {
             <h5 className="text-muted subtitle">Duration</h5>
             <img src={TimeIcon} alt="Time" width="24" height="24" />
             <span className="fw-bold ms-2">
-              {data.duration.day} Day {data.duration.night} Night
+              {data.day} Day {data.night} Night
             </span>
           </div>
           <div className="col">

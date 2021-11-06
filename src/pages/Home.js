@@ -10,8 +10,6 @@ import Footer from "components/molecules/Footer";
 
 import { API } from "config/api";
 
-// import home from "json/home.json";
-
 export default function Home() {
   const { stateAuth } = useContext(AuthContext);
   const [trips, setTrips] = useState([]);
@@ -33,12 +31,30 @@ export default function Home() {
     <>
       <Header />
       {stateAuth.user.role === "admin" ? (
-        <GroupTour data={trips} isAdmin={stateAuth} />
+        <>
+          {trips === null ? (
+            <div className="container">
+              <div className="d-flex justify-content-center align-items-center fs-4">
+                Loading...
+              </div>
+            </div>
+          ) : (
+            <GroupTour data={trips} isAdmin={stateAuth.user.role === "admin"} />
+          )}
+        </>
       ) : (
         <>
           <Hero />
           <Categories />
-          <GroupTour data={trips} />
+          {trips === null ? (
+            <div className="container">
+              <div className="d-flex justify-content-center align-items-center fs-4 vh-100">
+                Loading...
+              </div>
+            </div>
+          ) : (
+            <GroupTour data={trips} />
+          )}
         </>
       )}
       <Footer />
