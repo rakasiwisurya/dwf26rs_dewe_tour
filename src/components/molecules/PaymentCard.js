@@ -6,7 +6,7 @@ import formatWeekDay from "utils/formatWeekDay";
 import Logo from "assets/images/dewe-tour-black.png";
 
 export default function PaymentCard({ data }) {
-  console.log(data);
+  // console.log(data);
 
   return (
     <section className="payment-card">

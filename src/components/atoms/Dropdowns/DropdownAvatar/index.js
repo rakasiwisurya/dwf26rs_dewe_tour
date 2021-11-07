@@ -1,13 +1,16 @@
+import { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import { Dropdown } from "react-bootstrap";
 
-import Avatar from "assets/images/user.png";
+import { API } from "config/api";
+
+// import Avatar from "assets/images/user.png";
 import Profile from "assets/icons/profile.svg";
 import Pay from "assets/icons/pay.svg";
 import Journey from "assets/icons/journey.svg";
 import Logout from "assets/icons/logout.svg";
 
-export default function DropdownAvatar({ stateAuthRole, dispatch }) {
+export default function DropdownAvatar({ avatar, role, dispatch }) {
   const history = useHistory();
 
   const handleLogout = () => {
@@ -21,11 +24,17 @@ export default function DropdownAvatar({ stateAuthRole, dispatch }) {
   return (
     <Dropdown>
       <Dropdown.Toggle as="a" id="dropdown-basic">
-        <img src={Avatar} alt="user" width="50" height="50" />
+        <img
+          src={avatar}
+          alt="Avatar"
+          width="50"
+          height="50"
+          className="border border-3 border-primary rounded-circle"
+        />
       </Dropdown.Toggle>
 
       <Dropdown.Menu>
-        {stateAuthRole === "admin" ? (
+        {role === "admin" ? (
           <Dropdown.Item
             onClick={() => {
               history.push("/list-transaction");

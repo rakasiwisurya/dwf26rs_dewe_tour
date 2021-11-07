@@ -38,6 +38,8 @@ export default function Header() {
     }
   };
 
+  console.log(stateAuth.user.avatar);
+
   return (
     <header className="header position-relative">
       <nav className="navbar navbar-expand-lg navbar-light position-absolute w-100">
@@ -55,7 +57,8 @@ export default function Header() {
           <div className="auth">
             {stateAuth.isLogin ? (
               <DropdownAvatar
-                stateAuthRole={stateAuth.user.role}
+                avatar={stateAuth.user.avatar}
+                role={stateAuth.user.role}
                 dispatch={dispatch}
               />
             ) : (

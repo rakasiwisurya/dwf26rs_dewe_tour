@@ -10,6 +10,7 @@ const initialValue = {
     phone: "",
     address: "",
     role: "",
+    avatar: "",
   },
 };
 
@@ -39,6 +40,7 @@ function reducer(state, action) {
           phone: "",
           address: "",
           role: "",
+          avatar: "",
         },
       };
     default:

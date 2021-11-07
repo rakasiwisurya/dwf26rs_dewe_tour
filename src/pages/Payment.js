@@ -17,11 +17,6 @@ export default function Payment() {
 
   // console.log(transaction);
 
-  const handlePay = () => {
-    // setIsPay(true);
-    setIsShow(true);
-  };
-
   const handleClose = () => {
     setIsShow(false);
   };
@@ -29,13 +24,18 @@ export default function Payment() {
   const getLastTransaction = async () => {
     try {
       const response = await API.get("/transactions");
-      const filteredTransactions = await response.data.data.filter(
+      const filteredTransactions = response.data.data.filter(
         (item) => item.user.id === stateAuth.user.id
       );
       setTransaction(filteredTransactions[filteredTransactions.length - 1]);
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const handlePay = () => {
+    // setIsPay(true);
+    setIsShow(true);
   };
 
   useEffect(() => {
