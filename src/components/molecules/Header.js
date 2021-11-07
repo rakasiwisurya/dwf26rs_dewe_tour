@@ -38,8 +38,6 @@ export default function Header() {
     }
   };
 
-  console.log(stateAuth.user.avatar);
-
   return (
     <header className="header position-relative">
       <nav className="navbar navbar-expand-lg navbar-light position-absolute w-100">

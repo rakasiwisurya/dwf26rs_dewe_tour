@@ -1,6 +1,7 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 
 import { AuthContext } from "contexts/AuthContext";
+import { API } from "config/api";
 
 import Header from "components/molecules/Header";
 import ProfileCard from "components/molecules/ProfileCard";
@@ -12,12 +13,35 @@ import PaymentCard from "components/molecules/PaymentCard";
 export default function Profile() {
   const { stateAuth } = useContext(AuthContext);
 
+  const [transactions, setTransactions] = useState(null);
+
+  // console.log(transactions);
+
+  const getAllTransaction = async () => {
+    const response = await API.get("/transactions");
+    const filteredTransactions = response.data.data
+      .filter((item) => item.user.id === stateAuth.user.id)
+      .filter(
+        (item) =>
+          item.status === "Waiting Approve" ||
+          item.status === "Approved" ||
+          item.status === "Canceled"
+      );
+    setTransactions(filteredTransactions);
+  };
+
+  useEffect(() => {
+    getAllTransaction();
+  }, []);
+
   return (
     <>
       <Header />
       <main>
         <ProfileCard stateAuth={stateAuth} />
-        {/* <PaymentCard data={payment} /> */}
+        {transactions?.map((item, index) => (
+          <PaymentCard data={item} key={`paymentCard-${index}`} />
+        ))}
       </main>
       <Footer />
     </>
