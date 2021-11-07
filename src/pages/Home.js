@@ -12,7 +12,7 @@ import { API } from "config/api";
 
 export default function Home() {
   const { stateAuth } = useContext(AuthContext);
-  const [trips, setTrips] = useState([]);
+  const [trips, setTrips] = useState(null);
 
   const getTrips = async () => {
     try {
@@ -34,7 +34,7 @@ export default function Home() {
         <>
           {trips === null ? (
             <div className="container">
-              <div className="d-flex justify-content-center align-items-center fs-4">
+              <div className="d-flex justify-content-center align-items-center fs-4 vh-100">
                 Loading...
               </div>
             </div>
@@ -48,7 +48,7 @@ export default function Home() {
           <Categories />
           {trips === null ? (
             <div className="container">
-              <div className="d-flex justify-content-center align-items-center fs-4 vh-100">
+              <div className="d-flex justify-content-center align-items-center fs-4">
                 Loading...
               </div>
             </div>

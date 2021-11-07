@@ -1,11 +1,13 @@
-import Logo from "assets/images/dewe-tour-black.png";
 import { InputFileProofPayment } from "components/atoms";
-
 import formatDate from "utils/formatDate";
 import formatNumber from "utils/formatNumber";
 import formatWeekDay from "utils/formatWeekDay";
 
-export default function PaymentCard({ data, isPay }) {
+import Logo from "assets/images/dewe-tour-black.png";
+
+export default function PaymentCard({ data }) {
+  console.log(data);
+
   return (
     <section className="payment-card">
       <div className="container">
@@ -17,8 +19,10 @@ export default function PaymentCard({ data, isPay }) {
                 <div>
                   <h1 className="h4 fw-bold text-end">Booking</h1>
                   <p className="text-end">
-                    <span className="fw-bold">{formatWeekDay()}</span>,{" "}
-                    {formatDate()}
+                    <span className="fw-bold">
+                      {formatWeekDay(data.createdAt)}
+                    </span>
+                    , {formatDate(data.createdAt)}
                   </p>
                 </div>
               </div>
@@ -26,14 +30,16 @@ export default function PaymentCard({ data, isPay }) {
 
             <div className="row mb-3">
               <div className="col-4">
-                <div className="fw-bold fs-5">{data.trip.name}</div>
-                <div className="text-muted mb-4">{data.trip.country}</div>
+                <div className="fw-bold fs-5">{data.trip.title}</div>
+                <div className="text-muted mb-4">{data.trip.country.name}</div>
                 <div
                   className={`notif p-1 d-flex justify-content-center align-items-center ${
-                    isPay ? "notif-warning" : "notif-danger"
+                    data.status === "Waiting Payment"
+                      ? "notif-warning"
+                      : "notif-danger"
                   }`}
                 >
-                  {isPay ? "Waiting Approve" : "Waiting Payment"}
+                  {data.status}
                 </div>
               </div>
               <div className="col-2">
@@ -47,8 +53,7 @@ export default function PaymentCard({ data, isPay }) {
                   <div className="col">
                     <div className="fs-6 fw-bold mb-1">Duration</div>
                     <div className="text-muted" style={{ fontSize: 12 }}>
-                      {data.trip.duration.day} Day {data.trip.duration.night}{" "}
-                      Night
+                      {data.trip.day} Day {data.trip.night} Night
                     </div>
                   </div>
                 </div>
@@ -80,7 +85,7 @@ export default function PaymentCard({ data, isPay }) {
                   <tr>
                     <th>No</th>
                     <th>Full Name</th>
-                    <th>Email</th>
+                    <th>Gender</th>
                     <th>Phone</th>
                     <th colSpan="3"></th>
                   </tr>
@@ -89,11 +94,11 @@ export default function PaymentCard({ data, isPay }) {
                   <tr>
                     <td>1</td>
                     <td>{data.user.fullname}</td>
-                    <td>{data.user.email}</td>
+                    <td>{data.user.gender}</td>
                     <td>{data.user.phone}</td>
                     <td className="fw-bold">Qty</td>
                     <td className="fw-bold">:</td>
-                    <td className="fw-bold">{data.qty}</td>
+                    <td className="fw-bold">{data.counterQty}</td>
                   </tr>
                   <tr className="fw-bold border-white">
                     <td colSpan="4"></td>

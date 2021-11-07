@@ -2,10 +2,11 @@ import { useState, useContext } from "react";
 import { useHistory } from "react-router";
 
 import { AuthContext } from "contexts/AuthContext";
+
 import { ModalLogin, ModalRegister } from "components/atoms";
+import { DropdownAvatar } from "components/atoms";
 
 import BrandIcon from "assets/images/dewe-tour-icon.png";
-import { DropdownAvatar } from "components/atoms";
 
 export default function Header() {
   const history = useHistory();

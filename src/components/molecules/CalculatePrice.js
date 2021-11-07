@@ -1,36 +1,93 @@
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
 
+import { ModalLogin, ModalRegister } from "components/atoms";
+
+import { API } from "config/api";
 import formatNumber from "utils/formatNumber";
 
-export default function CalculatePrice({ data }) {
+export default function CalculatePrice({ tripId, price, stateAuth }) {
   const history = useHistory();
 
-  const [qty, setQty] = useState(1);
+  const [show, setShow] = useState({
+    login: false,
+    register: false,
+  });
 
-  let totalPrice = qty * data.price;
+  const [transaction, setTransaction] = useState({
+    counterQty: 1,
+    total: price,
+    tripId: tripId,
+    userId: stateAuth.user.id,
+  });
 
-  const handleAdd = () => {
-    setQty(qty + 1);
+  let totalPrice = transaction.counterQty * price;
+
+  const handleClose = () => {
+    setShow({ login: false, register: false });
   };
 
-  const handleSubtract = () => {
-    if (qty > 1) {
-      setQty(qty - 1);
+  const handleShowLogin = () => {
+    setShow((prevState) => ({ ...prevState, login: true }));
+  };
+
+  const handleSwitch = () => {
+    if (show.login) {
+      setShow({ login: false, register: true });
+    } else {
+      setShow({ login: true, register: false });
     }
   };
 
-  const handleSubmit = () => {
-    const userOrder = {
-      id: Date.now(),
-      qty: qty,
-      total: totalPrice,
-      isPay: false,
-    };
+  const handleAdd = () => {
+    if (transaction.counterQty < 10) {
+      const add = transaction.counterQty + 1;
+      setTransaction((prevState) => ({
+        ...prevState,
+        counterQty: add,
+        total: totalPrice,
+      }));
+    }
+  };
 
-    localStorage.setItem("userOrder", JSON.stringify(userOrder));
+  const handleSubtract = () => {
+    if (transaction.counterQty > 1) {
+      const subtract = transaction.counterQty - 1;
+      setTransaction((prevState) => ({
+        ...prevState,
+        counterQty: subtract,
+        total: totalPrice,
+      }));
+    }
+  };
 
-    history.push("/payment");
+  const handleSubmit = async () => {
+    try {
+      if (stateAuth.isLogin) {
+        const confirmation = window.confirm(
+          "Are you sure want to book this one?"
+        );
+
+        if (confirmation) {
+          const config = {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          };
+
+          const body = JSON.stringify(transaction);
+          const response = await API.post("/transactions", body, config);
+
+          response.data.status === "success" && alert(response.data.message);
+
+          history.push("/payment");
+        }
+      } else {
+        handleShowLogin();
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -39,10 +96,8 @@ export default function CalculatePrice({ data }) {
         <div className="d-flex justify-content-between fw-bold fs-5">
           <div className="price d-flex align-items-center">
             IDR.
-            <span className="mx-2 text-primary">
-              {formatNumber(data.price)}
-            </span>
-            / Person
+            <span className="mx-2 text-primary">{formatNumber(price)}</span>/
+            Person
           </div>
           <div className="quantity">
             <button
@@ -52,7 +107,7 @@ export default function CalculatePrice({ data }) {
               -
             </button>
             <div className="d-inline-block text-center" style={{ width: 75 }}>
-              {qty}
+              {transaction.counterQty}
             </div>
             <button
               className="btn btn-primary text-white rounded-circle fw-bold"
@@ -81,6 +136,18 @@ export default function CalculatePrice({ data }) {
           </button>
         </div>
       </div>
+
+      <ModalLogin
+        show={show.login}
+        handleClose={handleClose}
+        handleSwitch={handleSwitch}
+      />
+
+      <ModalRegister
+        show={show.register}
+        handleClose={handleClose}
+        handleSwitch={handleSwitch}
+      />
     </section>
   );
 }

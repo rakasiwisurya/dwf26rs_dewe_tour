@@ -1,5 +1,7 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router";
+
+import { AuthContext } from "contexts/AuthContext";
 
 import Header from "components/molecules/Header";
 import TourTitle from "components/molecules/TourTitle";
@@ -15,9 +17,11 @@ import { API } from "config/api";
 export default function DetailTour() {
   const { id } = useParams();
 
+  const { stateAuth } = useContext(AuthContext);
+
   const [detailTrip, setDetailTrip] = useState(null);
 
-  const getDetailTrip = async () => {
+  const getDetailTrip = async (id) => {
     try {
       const response = await API.get("/trips/" + id);
       setDetailTrip(response.data.data);
@@ -27,7 +31,7 @@ export default function DetailTour() {
   };
 
   useEffect(() => {
-    getDetailTrip();
+    getDetailTrip(id);
   }, []);
 
   return (
@@ -42,11 +46,25 @@ export default function DetailTour() {
           </div>
         ) : (
           <>
-            <TourTitle data={detailTrip} />
-            <FeaturedImages data={detailTrip} />
-            <InfoTrip data={detailTrip} />
-            <Description data={detailTrip} />
-            <CalculatePrice data={detailTrip} />
+            <TourTitle
+              title={detailTrip.title}
+              countryName={detailTrip.country.name}
+            />
+            <FeaturedImages images={detailTrip.image} />
+            <InfoTrip
+              accomodation={detailTrip.accomodation}
+              transportation={detailTrip.transportation}
+              eat={detailTrip.eat}
+              day={detailTrip.day}
+              night={detailTrip.night}
+              dateTrip={detailTrip.dateTrip}
+            />
+            <Description description={detailTrip.description} />
+            <CalculatePrice
+              tripId={detailTrip.id}
+              price={detailTrip.price}
+              stateAuth={stateAuth}
+            />
           </>
         )}
       </main>

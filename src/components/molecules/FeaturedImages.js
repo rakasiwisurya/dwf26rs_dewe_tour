@@ -1,9 +1,9 @@
-export default function FeaturedImages({ data }) {
+export default function FeaturedImages({ images }) {
   return (
     <section className="detail-featured-images mb-5">
       <div className="container">
         <div className="row g-3">
-          {data.image.map((item, index) => {
+          {images.map((item, index) => {
             return (
               <div
                 key={`featuredImage-${index}`}
