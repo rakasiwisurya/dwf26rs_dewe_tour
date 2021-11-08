@@ -141,7 +141,8 @@ main {
   .dropdown-menu {
     border: none;
     box-shadow: 0 0 5px rgba(151, 151, 151, 0.4);
-    inset: 30px 0px auto auto !important;
+    inset: 70px 0px auto auto !important;
+    transform: none !important;
   }
 
   .dropdown-menu::after {

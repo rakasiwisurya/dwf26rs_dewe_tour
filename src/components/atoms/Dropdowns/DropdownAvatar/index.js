@@ -36,6 +36,7 @@ export default function DropdownAvatar({ avatar, role, dispatch }) {
       <Dropdown.Menu>
         {role === "admin" ? (
           <Dropdown.Item
+            eventKey="1"
             onClick={() => {
               history.push("/list-transaction");
             }}
@@ -46,6 +47,7 @@ export default function DropdownAvatar({ avatar, role, dispatch }) {
         ) : (
           <>
             <Dropdown.Item
+              eventKey="1"
               onClick={() => {
                 history.push("/profile");
               }}
@@ -54,6 +56,7 @@ export default function DropdownAvatar({ avatar, role, dispatch }) {
               <span className="fw-bold ms-2">Profile</span>
             </Dropdown.Item>
             <Dropdown.Item
+              eventKey="2"
               onClick={() => {
                 history.push("/payment");
               }}

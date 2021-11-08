@@ -33,11 +33,10 @@ export default function PaymentCard({ data }) {
                 <div className="fw-bold fs-5">{data.trip.title}</div>
                 <div className="text-muted mb-4">{data.trip.country.name}</div>
                 <div
-                  className={`notif p-1 d-flex justify-content-center align-items-center ${
-                    data.status === "Waiting Payment"
-                      ? "notif-warning"
-                      : "notif-danger"
-                  }`}
+                  className={`notif p-1 d-flex justify-content-center align-items-center 
+                  ${data.status === "Waiting Payment" && "notif-danger"}
+                  ${data.status === "Waiting Approve" && "notif-warning"}
+                  `}
                 >
                   {data.status}
                 </div>
