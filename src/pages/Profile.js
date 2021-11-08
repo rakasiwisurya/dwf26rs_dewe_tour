@@ -24,8 +24,8 @@ export default function Profile() {
       .filter(
         (item) =>
           item.status === "Waiting Approve" ||
-          item.status === "Approved" ||
-          item.status === "Canceled"
+          item.status === "Approve" ||
+          item.status === "Cancel"
       );
     setTransactions(filteredTransactions);
   };

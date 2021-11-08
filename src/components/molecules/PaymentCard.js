@@ -36,6 +36,8 @@ export default function PaymentCard({ data }) {
                   className={`notif p-1 d-flex justify-content-center align-items-center 
                   ${data.status === "Waiting Payment" && "notif-danger"}
                   ${data.status === "Waiting Approve" && "notif-warning"}
+                  ${data.status === "Cancel" && "notif-danger"}
+                  ${data.status === "Approve" && "notif-success"}
                   `}
                 >
                   {data.status}
@@ -74,7 +76,23 @@ export default function PaymentCard({ data }) {
                 </div>
               </div>
               <div className="col">
-                <InputFileProofPayment />
+                {data.attachment === null ? (
+                  <InputFileProofPayment />
+                ) : (
+                  <div className="file-proofpayment d-flex justify-content-end">
+                    <div className="d-flex justify-content-center flex-column">
+                      <img
+                        src={data.attachment}
+                        alt="attachment"
+                        width="140"
+                        height="140"
+                      />
+                      <div className="text-muted" style={{ fontSize: 12 }}>
+                        upload payment proof
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
 
