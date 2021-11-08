@@ -2,7 +2,6 @@ import { useState } from "react";
 import { Modal } from "react-bootstrap";
 
 import Logo from "assets/images/dewe-tour-black.png";
-import PaymentProof from "assets/images/payment-proof.jpg";
 
 import formatNumber from "utils/formatNumber";
 import formatDate from "utils/formatDate";
@@ -35,21 +34,21 @@ export default function Invoice({ isShow, handleClose, dataItem }) {
             <div className="row mb-3">
               <div className="col-4">
                 <div className="fw-bold fs-5">{dataItem.trip.name}</div>
-                <div className="text-muted mb-4">{dataItem.trip.country}</div>
+                <div className="text-muted mb-4">
+                  {dataItem.trip.countryName}
+                </div>
                 <div
-                  className={`notif p-1 d-flex justify-content-center align-items-center ${
-                    isConfirm
-                      ? isApprove
-                        ? "notif-success"
-                        : "notif-danger"
-                      : "notif-warning"
-                  }`}
+                  className={`notif p-1 d-flex justify-content-center align-items-center
+                  ${dataItem.status === "Waiting Payment" && "notif-warning"}
+                  ${
+                    (dataItem.status === "Waiting Approve" ||
+                      dataItem.status === "Cancel") &&
+                    "notif-danger"
+                  }
+                  ${dataItem.status === "Approve" && "notif-success"}
+                  `}
                 >
-                  {isConfirm
-                    ? isApprove
-                      ? "Approved"
-                      : "Canceled"
-                    : "Waiting Approve"}
+                  {dataItem.status}
                 </div>
               </div>
               <div className="col-2">
@@ -85,30 +84,19 @@ export default function Invoice({ isShow, handleClose, dataItem }) {
                   </div>
                 </div>
               </div>
-              <div className="col text-end">
-                <div className="file-input-group">
-                  <div id="preview-thumbnail">
+              <div className="col">
+                <div className="file-proofpayment d-flex justify-content-end">
+                  <div className="d-flex justify-content-center flex-column">
                     <img
-                      src={PaymentProof}
-                      alt="Payment Proof"
-                      style={{ width: 140, height: 140 }}
+                      src={dataItem.attachment}
+                      alt="attachment"
+                      width="140"
+                      height="140"
                     />
+                    <div className="text-muted" style={{ fontSize: 12 }}>
+                      upload payment proof
+                    </div>
                   </div>
-                  <input
-                    type="file"
-                    hidden
-                    id="file"
-                    aria-label="file upload"
-                    name="image"
-                    // onchange="handleChange()"
-                  />
-                  <label
-                    htmlFor="file"
-                    className="text-muted"
-                    style={{ fontSize: 12 }}
-                  >
-                    upload payment proof
-                  </label>
                 </div>
               </div>
             </div>

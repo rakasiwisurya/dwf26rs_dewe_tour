@@ -10,6 +10,8 @@ export default function ListTransaction({ data }) {
     id: "",
     qty: "",
     total: "",
+    status: "",
+    attachment: "",
     bookDate: "2020-12-12",
     user: {
       fullname: "",
@@ -18,7 +20,7 @@ export default function ListTransaction({ data }) {
     },
     trip: {
       name: "",
-      country: "",
+      countryName: "",
       dateTrip: "2020-12-12",
       accomodation: "",
       duration: {
@@ -49,20 +51,33 @@ export default function ListTransaction({ data }) {
             </tr>
           </thead>
           <tbody>
-            {data.map((item, index) => {
+            {data?.map((item, index) => {
               return (
                 <tr key={`list-transaction-${item.id}`}>
                   <td>{index + 1}</td>
                   <td>{item.user.fullname}</td>
-                  <td>{item.trip.name}</td>
-                  <td>{item.proofPayment}</td>
+                  <td>{item.trip.title}</td>
+                  <td>
+                    {item.attachment === null ? (
+                      <div className="text-danger">NULL</div>
+                    ) : (
+                      item.attachment.split("/")[5]
+                    )}
+                  </td>
                   <td
                     className={`fw-bold
-                      ${item.status === "Pending" && "text-primary"}
+                      ${
+                        (item.status === "Waiting Payment" ||
+                          item.status === "Waiting Approve") &&
+                        "text-primary"
+                      }
                       ${item.status === "Approve" && "text-success"}
                       ${item.status === "Cancel" && "text-danger"}`}
                   >
-                    {item.status}
+                    {item.status === "Waiting Payment" ||
+                    item.status === "Waiting Approve"
+                      ? "Pending"
+                      : item.status}
                   </td>
                   <td>
                     <img
@@ -74,22 +89,24 @@ export default function ListTransaction({ data }) {
                       onClick={() => {
                         setDataItem({
                           id: item.id,
-                          qty: item.qty,
+                          qty: item.counterQty,
                           total: item.total,
-                          bookDate: item.bookDate,
+                          status: item.status,
+                          attachment: item.attachment,
+                          bookDate: item.createdAt,
                           user: {
                             fullname: item.user.fullname,
                             email: item.user.email,
                             phone: item.user.phone,
                           },
                           trip: {
-                            name: item.trip.name,
-                            country: item.trip.country,
+                            name: item.trip.title,
+                            countryName: item.trip.country.name,
                             dateTrip: item.trip.dateTrip,
                             accomodation: item.trip.accomodation,
                             duration: {
-                              day: item.trip.duration.day,
-                              night: item.trip.duration.night,
+                              day: item.trip.day,
+                              night: item.trip.night,
                             },
                             transportation: item.trip.transportation,
                           },
