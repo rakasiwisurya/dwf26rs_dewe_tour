@@ -19,6 +19,8 @@ export default function Avatar({ userId, avatar }) {
       formData.set("avatar", e.target.files[0], e.target.files[0].name);
 
       await API.put(`/users/${userId}`, formData, config);
+
+      window.location.reload();
     } catch (error) {
       console.log(error);
     }

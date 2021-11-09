@@ -47,6 +47,9 @@ function App() {
       });
     } catch (error) {
       console.log(error);
+      dispatch({
+        type: "AUTH_ERROR",
+      });
     }
   };
 
@@ -58,13 +61,7 @@ function App() {
     <div className="App">
       <Router>
         <Switch>
-          <Route exact path="/" component={Home} />
-          <Route path="/detail/:id" component={DetailTour} />
-          <PrivateRoute path="/payment" component={Payment} />
-          <PrivateRoute path="/profile" component={Profile} />
-          <PrivateRoute path="/list-transaction" component={Transaction} />
-          <PrivateRoute path="/add-trip" component={AddTrip} />
-          {/* {!stateAuth.user.email ? (
+          {stateAuth.isLoading ? (
             <div className="container">
               <div className="d-flex justify-content-center align-items-center fs-4 vh-100">
                 Loading...
@@ -72,8 +69,14 @@ function App() {
             </div>
           ) : (
             <>
+              <Route exact path="/" component={Home} />
+              <Route path="/detail/:id" component={DetailTour} />
+              <PrivateRoute path="/payment" component={Payment} />
+              <PrivateRoute path="/profile" component={Profile} />
+              <PrivateRoute path="/list-transaction" component={Transaction} />
+              <PrivateRoute path="/add-trip" component={AddTrip} />
             </>
-          )} */}
+          )}
           <Route component={NotFound} />
         </Switch>
       </Router>

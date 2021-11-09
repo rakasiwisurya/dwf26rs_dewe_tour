@@ -23,13 +23,13 @@ export default function ListTransaction({ data }) {
       countryName: "",
       dateTrip: "2020-12-12",
       accomodation: "",
-      duration: {
-        day: "",
-        night: "",
-      },
+      day: "",
+      night: "",
       transportation: "",
     },
   });
+
+  console.log(dataItem);
 
   const handleClose = () => {
     setIsShow(false);
@@ -88,28 +88,27 @@ export default function ListTransaction({ data }) {
                       style={{ cursor: "pointer" }}
                       onClick={() => {
                         setDataItem({
-                          id: item.id,
-                          qty: item.counterQty,
-                          total: item.total,
-                          status: item.status,
-                          attachment: item.attachment,
-                          bookDate: item.createdAt,
-                          user: {
-                            fullname: item.user.fullname,
-                            email: item.user.email,
-                            phone: item.user.phone,
-                          },
-                          trip: {
-                            name: item.trip.title,
-                            countryName: item.trip.country.name,
-                            dateTrip: item.trip.dateTrip,
-                            accomodation: item.trip.accomodation,
-                            duration: {
-                              day: item.trip.day,
-                              night: item.trip.night,
-                            },
-                            transportation: item.trip.transportation,
-                          },
+                          ...item,
+                          // id: item.id,
+                          // qty: item.counterQty,
+                          // total: item.total,
+                          // status: item.status,
+                          // attachment: item.attachment,
+                          // bookDate: item.createdAt,
+                          // user: {
+                          //   fullname: item.user.fullname,
+                          //   email: item.user.email,
+                          //   phone: item.user.phone,
+                          // },
+                          // trip: {
+                          //   name: item.trip.title,
+                          //   countryName: item.trip.country.name,
+                          //   dateTrip: item.trip.dateTrip,
+                          //   accomodation: item.trip.accomodation,
+                          //   day: item.trip.day,
+                          //   night: item.trip.night,
+                          //   transportation: item.trip.transportation,
+                          // },
                         });
                         setIsShow(true);
                       }}
@@ -126,6 +125,7 @@ export default function ListTransaction({ data }) {
         isShow={isShow}
         handleClose={handleClose}
         dataItem={dataItem}
+        // setDataItem={setDataItem}
       />
     </section>
   );

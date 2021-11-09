@@ -2,6 +2,7 @@ import { createContext, useReducer } from "react";
 
 // this is initial value for global auth state (context)
 const initialValue = {
+  isLoading: true,
   isLogin: false,
   user: {
     fullname: "",
@@ -25,6 +26,7 @@ function reducer(state, action) {
     case "LOGIN_SUCCESS":
       localStorage.setItem("token", payload.token);
       return {
+        isLoading: false,
         isLogin: true,
         user: payload,
       };
@@ -32,6 +34,7 @@ function reducer(state, action) {
     case "LOGOUT":
       localStorage.removeItem("token");
       return {
+        isLoading: false,
         isLogin: false,
         user: {
           fullname: "",

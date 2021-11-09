@@ -1,15 +1,28 @@
 import { useState } from "react";
 import { Modal } from "react-bootstrap";
 
-import Logo from "assets/images/dewe-tour-black.png";
-
+import { API } from "config/api";
 import formatNumber from "utils/formatNumber";
 import formatDate from "utils/formatDate";
 import formatWeekDay from "utils/formatWeekDay";
 
+import Logo from "assets/images/dewe-tour-black.png";
+
 export default function Invoice({ isShow, handleClose, dataItem }) {
-  const [isConfirm, setIsConfirm] = useState(false);
-  const [isApprove, setIsApprove] = useState(false);
+  const handleConfirm = async (confirm) => {
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    const data = JSON.stringify({ status: confirm });
+    console.log(data);
+
+    await API.put(`/transactions/confirm/${dataItem.id}`, data, config);
+
+    window.location.reload();
+  };
 
   return (
     <Modal show={isShow} onHide={handleClose} centered>
@@ -62,8 +75,7 @@ export default function Invoice({ isShow, handleClose, dataItem }) {
                   <div className="col">
                     <div className="fs-6 fw-bold mb-1">Duration</div>
                     <div className="text-muted" style={{ fontSize: 12 }}>
-                      {dataItem.trip.duration.day} Day{" "}
-                      {dataItem.trip.duration.night} Night
+                      {dataItem.trip.day} Day {dataItem.trip.night} Night
                     </div>
                   </div>
                 </div>
@@ -136,13 +148,17 @@ export default function Invoice({ isShow, handleClose, dataItem }) {
           </div>
         </div>
 
-        <div className={`d-flex justify-content-end ${isConfirm && "d-none"}`}>
+        <div
+          className={`d-flex justify-content-end ${
+            (dataItem.status === "Approve" || dataItem.status === "Cancel") &&
+            "d-none"
+          }`}
+        >
           <button
             className="btn btn-danger mt-2 fw-bold text-white me-3"
             style={{ width: 100, height: 35 }}
             onClick={() => {
-              setIsConfirm(true);
-              setIsApprove(false);
+              handleConfirm("Cancel");
             }}
           >
             Cancel
@@ -151,8 +167,7 @@ export default function Invoice({ isShow, handleClose, dataItem }) {
             className="btn btn-success mt-2 fw-bold text-white"
             style={{ width: 100, height: 35 }}
             onClick={() => {
-              setIsConfirm(true);
-              setIsApprove(true);
+              handleConfirm("Approve");
             }}
           >
             Approve

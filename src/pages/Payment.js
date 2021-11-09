@@ -7,15 +7,11 @@ import { ModalPopUp } from "components/atoms";
 
 import { API } from "config/api";
 import { AuthContext } from "contexts/AuthContext";
-// import payment from "json/payment.json";
 
 export default function Payment() {
-  // const [isPay, setIsPay] = useState(false);
   const [isShow, setIsShow] = useState(false);
   const { stateAuth } = useContext(AuthContext);
   const [transaction, setTransaction] = useState(null);
-
-  console.log(transaction);
 
   const handleClose = () => {
     setIsShow(false);

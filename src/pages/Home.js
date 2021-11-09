@@ -13,6 +13,10 @@ import { API } from "config/api";
 export default function Home() {
   const { stateAuth } = useContext(AuthContext);
   const [trips, setTrips] = useState(null);
+  const [searchData, setSearchData] = useState("");
+  const [isSearching, setIsSearching] = useState(false);
+
+  console.log(trips);
 
   const getTrips = async () => {
     try {
@@ -44,16 +48,29 @@ export default function Home() {
         </>
       ) : (
         <>
-          <Hero />
-          <Categories />
-          {trips === null ? (
-            <div className="container">
-              <div className="d-flex justify-content-center align-items-center fs-4">
-                Loading...
-              </div>
+          <Hero
+            trips={trips}
+            setIsSearching={setIsSearching}
+            searchData={searchData}
+            setSearchData={setSearchData}
+          />
+          {isSearching ? (
+            <div className="mt-5">
+              <GroupTour data={trips} searchData={searchData} />
             </div>
           ) : (
-            <GroupTour data={trips} />
+            <>
+              <Categories />
+              {trips === null ? (
+                <div className="container">
+                  <div className="d-flex justify-content-center align-items-center fs-4">
+                    Loading...
+                  </div>
+                </div>
+              ) : (
+                <GroupTour data={trips} />
+              )}
+            </>
           )}
         </>
       )}
