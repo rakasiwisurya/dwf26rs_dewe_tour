@@ -15,7 +15,7 @@ export default function Payment() {
   const { stateAuth } = useContext(AuthContext);
   const [transaction, setTransaction] = useState(null);
 
-  // console.log(transaction);
+  console.log(transaction);
 
   const handleClose = () => {
     setIsShow(false);
@@ -33,8 +33,32 @@ export default function Payment() {
     }
   };
 
-  const handlePay = () => {
-    // setIsPay(true);
+  console.log(transaction);
+
+  const handlePay = async () => {
+    if (!transaction.attachment) {
+      return alert("Please upload the payment proof first");
+    }
+
+    const config = {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    };
+
+    const formData = new FormData();
+    formData.set(
+      "attachment",
+      transaction.attachment[0],
+      transaction.attachment[0].name
+    );
+
+    const response = await API.put(
+      `/transactions/pay/${transaction.id}`,
+      formData,
+      config
+    );
+    setTransaction(response.data.data);
     setIsShow(true);
   };
 
@@ -54,20 +78,22 @@ export default function Payment() {
           </div>
         ) : (
           <>
-            <PaymentCard data={transaction} />
-            <div className="container">
-              <div className="d-flex justify-content-end">
-                <button
-                  className={`btn btn-primary mt-2 fw-bold text-white ${
-                    transaction.status === "Waiting Approve" && "d-none"
-                  }`}
-                  style={{ width: 213, height: 50 }}
-                  onClick={handlePay}
-                >
-                  PAY
-                </button>
+            <PaymentCard data={transaction} setData={setTransaction} />
+            {transaction.status === "Waiting Payment" && (
+              <div className="container">
+                <div className="d-flex justify-content-end">
+                  <button
+                    className={`btn btn-primary mt-2 fw-bold text-white ${
+                      transaction.status === "Waiting Approve" && "d-none"
+                    }`}
+                    style={{ width: 213, height: 50 }}
+                    onClick={handlePay}
+                  >
+                    PAY
+                  </button>
+                </div>
               </div>
-            </div>
+            )}
             <ModalPopUp isShow={isShow} handleClose={handleClose} />
           </>
         )}

@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 import { InputFileProofPayment } from "components/atoms";
 import formatDate from "utils/formatDate";
 import formatNumber from "utils/formatNumber";
@@ -5,8 +7,8 @@ import formatWeekDay from "utils/formatWeekDay";
 
 import Logo from "assets/images/dewe-tour-black.png";
 
-export default function PaymentCard({ data }) {
-  // console.log(data);
+export default function PaymentCard({ data, setData }) {
+  const [preview, setPreview] = useState(null);
 
   return (
     <section className="payment-card">
@@ -76,13 +78,17 @@ export default function PaymentCard({ data }) {
                 </div>
               </div>
               <div className="col">
-                {data.attachment === null ? (
-                  <InputFileProofPayment />
+                {!data.attachment ? (
+                  <InputFileProofPayment
+                    setData={setData}
+                    preview={preview}
+                    setPreview={setPreview}
+                  />
                 ) : (
                   <div className="file-proofpayment d-flex justify-content-end">
                     <div className="d-flex justify-content-center flex-column">
                       <img
-                        src={data.attachment}
+                        src={`${preview ? preview : data.attachment}`}
                         alt="attachment"
                         width="140"
                         height="140"
