@@ -49,7 +49,7 @@ export default function GroupTour({ data, isAdmin, searchData }) {
               return (
                 <div
                   key={`groupTour-index${index}`}
-                  className="col d-flex justify-content-center"
+                  className="col-4 d-flex justify-content-center"
                 >
                   <Link
                     to={`/detail/${item.id}`}

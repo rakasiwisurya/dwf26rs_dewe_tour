@@ -16,8 +16,6 @@ export default function Home() {
   const [searchData, setSearchData] = useState("");
   const [isSearching, setIsSearching] = useState(false);
 
-  console.log(trips);
-
   const getTrips = async () => {
     try {
       const response = await API.get("/trips");

@@ -73,7 +73,9 @@ export default function FormAddTrip() {
 
       // create data with form data as object here ...
       const formData = new FormData();
-      formData.append("image", inputTrip.images);
+      for (const file of inputTrip.images) {
+        formData.append("image", file);
+      }
       formData.set("title", inputTrip.title);
       formData.set("countryId", inputTrip.countryId);
       formData.set("accomodation", inputTrip.accomodation);

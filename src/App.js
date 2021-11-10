@@ -1,10 +1,5 @@
 import { useContext, useEffect } from "react";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  useHistory,
-} from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import { API, setAuthToken } from "config/api";
 import { AuthContext } from "contexts/AuthContext";
@@ -25,7 +20,6 @@ if (localStorage.token) {
 }
 
 function App() {
-  const history = useHistory();
   const { stateAuth, dispatch } = useContext(AuthContext);
 
   const checkUser = async () => {
@@ -36,7 +30,6 @@ function App() {
         dispatch({
           type: "AUTH_ERROR",
         });
-        // return history.push("/");
       }
 
       let payload = response.data.data.user;
