@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 
 import { ModalLogin, ModalRegister } from "components/atoms";
@@ -6,7 +6,7 @@ import { ModalLogin, ModalRegister } from "components/atoms";
 import { API } from "config/api";
 import formatNumber from "utils/formatNumber";
 
-export default function CalculatePrice({ tripId, price, stateAuth }) {
+export default function CalculatePrice({ tripId, price, quota, stateAuth }) {
   const history = useHistory();
 
   const [show, setShow] = useState({
@@ -20,6 +20,24 @@ export default function CalculatePrice({ tripId, price, stateAuth }) {
     tripId: tripId,
     userId: stateAuth.user.id,
   });
+
+  const [quotaRemaining, setQuotaRemaining] = useState({
+    quota: quota - transaction.counterQty,
+  });
+
+  const [dataTransaction, setDataTransaction] = useState([]);
+
+  const getDataTransactionsByUserId = async () => {
+    const response = await API.get("/transactions");
+    const filteredTransactions = response.data.data.filter(
+      (item) => item.user.id === stateAuth.user.id
+    );
+    setDataTransaction(filteredTransactions[filteredTransactions.length - 1]);
+  };
+
+  useEffect(() => {
+    getDataTransactionsByUserId();
+  }, []);
 
   let totalPrice = transaction.counterQty * price;
 
@@ -40,8 +58,10 @@ export default function CalculatePrice({ tripId, price, stateAuth }) {
   };
 
   const handleAdd = () => {
-    if (transaction.counterQty < 10) {
+    if (transaction.counterQty < quota) {
       const add = transaction.counterQty + 1;
+      const updateQuota = quota - add;
+      setQuotaRemaining({ quota: updateQuota });
       setTransaction((prevState) => ({
         ...prevState,
         counterQty: add,
@@ -53,6 +73,8 @@ export default function CalculatePrice({ tripId, price, stateAuth }) {
   const handleSubtract = () => {
     if (transaction.counterQty > 1) {
       const subtract = transaction.counterQty - 1;
+      const updateQuota = quota - subtract;
+      setQuotaRemaining({ quota: updateQuota });
       setTransaction((prevState) => ({
         ...prevState,
         counterQty: subtract,
@@ -64,6 +86,12 @@ export default function CalculatePrice({ tripId, price, stateAuth }) {
   const handleSubmit = async () => {
     try {
       if (stateAuth.isLogin) {
+        if (dataTransaction?.status === "Waiting Payment") {
+          return alert(
+            "Please pay your last transaction first before make a new transaction"
+          );
+        }
+
         const confirmation = window.confirm(
           "Are you sure want to book this one?"
         );
@@ -75,9 +103,15 @@ export default function CalculatePrice({ tripId, price, stateAuth }) {
             },
           };
 
-          const body = JSON.stringify(transaction);
-          const response = await API.post("/transactions", body, config);
+          const bodyTransaction = JSON.stringify(transaction);
+          const response = await API.post(
+            "/transactions",
+            bodyTransaction,
+            config
+          );
 
+          const bodyQuota = JSON.stringify(quotaRemaining);
+          await API.put(`/trips/${tripId}`, bodyQuota, config);
           response.data.status === "success" && alert(response.data.message);
 
           history.push("/payment");

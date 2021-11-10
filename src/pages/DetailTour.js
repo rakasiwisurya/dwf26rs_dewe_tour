@@ -61,6 +61,7 @@ export default function DetailTour() {
             />
             <Description description={detailTrip.description} />
             <CalculatePrice
+              quota={detailTrip.quota}
               tripId={detailTrip.id}
               price={detailTrip.price}
               stateAuth={stateAuth}
