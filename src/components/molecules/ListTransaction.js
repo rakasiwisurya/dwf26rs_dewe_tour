@@ -12,7 +12,7 @@ export default function ListTransaction({ data }) {
     total: "",
     status: "",
     attachment: "",
-    bookDate: "2020-12-12",
+    createdAt: "2020-12-12",
     user: {
       fullname: "",
       email: "",
@@ -28,6 +28,8 @@ export default function ListTransaction({ data }) {
       transportation: "",
     },
   });
+
+  console.log(dataItem);
 
   const handleClose = () => {
     setIsShow(false);

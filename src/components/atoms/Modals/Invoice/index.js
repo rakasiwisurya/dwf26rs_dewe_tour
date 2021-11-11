@@ -63,9 +63,9 @@ export default function Invoice(props) {
                   <h1 className="h4 fw-bold text-end">Booking</h1>
                   <p className="text-end">
                     <span className="fw-bold">
-                      {formatWeekDay(dataItem.bookDate)}
+                      {formatWeekDay(dataItem.createdAt)}
                     </span>
-                    , {formatDate(dataItem.bookDate)}
+                    , {formatDate(dataItem.createdAt)}
                   </p>
                 </div>
               </div>

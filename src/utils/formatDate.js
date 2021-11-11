@@ -1,5 +1,5 @@
 export default function formatDate(date) {
-  const newDate = date ? new Date(date) : new Date();
+  const newDate = new Date(date);
   return Intl.DateTimeFormat("id-ID", {
     dateStyle: "long",
   }).format(newDate);

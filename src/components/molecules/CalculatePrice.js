@@ -88,6 +88,24 @@ export default function CalculatePrice({ tripId, price, quota, stateAuth }) {
   const handleSubmit = async () => {
     try {
       if (stateAuth.isLogin) {
+        const detailTripData = await API.get(`/trips/${tripId}`);
+        const quotaTrip = detailTripData.data.data.quota;
+
+        let resultQuota = quotaTrip - transaction.counterQty;
+
+        if (resultQuota <= 0) {
+          NotificationManager.error(
+            `I'm Sorry, this quota tour was updated, quota is ${quotaTrip} now, someone book this tour before`,
+            "Limited Quota Tour"
+          );
+
+          const pushToHome = setTimeout(() => {
+            history.push("/");
+          }, 3000);
+
+          return pushToHome;
+        }
+
         if (dataTransaction?.status === "Waiting Payment") {
           return NotificationManager.warning(
             "Please pay your last transaction first before make a new transaction",

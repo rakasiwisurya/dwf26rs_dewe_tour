@@ -8,12 +8,14 @@ import ProfileCard from "components/molecules/ProfileCard";
 import Footer from "components/molecules/Footer";
 import PaymentCard from "components/molecules/PaymentCard";
 
-// import payment from "json/payment.json";
+import NotFoundIcon from "assets/icons/not-found.svg";
 
 export default function Profile() {
   const { stateAuth } = useContext(AuthContext);
 
   const [transactions, setTransactions] = useState(null);
+
+  console.log(transactions);
 
   const getAllTransaction = async () => {
     const response = await API.get("/transactions");
@@ -38,10 +40,28 @@ export default function Profile() {
       <main>
         <ProfileCard stateAuth={stateAuth} />
         <div className="payment-card container pt-5">
-          <h2 className="fw-bold mb-5 ms-3">History Trip</h2>
-          {transactions?.map((item, index) => (
-            <PaymentCard data={item} key={`paymentCard-${index}`} />
-          ))}
+          {!transactions?.length ? (
+            <div className="container">
+              <div className="not-found d-flex justify-content-center align-items-center">
+                <div className="text-center">
+                  <img
+                    src={NotFoundIcon}
+                    alt="Not Found"
+                    width="250"
+                    height="250"
+                  />
+                  <h1 className="fw-bold h5">No History Trip Yet</h1>
+                </div>
+              </div>
+            </div>
+          ) : (
+            <>
+              <h2 className="fw-bold mb-5 ms-3">History Trip</h2>
+              {transactions?.map((item, index) => (
+                <PaymentCard data={item} key={`paymentCard-${index}`} />
+              ))}
+            </>
+          )}
         </div>
       </main>
       <Footer />

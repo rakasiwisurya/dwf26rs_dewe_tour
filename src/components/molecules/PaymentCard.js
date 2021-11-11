@@ -6,6 +6,7 @@ import formatNumber from "utils/formatNumber";
 import formatWeekDay from "utils/formatWeekDay";
 
 import Logo from "assets/images/dewe-tour-black.png";
+import NoImage from "assets/images/no-image.jpg";
 
 export default function PaymentCard({ data, setData }) {
   const [preview, setPreview] = useState(null);
@@ -22,9 +23,9 @@ export default function PaymentCard({ data, setData }) {
                   <h1 className="h4 fw-bold text-end">Booking</h1>
                   <p className="text-end">
                     <span className="fw-bold">
-                      {formatWeekDay(data.createdAt)}
+                      {formatWeekDay(data?.createdAt)}
                     </span>
-                    , {formatDate(data.createdAt)}
+                    , {formatDate(data?.createdAt)}
                   </p>
                 </div>
               </div>
@@ -32,17 +33,17 @@ export default function PaymentCard({ data, setData }) {
 
             <div className="row mb-3">
               <div className="col-4">
-                <div className="fw-bold fs-5">{data.trip.title}</div>
-                <div className="text-muted mb-4">{data.trip.country.name}</div>
+                <div className="fw-bold fs-5">{data?.trip.title}</div>
+                <div className="text-muted mb-4">{data?.trip.country.name}</div>
                 <div
                   className={`notif p-1 d-flex justify-content-center align-items-center 
-                  ${data.status === "Waiting Payment" && "notif-danger"}
-                  ${data.status === "Waiting Approve" && "notif-warning"}
-                  ${data.status === "Cancel" && "notif-danger"}
-                  ${data.status === "Approve" && "notif-success"}
+                  ${data?.status === "Waiting Payment" && "notif-danger"}
+                  ${data?.status === "Waiting Approve" && "notif-warning"}
+                  ${data?.status === "Cancel" && "notif-danger"}
+                  ${data?.status === "Approve" && "notif-success"}
                   `}
                 >
-                  {data.status}
+                  {data?.status}
                 </div>
               </div>
               <div className="col-2">
@@ -50,13 +51,13 @@ export default function PaymentCard({ data, setData }) {
                   <div className="col-auto mb-4">
                     <div className="fs-6 fw-bold mb-1">Date Trip</div>
                     <div className="text-muted" style={{ fontSize: 12 }}>
-                      {formatDate(data.trip.dateTrip)}
+                      {formatDate(data?.trip.dateTrip)}
                     </div>
                   </div>
                   <div className="col">
                     <div className="fs-6 fw-bold mb-1">Duration</div>
                     <div className="text-muted" style={{ fontSize: 12 }}>
-                      {data.trip.day} Day {data.trip.night} Night
+                      {data?.trip.day} Day {data?.trip.night} Night
                     </div>
                   </div>
                 </div>
@@ -66,29 +67,45 @@ export default function PaymentCard({ data, setData }) {
                   <div className="col-auto mb-4">
                     <div className="fs-6 fw-bold mb-1">Accomodation</div>
                     <div className="text-muted" style={{ fontSize: 12 }}>
-                      {data.trip.accomodation}
+                      {data?.trip.accomodation}
                     </div>
                   </div>
                   <div className="col">
                     <div className="fs-6 fw-bold mb-1">Transportation</div>
                     <div className="text-muted" style={{ fontSize: 12 }}>
-                      {data.trip.transportation}
+                      {data?.trip.transportation}
                     </div>
                   </div>
                 </div>
               </div>
               <div className="col">
-                {!data.attachment ? (
+                {!data?.attachment && data?.status === "Waiting Payment" && (
                   <InputFileProofPayment
                     setData={setData}
                     preview={preview}
                     setPreview={setPreview}
                   />
-                ) : (
+                )}
+                {!data?.attachment && data?.status === "Cancel" && (
                   <div className="file-proofpayment d-flex justify-content-end">
                     <div className="d-flex justify-content-center flex-column">
                       <img
-                        src={`${preview ? preview : data.attachment}`}
+                        src={NoImage}
+                        alt="attachment"
+                        width="140"
+                        height="140"
+                      />
+                      <div className="text-muted" style={{ fontSize: 12 }}>
+                        upload payment proof
+                      </div>
+                    </div>
+                  </div>
+                )}
+                {data?.attachment && (
+                  <div className="file-proofpayment d-flex justify-content-end">
+                    <div className="d-flex justify-content-center flex-column">
+                      <img
+                        src={`${preview ? preview : data?.attachment}`}
                         alt="attachment"
                         width="140"
                         height="140"
@@ -116,19 +133,19 @@ export default function PaymentCard({ data, setData }) {
                 <tbody className="text-muted">
                   <tr>
                     <td>1</td>
-                    <td>{data.user.fullname}</td>
-                    <td>{data.user.gender}</td>
-                    <td>{data.user.phone}</td>
+                    <td>{data?.user.fullname}</td>
+                    <td>{data?.user.gender}</td>
+                    <td>{data?.user.phone}</td>
                     <td className="fw-bold">Qty</td>
                     <td className="fw-bold">:</td>
-                    <td className="fw-bold">{data.counterQty}</td>
+                    <td className="fw-bold">{data?.counterQty}</td>
                   </tr>
                   <tr className="fw-bold border-white">
                     <td colSpan="4"></td>
                     <td>Total</td>
                     <td>:</td>
                     <td className="text-danger">
-                      IDR. {formatNumber(data.total)}
+                      IDR. {formatNumber(data?.total)}
                     </td>
                   </tr>
                 </tbody>
