@@ -8,6 +8,8 @@ import { ModalPopUp } from "components/atoms";
 import { API } from "config/api";
 import { AuthContext } from "contexts/AuthContext";
 
+import { NotificationManager } from "react-notifications";
+
 export default function Payment() {
   const [isShow, setIsShow] = useState(false);
   const { stateAuth } = useContext(AuthContext);
@@ -29,11 +31,12 @@ export default function Payment() {
     }
   };
 
-  console.log(transaction);
-
   const handlePay = async () => {
     if (!transaction.attachment) {
-      return alert("Please upload the payment proof first");
+      return NotificationManager.warning(
+        "Please upload the payment proof first",
+        "Warning"
+      );
     }
 
     const config = {

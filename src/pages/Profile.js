@@ -15,8 +15,6 @@ export default function Profile() {
 
   const [transactions, setTransactions] = useState(null);
 
-  // console.log(transactions);
-
   const getAllTransaction = async () => {
     const response = await API.get("/transactions");
     const filteredTransactions = response.data.data
@@ -39,9 +37,12 @@ export default function Profile() {
       <Header />
       <main>
         <ProfileCard stateAuth={stateAuth} />
-        {transactions?.map((item, index) => (
-          <PaymentCard data={item} key={`paymentCard-${index}`} />
-        ))}
+        <div className="payment-card container pt-5">
+          <h2 className="fw-bold mb-5 ms-3">History Trip</h2>
+          {transactions?.map((item, index) => (
+            <PaymentCard data={item} key={`paymentCard-${index}`} />
+          ))}
+        </div>
       </main>
       <Footer />
     </>

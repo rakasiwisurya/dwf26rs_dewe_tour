@@ -14,6 +14,8 @@ import NotFound from "pages/NotFound";
 import PrivateRoute from "components/PrivateRoute";
 
 import "assets/scss/style.scss";
+import "react-notifications/lib/notifications.css";
+import { NotificationContainer } from "react-notifications";
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
@@ -73,6 +75,7 @@ function App() {
           <Route component={NotFound} />
         </Switch>
       </Router>
+      <NotificationContainer />
     </div>
   );
 }

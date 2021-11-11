@@ -5,6 +5,8 @@ import { API, setAuthToken } from "config/api";
 
 import { AuthContext } from "contexts/AuthContext";
 
+import { NotificationManager } from "react-notifications";
+
 export default function Login({ show, handleClose, handleSwitch }) {
   const { dispatch } = useContext(AuthContext);
 
@@ -42,7 +44,7 @@ export default function Login({ show, handleClose, handleSwitch }) {
           type: "LOGIN_SUCCESS",
           payload: response.data.data,
         });
-        alert(response.data.message);
+        NotificationManager.success(response.data.message, "Success");
         handleClose();
       }
     } catch (error) {

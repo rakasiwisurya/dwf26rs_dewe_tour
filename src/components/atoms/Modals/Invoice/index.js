@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Modal } from "react-bootstrap";
 
 import { API } from "config/api";
@@ -6,10 +5,21 @@ import formatNumber from "utils/formatNumber";
 import formatDate from "utils/formatDate";
 import formatWeekDay from "utils/formatWeekDay";
 
-import Logo from "assets/images/dewe-tour-black.png";
+import { NotificationManager } from "react-notifications";
 
-export default function Invoice({ isShow, handleClose, dataItem }) {
+import Logo from "assets/images/dewe-tour-black.png";
+import NoImage from "assets/images/no-image.jpg";
+
+export default function Invoice(props) {
+  const { isShow, handleClose, dataItem, setDataItem } = props;
+
+  const handleClickImage = () => {
+    dataItem.attachment && window.open(dataItem.attachment, "_blank");
+  };
+
   const handleConfirm = async (confirm) => {
+    setDataItem((prevState) => ({ ...prevState, status: confirm }));
+
     const config = {
       headers: {
         "Content-Type": "application/json",
@@ -17,11 +27,22 @@ export default function Invoice({ isShow, handleClose, dataItem }) {
     };
 
     const data = JSON.stringify({ status: confirm });
-    console.log(data);
 
     await API.put(`/transactions/confirm/${dataItem.id}`, data, config);
 
-    window.location.reload();
+    confirm === "Approve"
+      ? NotificationManager.success(
+          "Transaction has successfully approved",
+          "Success"
+        )
+      : NotificationManager.error(
+          "Transaction has successfully canceled",
+          "Success"
+        );
+
+    setTimeout(() => {
+      window.location.reload();
+    }, 1500);
   };
 
   return (
@@ -52,9 +73,9 @@ export default function Invoice({ isShow, handleClose, dataItem }) {
                 </div>
                 <div
                   className={`notif p-1 d-flex justify-content-center align-items-center
-                  ${dataItem.status === "Waiting Payment" && "notif-warning"}
+                  ${dataItem.status === "Waiting Approve" && "notif-warning"}
                   ${
-                    (dataItem.status === "Waiting Approve" ||
+                    (dataItem.status === "Waiting Payment" ||
                       dataItem.status === "Cancel") &&
                     "notif-danger"
                   }
@@ -100,10 +121,12 @@ export default function Invoice({ isShow, handleClose, dataItem }) {
                 <div className="file-proofpayment d-flex justify-content-end">
                   <div className="d-flex justify-content-center flex-column">
                     <img
-                      src={dataItem.attachment}
+                      src={dataItem.attachment ? dataItem.attachment : NoImage}
                       alt="attachment"
                       width="140"
                       height="140"
+                      onClick={handleClickImage}
+                      className={`${dataItem.attachment && "image-proof"}`}
                     />
                     <div className="text-muted" style={{ fontSize: 12 }}>
                       upload payment proof
@@ -132,7 +155,7 @@ export default function Invoice({ isShow, handleClose, dataItem }) {
                     <td>{dataItem.user.phone}</td>
                     <td className="fw-bold">Qty</td>
                     <td className="fw-bold">:</td>
-                    <td className="fw-bold">{dataItem.qty}</td>
+                    <td className="fw-bold">{dataItem.counterQty}</td>
                   </tr>
                   <tr className="fw-bold border-white">
                     <td colSpan="4"></td>

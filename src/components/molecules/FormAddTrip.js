@@ -5,6 +5,8 @@ import Attach from "assets/icons/attach.svg";
 
 import { API } from "config/api";
 
+import { NotificationManager } from "react-notifications";
+
 export default function FormAddTrip() {
   const history = useHistory();
 
@@ -43,8 +45,6 @@ export default function FormAddTrip() {
       ...prevState,
       [e.target.id]: e.target.type === "file" ? e.target.files : e.target.value,
     }));
-
-    // console.log(Array.from(e.target.files))
 
     if (e.target.type === "file") {
       const fileList = e.target.files;
@@ -91,10 +91,8 @@ export default function FormAddTrip() {
       // Insert data trip to database here ...
       const response = await API.post("/trips", formData, config);
 
-      // console.log(response?.data.data);
-
       if (response?.status === 200) {
-        alert(response.data.message);
+        NotificationManager.success(response.data.message, "Success");
         history.push("/");
       }
     } catch (error) {

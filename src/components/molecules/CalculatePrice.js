@@ -6,6 +6,8 @@ import { ModalLogin, ModalRegister } from "components/atoms";
 import { API } from "config/api";
 import formatNumber from "utils/formatNumber";
 
+import { NotificationManager } from "react-notifications";
+
 export default function CalculatePrice({ tripId, price, quota, stateAuth }) {
   const history = useHistory();
 
@@ -87,35 +89,35 @@ export default function CalculatePrice({ tripId, price, quota, stateAuth }) {
     try {
       if (stateAuth.isLogin) {
         if (dataTransaction?.status === "Waiting Payment") {
-          return alert(
-            "Please pay your last transaction first before make a new transaction"
+          return NotificationManager.warning(
+            "Please pay your last transaction first before make a new transaction",
+            "Warning",
+            5000,
+            () => {
+              history.push("/payment");
+            }
           );
         }
 
-        const confirmation = window.confirm(
-          "Are you sure want to book this one?"
+        const config = {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        };
+
+        const bodyTransaction = JSON.stringify(transaction);
+        const response = await API.post(
+          "/transactions",
+          bodyTransaction,
+          config
         );
 
-        if (confirmation) {
-          const config = {
-            headers: {
-              "Content-Type": "application/json",
-            },
-          };
+        const bodyQuota = JSON.stringify(quotaRemaining);
+        await API.put(`/trips/${tripId}`, bodyQuota, config);
+        response.data.status === "success" &&
+          NotificationManager.success(response.data.message, "Success");
 
-          const bodyTransaction = JSON.stringify(transaction);
-          const response = await API.post(
-            "/transactions",
-            bodyTransaction,
-            config
-          );
-
-          const bodyQuota = JSON.stringify(quotaRemaining);
-          await API.put(`/trips/${tripId}`, bodyQuota, config);
-          response.data.status === "success" && alert(response.data.message);
-
-          history.push("/payment");
-        }
+        history.push("/payment");
       } else {
         handleShowLogin();
       }

@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router";
 
 import { AuthContext } from "contexts/AuthContext";
+import { API } from "config/api";
 
 import Header from "components/molecules/Header";
 import TourTitle from "components/molecules/TourTitle";
@@ -10,9 +11,6 @@ import InfoTrip from "components/molecules/InfoTrip";
 import Description from "components/molecules/Description";
 import CalculatePrice from "components/molecules/CalculatePrice";
 import Footer from "components/molecules/Footer";
-
-// import detailTour from "json/detailTour.json";
-import { API } from "config/api";
 
 export default function DetailTour() {
   const { id } = useParams();
@@ -61,9 +59,9 @@ export default function DetailTour() {
             />
             <Description description={detailTrip.description} />
             <CalculatePrice
-              quota={detailTrip.quota}
               tripId={detailTrip.id}
               price={detailTrip.price}
+              quota={detailTrip.quota}
               stateAuth={stateAuth}
             />
           </>

@@ -3,6 +3,8 @@ import { Modal } from "react-bootstrap";
 
 import { API } from "config/api";
 
+import { NotificationManager } from "react-notifications";
+
 export default function Register({ show, handleClose, handleSwitch }) {
   const [inputRegister, setInputRegister] = useState({
     fullname: "",
@@ -47,12 +49,8 @@ export default function Register({ show, handleClose, handleSwitch }) {
           address: "",
         });
         handleClose();
-        return alert(response.data.message);
+        return NotificationManager.success(response.data.message, "Success");
       }
-
-      // if (response?.status === 400) {
-      //   return alert(response.data.message);
-      // }
     } catch (error) {
       if (error) throw error;
     }

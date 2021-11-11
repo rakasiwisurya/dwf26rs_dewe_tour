@@ -51,7 +51,7 @@ export default function GroupTour({ data, isAdmin, searchData }) {
                   key={`groupTour-index${index}`}
                   className={`${
                     item.quota > 0
-                      ? "col-4 d-flex justify-content-center"
+                      ? "col-sm-12 col-md-6 col-lg-4 d-flex justify-content-center"
                       : "d-none"
                   }`}
                 >
