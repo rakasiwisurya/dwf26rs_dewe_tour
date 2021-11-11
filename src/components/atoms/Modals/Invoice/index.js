@@ -26,8 +26,14 @@ export default function Invoice(props) {
       },
     };
 
-    const data = JSON.stringify({ status: confirm });
+    if (confirm === "Cancel") {
+      let sumQuota = dataItem.counterQty + dataItem.trip.quota;
+      const returnQuota = JSON.stringify({ quota: sumQuota });
 
+      await API.put(`/trips/${dataItem.trip.id}`, returnQuota, config);
+    }
+
+    const data = JSON.stringify({ status: confirm });
     await API.put(`/transactions/confirm/${dataItem.id}`, data, config);
 
     confirm === "Approve"

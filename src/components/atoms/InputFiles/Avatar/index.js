@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { API } from "config/api";
 
+import { NotificationManager } from "react-notifications";
+
 export default function Avatar({ userId, avatar }) {
   const [preview, setPreview] = useState(avatar);
 
@@ -20,7 +22,11 @@ export default function Avatar({ userId, avatar }) {
 
       await API.put(`/users/${userId}`, formData, config);
 
-      window.location.reload();
+      NotificationManager.success("Images successfully changed", "Success");
+
+      setTimeout(() => {
+        window.location.reload();
+      }, 1500);
     } catch (error) {
       console.log(error);
     }
