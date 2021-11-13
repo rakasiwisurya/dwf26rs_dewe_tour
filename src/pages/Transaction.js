@@ -24,7 +24,7 @@ export default function Transaction() {
     <>
       <Header />
       <main>
-        {!transactions.length ? (
+        {!transactions?.length ? (
           <div className="container">
             <div className="not-found d-flex justify-content-center align-items-center">
               <div className="text-center">

@@ -36,8 +36,23 @@ export default function Login({ show, handleClose, handleSwitch }) {
       const body = JSON.stringify(inputLogin);
 
       // validate data user from database here ...
-      const response = await API.post("/login", body, config);
-      setAuthToken(response.data.data.token);
+      const response = await API.post("/login", body, config).catch((error) => {
+        if (error?.response.data.error?.message) {
+          return NotificationManager.error(
+            error.response.data.error.message,
+            error.response.data.status
+          );
+        }
+
+        if (error?.response.data?.message) {
+          return NotificationManager.error(
+            error.response.data.message,
+            error.response.data.status
+          );
+        }
+      });
+
+      setAuthToken(response?.data.data.token);
 
       if (response?.status === 200) {
         dispatch({
@@ -47,7 +62,9 @@ export default function Login({ show, handleClose, handleSwitch }) {
         NotificationManager.success(response.data.message, "Success");
         handleClose();
 
-        window.location.reload();
+        setTimeout(() => {
+          window.location.reload();
+        }, 1500);
       }
     } catch (error) {
       if (error) throw error;

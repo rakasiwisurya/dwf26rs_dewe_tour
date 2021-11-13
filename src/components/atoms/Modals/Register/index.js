@@ -37,9 +37,25 @@ export default function Register({ show, handleClose, handleSwitch }) {
       const body = JSON.stringify(inputRegister);
 
       // Insert data user to database here ...
-      const response = await API.post("/register", body, config);
+      const response = await API.post("/register", body, config).catch(
+        (error) => {
+          if (error?.response.data.error?.message) {
+            return NotificationManager.error(
+              error.response.data.error.message,
+              error.response.data.status
+            );
+          }
 
-      if (response.data.status === "success") {
+          if (error?.response.data?.message) {
+            return NotificationManager.error(
+              error.response.data.message,
+              error.response.data.status
+            );
+          }
+        }
+      );
+
+      if (response?.data.status === "success") {
         setInputRegister({
           fullname: "",
           email: "",
