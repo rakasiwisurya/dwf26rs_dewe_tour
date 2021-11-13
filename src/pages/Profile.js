@@ -15,8 +15,6 @@ export default function Profile() {
 
   const [transactions, setTransactions] = useState(null);
 
-  console.log(transactions);
-
   const getAllTransaction = async () => {
     const response = await API.get("/transactions");
     const filteredTransactions = response.data.data

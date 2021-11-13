@@ -8,7 +8,7 @@ export default function PopUp({ isShow, handleClose }) {
         <div>Your payment will be confirmed within 1 x 24 hours</div>
         <div>
           To see orders{" "}
-          <Link to="/" className="fw-bold text-dark">
+          <Link to="/profile" className="fw-bold text-dark">
             click here
           </Link>{" "}
           thank you

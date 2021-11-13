@@ -1,23 +1,9 @@
-import { useState } from "react";
+export default function Hero(props) {
+  const { trips, searchData, setSearchData, setIsSearching } = props;
 
-export default function Hero({
-  trips,
-  searchData,
-  setSearchData,
-  setIsSearching,
-}) {
-  // const [find, setFind] = useState("");
-
-  // console.log(find);
   const handleSearch = (e) => {
     setSearchData(e.target.value);
     e.target.value !== "" ? setIsSearching(true) : setIsSearching(false);
-
-    // const results = trips?.filter((item) =>
-    //   item?.title.toLowerCase().includes(find.toLowerCase())
-    // );
-
-    // setSearchData(results);
   };
 
   const handleSubmit = (e) => {
@@ -51,9 +37,6 @@ export default function Hero({
                 value={searchData}
                 style={{ height: 50 }}
               />
-              {/* <button className="btn btn-primary text-white" type="submit">
-                Search
-              </button> */}
             </form>
           </div>
         </div>

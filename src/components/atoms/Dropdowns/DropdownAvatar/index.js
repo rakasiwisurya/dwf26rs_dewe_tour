@@ -1,10 +1,6 @@
-import { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import { Dropdown } from "react-bootstrap";
 
-import { API } from "config/api";
-
-// import Avatar from "assets/images/user.png";
 import Profile from "assets/icons/profile.svg";
 import Pay from "assets/icons/pay.svg";
 import Journey from "assets/icons/journey.svg";
