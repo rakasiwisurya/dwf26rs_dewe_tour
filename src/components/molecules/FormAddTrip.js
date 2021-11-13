@@ -86,6 +86,7 @@ export default function FormAddTrip() {
       formData.set("dateTrip", inputTrip.dateTrip);
       formData.set("price", inputTrip.price);
       formData.set("quota", inputTrip.quota);
+      formData.set("maxQuota", inputTrip.quota);
       formData.set("description", inputTrip.description);
 
       // Insert data trip to database here ...
@@ -241,8 +242,6 @@ export default function FormAddTrip() {
                 className="w-100 form-control"
                 onChange={handleOnChange}
                 value={inputTrip.quota}
-                max="15"
-                min="0"
               />
             </div>
 

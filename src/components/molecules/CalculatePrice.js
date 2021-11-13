@@ -14,6 +14,7 @@ export default function CalculatePrice({ tripId, price, quota, stateAuth }) {
   const [show, setShow] = useState({
     login: false,
     register: false,
+    confirm: false,
   });
 
   const [transaction, setTransaction] = useState({
@@ -93,7 +94,7 @@ export default function CalculatePrice({ tripId, price, quota, stateAuth }) {
 
         let resultQuota = quotaTrip - transaction.counterQty;
 
-        if (resultQuota <= 0) {
+        if (resultQuota < 0) {
           NotificationManager.error(
             `I'm Sorry, this quota tour was updated, quota is ${quotaTrip} now, someone book this tour before`,
             "Limited Quota Tour"
@@ -181,10 +182,10 @@ export default function CalculatePrice({ tripId, price, quota, stateAuth }) {
         <hr />
         <div className="d-flex justify-content-end">
           <button
-            onClick={handleSubmit}
             type="button"
             className="btn btn-primary mt-2 fw-bold text-white d-flex align-items-center justify-content-center"
             style={{ width: 213, height: 50 }}
+            onClick={handleSubmit}
           >
             BOOK NOW
           </button>

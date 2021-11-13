@@ -46,6 +46,8 @@ export default function Login({ show, handleClose, handleSwitch }) {
         });
         NotificationManager.success(response.data.message, "Success");
         handleClose();
+
+        window.location.reload();
       }
     } catch (error) {
       if (error) throw error;

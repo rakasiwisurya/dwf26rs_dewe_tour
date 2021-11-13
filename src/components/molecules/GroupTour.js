@@ -68,7 +68,7 @@ export default function GroupTour({ data, isAdmin, searchData }) {
                         height="241"
                       />
                       <div className="capacity rounded-start bg-white text-dark d-flex justify-content-center align-items-center fw-bold">
-                        {item.quota}/15
+                        {item.quota}/{item.maxQuota}
                       </div>
                       <div className="card-body">
                         <h5 className="card-title mb-3 text-dark fw-bold text-truncate">

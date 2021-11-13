@@ -29,14 +29,12 @@ export default function ListTransaction({ data }) {
     },
   });
 
-  console.log(dataItem);
-
   const handleClose = () => {
     setIsShow(false);
   };
 
   return (
-    <section className="list-transaction">
+    <section className="list-transaction" style={{ minHeight: 450 }}>
       <div className="container">
         <h1 className="h4 fw-bold mb-4">Incoming Transaction</h1>
         <table className="table bg-white" style={{ fontSize: 12 }}>

@@ -54,27 +54,29 @@ function App() {
 
   return (
     <div className="App">
-      <Router>
-        <Switch>
-          {stateAuth.isLoading ? (
-            <div className="container">
-              <div className="d-flex justify-content-center align-items-center fs-4 vh-100">
-                Loading...
-              </div>
-            </div>
-          ) : (
-            <>
-              <Route exact path="/" component={Home} />
-              <Route path="/detail/:id" component={DetailTour} />
-              <PrivateRoute path="/payment" component={Payment} />
-              <PrivateRoute path="/profile" component={Profile} />
-              <PrivateRoute path="/list-transaction" component={Transaction} />
-              <PrivateRoute path="/add-trip" component={AddTrip} />
-            </>
-          )}
-          <Route component={NotFound} />
-        </Switch>
-      </Router>
+      {stateAuth.isLoading ? (
+        <div className="container">
+          <div className="d-flex justify-content-center align-items-center fs-4 vh-100">
+            Loading...
+          </div>
+        </div>
+      ) : (
+        <Router>
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route exact path="/detail/:id" component={DetailTour} />
+            <PrivateRoute exact path="/payment" component={Payment} />
+            <PrivateRoute exact path="/profile" component={Profile} />
+            <PrivateRoute
+              exact
+              path="/list-transaction"
+              component={Transaction}
+            />
+            <PrivateRoute exact path="/add-trip" component={AddTrip} />
+            <Route component={NotFound} />
+          </Switch>
+        </Router>
+      )}
       <NotificationContainer />
     </div>
   );

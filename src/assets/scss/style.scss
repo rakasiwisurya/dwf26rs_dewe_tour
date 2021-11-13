@@ -83,6 +83,17 @@ main {
   }
 }
 
+.confirmation {
+  .modal-dialog {
+    display: flex;
+    justify-content: center;
+
+    .modal-content {
+      width: 400px !important;
+    }
+  }
+}
+
 .btn-outline-light {
 
   &:hover,
