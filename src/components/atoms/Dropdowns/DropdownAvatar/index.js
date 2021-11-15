@@ -18,8 +18,8 @@ export default function DropdownAvatar({ avatar, role, dispatch }) {
   };
 
   return (
-    <Dropdown>
-      <Dropdown.Toggle as="a" id="dropdown-basic">
+    <Dropdown className="dropdown-avatar">
+      <Dropdown.Toggle as="a">
         <img
           src={avatar}
           alt="Avatar"

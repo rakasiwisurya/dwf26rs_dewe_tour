@@ -1,4 +1,5 @@
 export { default as DropdownAvatar } from "./Dropdowns/DropdownAvatar";
+export { default as DropdownNotif } from "./Dropdowns/DropdownNotif";
 export { default as InputFileAvatar } from "./InputFiles/Avatar";
 export { default as InputFileProofPayment } from "./InputFiles/ProofPayment";
 export { default as ModalConfirm } from "./Modals/Confirm";

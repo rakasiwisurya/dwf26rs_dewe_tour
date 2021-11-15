@@ -3,7 +3,7 @@ import { useHistory } from "react-router";
 
 import { AuthContext } from "contexts/AuthContext";
 
-import { ModalLogin, ModalRegister } from "components/atoms";
+import { DropdownNotif, ModalLogin, ModalRegister } from "components/atoms";
 import { DropdownAvatar } from "components/atoms";
 
 import BrandIcon from "assets/images/dewe-tour-icon.png";
@@ -54,11 +54,15 @@ export default function Header() {
 
           <div className="auth">
             {stateAuth.isLogin ? (
-              <DropdownAvatar
-                avatar={stateAuth.user.avatar}
-                role={stateAuth.user.role}
-                dispatch={dispatch}
-              />
+              <div className="d-flex align-items-center">
+                {stateAuth?.user.role === "admin" && <DropdownNotif />}
+
+                <DropdownAvatar
+                  avatar={stateAuth.user.avatar}
+                  role={stateAuth.user.role}
+                  dispatch={dispatch}
+                />
+              </div>
             ) : (
               <ul className="navbar-nav row g-2">
                 <li className="nav-item col">
