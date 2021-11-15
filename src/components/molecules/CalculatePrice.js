@@ -1,15 +1,22 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
 
 import { ModalLogin, ModalRegister } from "components/atoms";
 
+import { NotifContext } from "contexts/NotifContext";
 import { API } from "config/api";
 import formatNumber from "utils/formatNumber";
 
 import { NotificationManager } from "react-notifications";
+import { io } from "socket.io-client";
 
+let socket;
 export default function CalculatePrice({ tripId, price, quota, stateAuth }) {
   const history = useHistory();
+
+  const { stateNotif, dispatchNotif } = useContext(NotifContext);
+
+  console.log(stateNotif);
 
   const [show, setShow] = useState({
     login: false,
@@ -86,57 +93,77 @@ export default function CalculatePrice({ tripId, price, quota, stateAuth }) {
     }
   };
 
+  useEffect(() => {
+    socket = io("http://localhost:4000", {
+      query: {
+        id: stateAuth.user.id,
+      },
+    });
+    return () => {
+      socket.disconnect();
+    };
+  }, []);
+
   const handleSubmit = async () => {
     try {
       if (stateAuth.isLogin) {
-        const detailTripData = await API.get(`/trips/${tripId}`);
-        const quotaTrip = detailTripData.data.data.quota;
+        socket.emit("new transaction");
 
-        let resultQuota = quotaTrip - transaction.counterQty;
+        socket.emit("load notif");
+        socket.on("all notif", (data) => {
+          dispatchNotif({
+            type: "ADD_NOTIF",
+            payload: data,
+          });
+        });
+        // const detailTripData = await API.get(`/trips/${tripId}`);
+        // const quotaTrip = detailTripData.data.data.quota;
 
-        if (resultQuota < 0) {
-          NotificationManager.error(
-            `I'm Sorry, this quota tour was updated, quota is ${quotaTrip} now, someone book this tour before`,
-            "Limited Quota Tour"
-          );
+        // let resultQuota = quotaTrip - transaction.counterQty;
 
-          const pushToHome = setTimeout(() => {
-            history.push("/");
-          }, 3000);
+        // if (resultQuota < 0) {
+        //   NotificationManager.error(
+        //     `I'm Sorry, this quota tour was updated, quota is ${quotaTrip} now, someone book this tour before`,
+        //     "Limited Quota Tour"
+        //   );
 
-          return pushToHome;
-        }
+        //   const pushToHome = setTimeout(() => {
+        //     history.push("/");
+        //   }, 3000);
 
-        if (dataTransaction?.status === "Waiting Payment") {
-          return NotificationManager.warning(
-            "Please pay your last transaction first before make a new transaction",
-            "Warning",
-            5000,
-            () => {
-              history.push("/payment");
-            }
-          );
-        }
+        //   return pushToHome;
+        // }
 
-        const config = {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        };
+        // if (dataTransaction?.status === "Waiting Payment") {
+        //   return NotificationManager.warning(
+        //     "Please pay your last transaction first before make a new transaction",
+        //     "Warning",
+        //     5000,
+        //     () => {
+        //       history.push("/payment");
+        //     }
+        //   );
+        // }
 
-        const bodyTransaction = JSON.stringify(transaction);
-        const response = await API.post(
-          "/transactions",
-          bodyTransaction,
-          config
-        );
+        // const config = {
+        //   headers: {
+        //     "Content-Type": "application/json",
+        //   },
+        // };
 
-        const bodyQuota = JSON.stringify(quotaRemaining);
-        await API.put(`/trips/${tripId}`, bodyQuota, config);
-        response.data.status === "success" &&
-          NotificationManager.success(response.data.message, "Success");
+        // const bodyTransaction = JSON.stringify(transaction);
+        // const response = await API.post(
+        //   "/transactions",
+        //   bodyTransaction,
+        //   config
+        // );
 
-        history.push("/payment");
+        // const bodyQuota = JSON.stringify(quotaRemaining);
+        // await API.put(`/trips/${tripId}`, bodyQuota, config);
+        // response.data.status === "success" &&
+        //   NotificationManager.success(response.data.message, "Success");
+
+        // history.push("/payment");
       } else {
         handleShowLogin();
       }

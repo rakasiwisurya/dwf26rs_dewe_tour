@@ -2,11 +2,13 @@ import { useState, useContext, useEffect } from "react";
 import { useHistory } from "react-router";
 
 import { AuthContext } from "contexts/AuthContext";
+import { NotifContext } from "contexts/NotifContext";
 
 import { DropdownNotif, ModalLogin, ModalRegister } from "components/atoms";
 import { DropdownAvatar } from "components/atoms";
 
 import { io } from "socket.io-client";
+import { NotificationManager } from "react-notifications";
 
 import BrandIcon from "assets/images/dewe-tour-icon.png";
 
@@ -15,11 +17,14 @@ export default function Header() {
   const history = useHistory();
 
   const { stateAuth, dispatch } = useContext(AuthContext);
+  const { stateNotif, dispatchNotif } = useContext(NotifContext);
 
   const [show, setShow] = useState({
     login: false,
     register: false,
   });
+
+  console.log(stateNotif);
 
   const handleClose = () => {
     setShow({ login: false, register: false });
@@ -41,8 +46,29 @@ export default function Header() {
     }
   };
 
+  const loadNotifs = () => {
+    socket.emit("load notif");
+    socket.on("all notif", (data) => {
+      dispatchNotif({
+        type: "ADD_NOTIF",
+        payload: data,
+      });
+    });
+  };
+
+  const newNotif = () => {
+    socket.on("new notif", (data) => {
+      NotificationManager.info(data, "New Transactions", () => {
+        window.location.reload();
+      });
+    });
+  };
+
   useEffect(() => {
     socket = io("http://localhost:4000");
+    loadNotifs();
+    newNotif();
+
     return () => {
       socket.disconnect();
     };
@@ -65,7 +91,9 @@ export default function Header() {
           <div className="auth">
             {stateAuth.isLogin ? (
               <div className="d-flex align-items-center">
-                {stateAuth?.user.role === "admin" && <DropdownNotif />}
+                {stateAuth?.user.role === "admin" && (
+                  <DropdownNotif data={stateNotif} />
+                )}
 
                 <DropdownAvatar
                   avatar={stateAuth.user.avatar}

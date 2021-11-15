@@ -2,12 +2,15 @@ import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
 import AuthContextProvider from "contexts/AuthContext";
+import NotifContextProvider from "contexts/NotifContext";
 import reportWebVitals from "./reportWebVitals";
 
 ReactDOM.render(
   <React.StrictMode>
     <AuthContextProvider>
-      <App />
+      <NotifContextProvider>
+        <App />
+      </NotifContextProvider>
     </AuthContextProvider>
   </React.StrictMode>,
   document.getElementById("root")
