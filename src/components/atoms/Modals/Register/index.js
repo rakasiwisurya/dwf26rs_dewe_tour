@@ -55,7 +55,7 @@ export default function Register({ show, handleClose, handleSwitch }) {
         }
       );
 
-      if (response?.data.status === "success") {
+      if (response?.data.status === "Success") {
         setInputRegister({
           fullname: "",
           email: "",
