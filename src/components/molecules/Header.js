@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { useHistory } from "react-router";
 
 import { AuthContext } from "contexts/AuthContext";
@@ -6,8 +6,11 @@ import { AuthContext } from "contexts/AuthContext";
 import { DropdownNotif, ModalLogin, ModalRegister } from "components/atoms";
 import { DropdownAvatar } from "components/atoms";
 
+import { io } from "socket.io-client";
+
 import BrandIcon from "assets/images/dewe-tour-icon.png";
 
+let socket;
 export default function Header() {
   const history = useHistory();
 
@@ -37,6 +40,13 @@ export default function Header() {
       setShow({ login: true, register: false });
     }
   };
+
+  useEffect(() => {
+    socket = io("http://localhost:4000");
+    return () => {
+      socket.disconnect();
+    };
+  }, []);
 
   return (
     <header className="header position-relative">
