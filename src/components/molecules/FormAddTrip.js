@@ -10,8 +10,13 @@ import { NotificationManager } from "react-notifications";
 export default function FormAddTrip() {
   const history = useHistory();
 
+  // state for fetching country
   const [countries, setCountries] = useState([]);
+
+  // state for preview image
   const [preview, setPreview] = useState([]);
+
+  // state input form
   const [inputTrip, setInputTrip] = useState({
     title: "",
     countryId: 0,
@@ -27,6 +32,7 @@ export default function FormAddTrip() {
     images: [],
   });
 
+  // fetching countries from backend
   const getCountries = async () => {
     try {
       const response = await API.get("/countries");
@@ -36,28 +42,28 @@ export default function FormAddTrip() {
     }
   };
 
+  // didmount get countries
   useEffect(() => {
     getCountries();
   }, []);
 
   const handleOnChange = (e) => {
+    // set input form state and selection if it's file input fileList type
     setInputTrip((prevState) => ({
       ...prevState,
       [e.target.id]: e.target.type === "file" ? e.target.files : e.target.value,
     }));
 
+    // if input file clicked
     if (e.target.type === "file") {
       const fileList = e.target.files;
 
+      // create url and push to array to see on preview
       const arrayUrlImages = [];
-      if (fileList) {
-        setPreview([]);
-      }
-      setPreview(arrayUrlImages);
-
       for (const file of fileList) {
         arrayUrlImages.push(URL.createObjectURL(file));
       }
+      setPreview(arrayUrlImages);
     }
   };
 
@@ -65,13 +71,14 @@ export default function FormAddTrip() {
     try {
       e.preventDefault();
 
+      // set config
       const config = {
         headers: {
           "Content-Type": "multipart/form-data",
         },
       };
 
-      // create data with form data as object here ...
+      // create data with form data as object
       const formData = new FormData();
       for (const file of inputTrip.images) {
         formData.append("image", file);
@@ -89,9 +96,10 @@ export default function FormAddTrip() {
       formData.set("maxQuota", inputTrip.quota);
       formData.set("description", inputTrip.description);
 
-      // Insert data trip to database here ...
+      // insert data trip to database
       const response = await API.post("/trips", formData, config);
 
+      // notif success and go to home page
       if (response?.status === 200) {
         NotificationManager.success(response.data.message, "Success");
         history.push("/");
@@ -301,6 +309,7 @@ export default function FormAddTrip() {
               <button
                 className="btn btn-primary text-white fw-bold"
                 style={{ width: 250 }}
+                type="submit"
               >
                 Add Trip
               </button>
